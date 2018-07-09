@@ -1,0 +1,99 @@
+<div id="user">
+	<div class="container">
+		<div class="row">
+			<div class="form col-sm-6">
+				<div class="panel">
+					<div class="heading">
+						<h3>My account details</h3>
+					</div>
+					<div class="content">
+						<h3>You may update your account information below.</h3>
+						<%= form_for(@user) do |f| %>
+							
+							<div class="row">
+								<div class="col-sm-7">
+									<div class="row">
+										<div class="col-sm-10">
+											<%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+											<%= f.text_field :name, class: "form-control", placeholder: "Your Name" %>
+											<%= f.text_field :email, class: "form-control", placeholder: "example@gmail.com" %>
+											<%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+											<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password" %>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="button-container">
+										<div class="row">
+											<div class="col-sm-12">
+												<%= f.submit "Update", class: "create button" %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						<% end %>
+
+						<div class="delete">
+							<p>Beware, the link below will delete your account.</p>
+							<%= link_to "Delete Account", @user, method: :delete, data: { confirm: "You are about to delete your account, are you sure?" }, class: "delete" %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel">
+					<div class="heading">
+						<h3>Organizations</h3>
+					</div>
+					<div class="content">
+						<div class="organizations">
+							<h3>Organizations I Belong To</h3>
+							<% @userOrgs.each do |u| %>
+								<h4><%= u.name %>:  <a href="/organizations/<%= u.id.to_s %>">dashboard</a></h4>
+							<% end %>
+						</div>
+						<h3>Create a new organization by filling out the form below.</h3>
+						<%= form_for Organization.new do |f| %>
+							<%= f.text_field :name, class: "form-control", placeholder: "Organization Name" %>
+							<%= f.submit "Create Organization", class: "submit button" %>
+						<% end %>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="heading">
+						<h3>Create a User</h3>
+					</div>
+					<div class="content">
+						<h3>Create a new user for someone.</h3>
+						<%= form_for User.new do |f| %>
+							
+							<div class="row">
+								<div class="col-sm-7">
+									<div class="row">
+										<div class="col-sm-10">
+											<%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+											<%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+											<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password" %>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="button-container">
+										<div class="row">
+											<div class="col-sm-12">
+												<%= f.submit "Create", class: "create button" %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
