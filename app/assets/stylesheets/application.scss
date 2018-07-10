@@ -30,9 +30,11 @@
 }
 
 header#header {
+	position: relative;
 	display: block;
 	width: 100%;
 	background: #f1f1f1;
+	z-index: 500;
 
 	h1 {
 		font-size: 2em;
