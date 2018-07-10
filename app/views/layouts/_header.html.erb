@@ -1,0 +1,13 @@
+<header id="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<% if signed_in? %>
+					<h1>Welcome Back, <%= current_user.username %></h1>
+				<% else %>
+					<h1>Owl</h1>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</header>

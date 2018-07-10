@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 	    if user && user.authenticate(params[:session][:password])
 			sign_in user
 			flash[:notice] = "Welcome back " + user.username + "!"
-			redirect_to "/"
+			redirect_to "/home"
 	    else
 	      flash[:error] = 'Invalid email/password combination'
 	      redirect_to "/signin"
