@@ -4,6 +4,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<% if signed_in? %>
 					<h1>Welcome Back, <%= current_user.username %></h1>
+					<a href="/signin">Log Out</a>
 				<% else %>
 					<h1>Owl</h1>
 				<% end %>

@@ -19,5 +19,8 @@ Rails.application.routes.draw do
 
   #### custom pages
   match '/home', to: 'main#home', via: 'get'
+
+  #### API ROUTES
+  match '/sendtext', to: 'main#sendtext', via: 'get'
   
 end
