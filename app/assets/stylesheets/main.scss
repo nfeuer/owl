@@ -46,11 +46,207 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.button-container {
 				text-align: left;
 
-				
+
 			}
 		}
 	}
 }
+
+
+
+#eye {
+
+	#mapOverlay {
+		background: #111;
+		z-index: 15;
+		text-align: center;
+		padding-top: 40vh;
+		z-index: 500;
+
+		h3 {
+			position: relative;
+			text-align: center;
+			display: inline-block;
+			margin: 0;
+			font-size: 4em;
+			opacity: .5;
+			font-weight: 100;
+			color: #fff;
+			font-family: 'Roboto', sans-serif;
+
+			span {
+				position: absolute;
+				left: 0;
+				bottom: -.5em;
+				height: .1em;
+				background: #fff;
+				width: 10%;
+				opacity: 0;
+				transition: all .75s;
+				-ms-transition: all .75s;
+				-moz-transition: all .75s;
+				-webkit-transition: all .75s;
+			}
+		}
+	}
+
+	#map, #mapOverlay {
+		position: fixed;
+		width: 100vw;
+		height: 75vh;
+	}
+
+	#map {
+		border-bottom: 3px solid lightgreen;
+
+		.labels {
+			background: red;
+		}
+	}
+
+	#navigation {
+		display: none;
+		position: absolute;
+		left: 4vw;
+		top: 4vh;
+		width: 27vw;
+		max-width: 40em;
+		z-index: 250;
+		background: rgba(0,0,0,.65);
+
+		.navlist {
+			padding: 9em 0 2em;
+			max-height: 60vh;
+			overflow-y: scroll;
+
+			#directionsPanel {
+				background: transparent;
+
+				table.adp-placemark {
+					border: 0;
+					margin: 0;
+					position: absolute;
+					z-index: 15;
+					left: 0;
+					top: 0;
+					padding: 1.75em 1em;
+					display: block;
+					border-bottom: 1px solid lightgreen;
+					background: rgba(0,0,0,.75);
+
+					td {
+						color: lightgreen;
+						font-size: 1.75em;
+						font-family: 'Raleway', sans-serif;
+
+						img {
+							display: inline-block;
+							max-height: 4rem;
+							margin-right: 1.15rem;
+							vertical-align: middle;
+						}
+					}
+				}
+
+				div[data-leg-index="0"] {
+
+					.adp-placemark {
+						display: none;
+					}
+				}
+
+				.adp-summary {
+					font-family: 'Raleway', sans-serif;
+					font-weight: 300;
+					color: lightgreen;
+					padding: .5em 1em;
+					text-align: left;
+
+					span {
+						display: block;
+						font-size: 1.75em;
+						line-height: 2em;
+						margin-right: 1.5rem;
+
+						img {
+							display: inline-block;
+							max-height: 3.75rem;
+							margin-right: 1.5rem;
+							vertical-align: middle;
+						}
+
+						svg {
+							color: #fff;
+							font-size: 2.5rem;
+							display: inline-block;
+							margin-right: 1.5rem;
+							margin-left: .65rem;
+						}
+					}
+
+					span[jstcache="57"] {
+						display: none;
+					}
+				}
+
+				table {
+
+					tr {
+
+					}						
+
+					.adp-substep {
+						font-family: 'Raleway', sans-serif;
+						font-weight: 300;
+						font-size: 1.25em;
+						color: #fff;
+						padding-top: 1.25em;
+						padding-bottom: 1.25em;
+						border-top: 2px solid rgba(255,255,255,.05);
+
+						.adp-stepicon {
+							filter: brightness(500%);
+						}
+					}
+
+					.adp-substep:first-child {
+						padding-left: 1em;
+					}
+					.adp-substep:last-child {
+						padding-right: 1em;
+					}
+
+				}
+
+				table.adp-directions {
+
+					tr {
+						color: #fff;
+						min-height: 8em;
+						display: block;
+					}
+
+					tr:nth-child(odd) {
+						background: rgba(0,0,0,.5);
+					}
+				}
+			}
+
+			p {
+				font-size: 1.25em;
+				line-height: 1.5em;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 700;
+				margin: 0 0 1.5em;
+				color: #fff;
+			}
+		}
+	}
+}
+
+
+
+
 
 
 
