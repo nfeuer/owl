@@ -94,5 +94,41 @@ class MainController < ApplicationController
       end
   end
 
+  def classifier
+
+  	##### IBM Watson Natural Language Classifier allowing us to create custom voice text models
+
+  	@text = params[:text]
+  	@text = "how hot will it be outside today?"
+
+	{
+	  "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+	  "username": "e8f3ecb4-979e-45c1-8939-bdd29b9d7474",
+	  "password": "7h6goCtngjoN"
+	}
+
+	@endpoint = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1/classify?text=" + @text
+  end
+
+  def nlu
+
+  	##### IBM Watson Natural Language Understanding Base models for text
+
+  	# @text = params[:text]
+  	# @text = "how hot will it be outside today?"
+
+	@text = "IBM is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries."
+
+	# @features = "concepts,categories,emotion,entities,keywords,metadata,relations,semantic_roles,sentiment"
+	@features = "keywords,entities"
+
+	@endpoint = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-16&features=" + @features + "&text=" + @text
+	@nlu = HTTParty.get(@endpoint, headers: { Authorization: 'Basic NGJhODRmYWQtN2E0NC00ZTg3LTkwYTgtM2ZkZGEyYmI0OGJhOnRERDNEdTU4QVhIMw==', 'Content-type' => 'application/json' }, body: {})
+
+	puts " "
+	puts "----- nlu"
+	puts @nlu
+
+  end
 
 end
