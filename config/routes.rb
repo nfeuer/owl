@@ -23,5 +23,7 @@ Rails.application.routes.draw do
 
   #### API ROUTES
   match '/sendtext', to: 'main#sendtext', via: 'get'
+  match '/analyzetone', to: 'main#analyzetone', via: 'get'
+  match '/visualizer', to: 'main#visualizer', via: 'get'
   
 end
