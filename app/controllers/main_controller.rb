@@ -24,7 +24,7 @@ class MainController < ApplicationController
 
   end
 
-  def call
+  def sendcall
 
 	@account_sid = "AC6e6e9ff5e49ee5759341cee47f95e568"
 	@auth_token = "a15edbeb573ac2c6cc6bad635063bdc8"
@@ -115,8 +115,6 @@ class MainController < ApplicationController
   	##### IBM Watson Natural Language Understanding Base models for text
 
   	# @text = params[:text]
-  	# @text = "how hot will it be outside today?"
-
 	@text = "IBM is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries."
 
 	# @features = "concepts,categories,emotion,entities,keywords,metadata,relations,semantic_roles,sentiment"
