@@ -129,4 +129,27 @@ class MainController < ApplicationController
 
   end
 
+  def stt
+
+  end
+
+  def tts
+
+  	@endpoint = "https://stream.watsonplatform.net/text-to-speech/api"
+
+  end
+
+  def translate
+
+	{
+	  "apikey": "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_",
+	  "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:language-translator:us-south:a/a05e0398b87df931aa0f181fc49d23ee:466ff35e-5f99-4ab4-862c-e8203daee5b2::",
+	  "iam_apikey_name": "auto-generated-apikey-621c31ed-7ff1-4f73-a5e9-3b4180ef0d69",
+	  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+	  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/a05e0398b87df931aa0f181fc49d23ee::serviceid:ServiceId-87a8b3ec-e5c9-44f9-a9cc-ce27e4bc6028",
+	  "url": "https://gateway.watsonplatform.net/language-translator/api"
+	}
+	
+  end
+
 end

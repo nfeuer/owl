@@ -264,7 +264,45 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 }
 
 
+#test {
+	padding: 6em 0;
 
+	h1 {
+		font-size: 2.5em;
+		margin: 0 0 1em;
+	}
+
+	.api {
+		border: 1px solid #ccc;
+		margin: 0 0 2em;
+		padding: 1.5em;
+
+		h3 {
+			margin: 0 0 .25em;
+			font-size: 1.5em;
+			font-weight: 600;
+			line-height: 1.25em;
+		}
+
+		p {
+			font-size: 1.15em;
+			line-height: 1.25em;
+			margin: 0 0 1em;
+		}
+
+		a {
+			display: inline-block;
+			padding: .5em 1.5em;
+			background: #eee;
+			color: #333;
+			text-decoration: none;
+		}
+
+		a:hover {
+			background: #ddd;
+		}
+	}
+}
 
 
 

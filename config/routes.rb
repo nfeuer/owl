@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # custom html pages
   match '/home', to: 'main#home', via: 'get'
   match '/eye', to: 'main#eye', via: 'get'
+  match '/test', to: 'main#test', via: 'get'
 
   
   ########## API ROUTES
