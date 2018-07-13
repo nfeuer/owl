@@ -41,7 +41,6 @@ class MainController < ApplicationController
 
   ###################### IBM WATSON API INTELLIGENCE COMMANDS
 
-
   def analyzetone
 
   	##### IBM Watson Tone Analyzer
@@ -149,7 +148,7 @@ class MainController < ApplicationController
 	  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/a05e0398b87df931aa0f181fc49d23ee::serviceid:ServiceId-87a8b3ec-e5c9-44f9-a9cc-ce27e4bc6028",
 	  "url": "https://gateway.watsonplatform.net/language-translator/api"
 	}
-	
+
   end
 
 end

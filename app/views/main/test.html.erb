@@ -3,26 +3,48 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1>Test IBM Watson APIs</h1>
-				<div class="api">
+				<div class="api tone">
 					<h3>Analyze Tone from Text</h3>
-					<a href="/analyzetone">Test Tone Analyzer</a>
+					<div class="row">
+						<div class="col-sm-6">
+							<input type="text" class="form-control" placeholder="Tone Analyzer Test Text...">
+						</div>
+						<div class="col-sm-6">
+							<a href="#" class="analyzetone">Test Tone Analyzer</a>
+						</div>
+					</div>
+					<div class="response">
+						<h4>Response</h4>
+					</div>
 				</div>
 				<div class="api">
 					<h3>Visual Recognition of Elements Within Image</h3>
 					<p>This can include basic content recognition (IBM's model) as well as include custom models we will develop</p>
-					<a href="/visualizer">Test Visual Recognition</a>
+					<a href="#" class="visualizer">Test Visual Recognition</a>
 				</div>
 				<div class="api">
 					<h3>Custom Text Classifier</h3>
 					<p>This API allows us to create custom models for text input that we can then classify through this API <b>(this requires a custom model which is not done yet).</b></p>
-					<a href="/classifier">Try Custom Text Classifier</a>
+					<a href="#" class="classifier">Try Custom Text Classifier</a>
 				</div>
 				<div class="api">
 					<h3>Natural Language Understanding</h3>
 					<p>Analyze text and provides us with various things like emotions, keywords, sentiments, categories, concepts, etc.</p> 
-					<a href="/nlu">Test Natural Language Understanding</a>
+					<a href="#" class="nlu">Test Natural Language Understanding</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	
+	$(".analyzetone").on("click", function() {
+		var text = $(".api.tone .form-control").val()
+		$.get("/analyzetone?text=" + text,function() {
+			$(".response-tone").detach().appendTo(".api.tone .response")
+		})
+	})
+
+</script>
