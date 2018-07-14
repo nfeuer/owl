@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'main#index'
 
   # dynamic resources
+  resources :messages
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

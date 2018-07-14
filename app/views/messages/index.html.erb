@@ -1,0 +1,12 @@
+<div id="messages">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h1>All Messages</h1>
+				<% @messages.each do |m| %>
+					<div class="message"><%= m.message %></div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

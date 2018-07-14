@@ -45,9 +45,56 @@ header#header {
 
 	a {
 		display: inline-block;
-		float: right;
-		font-size: 1.15em;
+		font-size: 1.25em;
 		color: #333;
+		padding: 0 1em;
 		line-height: 7rem;
+		text-decoration: none;
+		background: rgba(0,0,0,0);
+		transition: all .15s;
+		-ms-transition: all .15s;
+		-webkit-transition: all .15s;
+		-moz-transition: all .15s;
+	}
+
+	a:hover {
+		background: rgba(0,0,0,.1);		
+	}
+
+	.links {
+		display: inline-block;
+		text-align: right;
+		float: right;
+		vertical-align: top;
+
+		a {
+			position: relative;
+		}
+
+		svg {
+			font-size: 1em;
+		}
+
+		.messages {
+
+		}
+
+		.messages.unread {
+
+			span {
+				display: inline-block;
+				font-size: .65em;
+				width: 1.5em;
+				height: 1.5em;
+				line-height: 1.5em;
+				text-align: center;
+				border-radius: .75em;
+				background: red;
+				color: #fff;
+				position: absolute;
+				top: 1em;
+				right: .5em;
+			}
+		}
 	}
 }

@@ -45,8 +45,6 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			.button-container {
 				text-align: left;
-
-
 			}
 		}
 	}
@@ -304,6 +302,12 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			color: #333;
 			margin: 0 0 1em;
 			text-decoration: none;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			border: 2px solid #ccc;
 		}
 
 		a:hover {

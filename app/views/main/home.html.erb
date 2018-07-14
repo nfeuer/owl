@@ -6,6 +6,17 @@
 					<img class="logo" src="/assets/owl_logo.jpg" />
 					<h1>Project OWL Home</h1>
 					<p>This is where basic information will be shown to logged in users.</p>
+					<h3>New Message</h3>
+					<%= render 'messages/form' %>
+					<h3>All Messages</h3>
+					<% Message.all.each do |f| %>
+						<p><b>From:</b> <%= f.sender %></p>
+						<p><b>To:</b> <%= f.recipient %></p>
+						<p><b>Type:</b> <%= f.mtype %></p>
+						<p><b>Read?</b> <%= f.read %></p>
+						<p><b>File:</b> <%= f.file %></p>
+						<p><b>message:</b> <%= f.message %></p>
+					<% end %>
 				</div>
 			</div>
 		</div>

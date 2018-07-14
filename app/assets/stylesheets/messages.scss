@@ -1,0 +1,16 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+#messages {
+	padding: 6em 0;
+
+	.message {
+		display: block;
+		padding: .5em 1em .5em 0;
+		border-bottom: 1px solid #ccc;
+	}
+}

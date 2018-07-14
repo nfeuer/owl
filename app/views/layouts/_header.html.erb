@@ -4,7 +4,10 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<% if signed_in? %>
 					<h1>Welcome Back, <%= current_user.username %></h1>
-					<a href="/signin">Log Out</a>
+					<div class="links">
+						<a href="/messages" class="messages unread"><i class="far fa-envelope"></i><span>3</span></a>
+						<a href="/signin">Log Out</a>
+					</div>
 				<% else %>
 					<h1>Owl</h1>
 				<% end %>
@@ -12,3 +15,13 @@
 		</div>
 	</div>
 </header>
+
+
+<script type="text/javascript">
+	
+	var ms = "<%= Message.all.where(read: false).count %>"
+	if (parseInt(ms) > 0) {
+		$(".links .messages").addClass("unread")
+		$(".links .messages span").text(ms)
+	}
+</script>

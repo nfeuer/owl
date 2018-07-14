@@ -1,5 +1,12 @@
 class MainController < ApplicationController
+
+  #################### Web Pages
+
   def index
+  end
+
+  def home
+    @message = Message.new
   end
 
 
