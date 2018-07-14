@@ -4,7 +4,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1>All Messages</h1>
 				<% @messages.each do |m| %>
-					<div class="message"><%= m.message %></div>
+					<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>"><%= m.message %></div>
 				<% end %>
 			</div>
 		</div>

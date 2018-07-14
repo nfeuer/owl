@@ -19,7 +19,7 @@
 
 <script type="text/javascript">
 	
-	var ms = "<%= Message.all.where(read: false).count %>"
+	var ms = "<%= Message.all.where(recipient: current_user.id).where(read: false).count %>"
 	if (parseInt(ms) > 0) {
 		$(".links .messages").addClass("unread")
 		$(".links .messages span").text(ms)

@@ -2,7 +2,8 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   def index
-    @messages = Message.all
+    @user = current_user
+    @messages = Message.where("sender = ? OR recipient = ?", @user.id, @user.id)
   end
 
   def show
