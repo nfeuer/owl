@@ -6,6 +6,7 @@
 				<div class="messages-container">
 					<div class="message-window out">
 						<div class="info"><div class="back"><i class="fas fa-chevron-left"></i></div><div class="friend">Username</div></div>
+						<div class="messages-content"></div>
 						<div class="message-input">
 							<%= render 'messages/form' %>
 						</div>
@@ -78,7 +79,7 @@
 					mdirection = "outgoing"
 				}
 				var html = '<div class="message ' + mdirection + '">' + msgArray[i][1] + '</div>'
-				$(".message-window").append(html)
+				$(".message-window .messages-content").append(html)
 			}
 
 			// clear messages response
@@ -87,6 +88,11 @@
 			// fade in UI to show the messages
 			$(".message-window").removeClass("out")
 			$(".message-list").addClass("out")
+
+			// and last, scroll dialogue to where we're at
+			$('.messages-content').animate({
+				scrollTop: $(".messages-content").prop("scrollHeight")
+			}, 650);
 		})
 	})
 
@@ -96,5 +102,7 @@
 		$(".message-window").addClass("out")
 		$(".message-list").removeClass("out")
 	})
+
+		
 
 </script>

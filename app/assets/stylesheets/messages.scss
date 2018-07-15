@@ -28,7 +28,7 @@
 	.messages-container {
 		position: relative;
 		max-width: 100%;
-		min-height: 50vh;
+		min-height: 70vh;
 		overflow-x: hidden;
 	}
 
@@ -107,7 +107,7 @@
 		min-height: 50vh;
 		width: 100%;
 		border: 1px solid #ccc;
-		padding: .75em .75em 4em;
+		padding: 5em .75em;
 		transition: all .25s;
 		-ms-transition: all .25s;
 		-moz-transition: all .25s;
@@ -117,11 +117,19 @@
 			display: none;
 		}
 
+		.messages-content {
+			position: relative;
+			max-height: 35vh;
+			overflow-y: auto;
+		}
+
 		.message-input {
 			position: absolute;
 			left: 0;
 			bottom: 0;
 			width: 100%;
+			background: #fff;
+			z-index: 25;
 			border-top: 1px solid rgba(0,0,0,.15);
 
 			.form-control {
@@ -173,8 +181,12 @@
 		}
 
 		.info {
-			position: relative;
-			margin-bottom: 1em;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			padding: .5em .75em;
+			background: #f1f1f1;
 
 			.back {
 				display: inline-block;
@@ -189,6 +201,8 @@
 
 			.friend {
 				display: inline-block;
+				font-weight: 600;
+				font-size: 1.15em;
 			}
 		}
 	}
