@@ -42,6 +42,20 @@
 			-ms-transition: all .1s;
 			-moz-transition: all .1s;
 			-webkit-transition: all .1s;
+
+			.delete-btn {
+				float: right;
+				display: inline-block;
+				color: red;
+				text-decoration: none;
+				padding: .25em;
+				background:transparent;
+			}
+
+			.delete-btn:hover {
+				background: red;
+				color: #fff;
+			}
 		}
 
 		.message:hover {

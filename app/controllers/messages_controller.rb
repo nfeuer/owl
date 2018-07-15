@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = current_user
@@ -44,18 +43,15 @@ class MessagesController < ApplicationController
   end
 
   def destroy
+    @message = Message.find(params[:id])
     @message.destroy
     respond_to do |format|
-      format.html { redirect_to "/console", notice: 'Message was successfully destroyed.' }
+      format.html { redirect_to "/messages", notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-
-    def set_message
-      @message = current_message
-    end
 
     def message_params
       params.require(:message).permit(:sender, :recipient, :message, :file, :read, :mtype)
