@@ -10,6 +10,28 @@ class MainController < ApplicationController
   end
 
 
+
+
+  ##################### DATABASE API ROUTES TO PULL DATA
+
+  def getdirectmessages
+
+    @u1 = params[:sender]
+    @u2 = params[:recipient]
+    @messages = []
+
+    Message.where("sender = ? OR recipient = ?", @u1.to_i, @u2.to_i).order(created_at: :desc).each do |f|
+      @messages.push(f.message)
+    end
+
+    respond_to do |format|
+      # format.html { redirect_to "/", notice: 'Gene created.' }
+      format.js { render action: 'getdirectmessages' }
+    end
+
+  end
+
+
   ##################### Twilio commands SMS Texting and Phone Calls
 
   def sendtext
@@ -54,11 +76,11 @@ class MainController < ApplicationController
 
   	@text = params[:text]
   	@endpoint = "https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?text=" + @text + "&version=2017-09-21&sentences=true"
-	@tone = HTTParty.get(@endpoint, headers: { Authorization: "Basic ZmMxYjY3YTYtZTJmMi00YWVhLTgzMTYtZjBjYzMwMDRlY2MyOkhNMHhWT2NDWmxsWg==", 'Content-type' => 'application/x-www-form-urlencoded' }, body: { })
-	@tone = @tone
+    @tone = HTTParty.get(@endpoint, headers: { Authorization: "Basic ZmMxYjY3YTYtZTJmMi00YWVhLTgzMTYtZjBjYzMwMDRlY2MyOkhNMHhWT2NDWmxsWg==", 'Content-type' => 'application/x-www-form-urlencoded' }, body: { })
+    @tone = @tone
 
-  	respond_to do |format|
-    	# format.html { redirect_to "/", notice: 'Gene created.' }
+    respond_to do |format|
+      # format.html { redirect_to "/", notice: 'Gene created.' }
     	format.js { render action: 'tone' }
     end
   end
