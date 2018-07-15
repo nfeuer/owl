@@ -22,11 +22,7 @@
 
 	select {
 		padding: .5em;
-		display: block;
-	}
-
-	form {
-		margin-bottom: 4em;
+		display: none;
 	}
 
 	.messages-container {
@@ -99,7 +95,7 @@
 		top: 0;
 		width: 100%;
 		border: 1px solid #ccc;
-		padding: .75em;
+		padding: .75em .75em 4em;
 		transition: all .25s;
 		-ms-transition: all .25s;
 		-moz-transition: all .25s;
@@ -107,6 +103,13 @@
 
 		.messages-response {
 			display: none;
+		}
+
+		.message-input {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
 		}
 
 		.message {

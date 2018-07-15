@@ -1,25 +1,20 @@
 <%= form_for(@message) do |f| %>
 	
-	<div class="row">
-		<div class="col-sm-4">
-			<%= f.collection_select(:recipient, User.all, :id, :username) %>
-			<%= f.hidden_field :sender, class: "form-control", value: current_user.id %>
-			<%= f.text_field :file, class: "form-control hidden", placeholder: "file" %>
-			<%= f.check_box :read, class: "form-control hidden", placeholder: "Read?" %>
-			<%= f.text_field :mtype, class: "form-control hidden", placeholder: "Message Type (DM or Group)", value: "direct" %>
-		</div>
-		<div class="col-sm-8">
-			<%= f.text_field :message, class: "form-control", placeholder: "Message Content" %>
-		</div>
-	</div>
+	<%= f.collection_select(:recipient, User.all, :id, :username) %>
+	<%= f.hidden_field :sender, class: "form-control", value: current_user.id %>
+	<%= f.text_field :file, class: "form-control hidden", placeholder: "file" %>
+	<%= f.check_box :read, class: "form-control hidden", placeholder: "Read?" %>
+	<%= f.text_field :mtype, class: "form-control hidden", placeholder: "Message Type (DM or Group)", value: "direct" %>
+
 	<div class="row">
 		<div class="col-sm-10">
+			<%= f.text_field :message, class: "form-control", placeholder: "Message Content" %>
 		</div>
-		<div class="col-sm-5">
+		<div class="col-sm-2">
 			<div class="button-container">
 				<div class="row">
 					<div class="col-sm-12">
-						<%= f.submit "Create", class: "create button" %>
+						<%= f.submit "Send", class: "create button" %>
 					</div>
 				</div>
 			</div>

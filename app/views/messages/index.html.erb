@@ -4,12 +4,13 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1>Messages</h1>
 				<h3>Create a new Message</h3>
-				<%= render 'messages/form' %>
 				<h3>All Messages</h3>
 				<div class="messages-container">
 					<div class="message-window out">
 						<div class="info"><div class="back"><i class="fas fa-chevron-left"></i></div><div class="friend">Username</div></div>
-
+						<div class="message-input">
+							<%= render 'messages/form' %>
+						</div>
 					</div>
 					<div class="message-list">
 						<% @messages.each do |m| %>
@@ -46,11 +47,15 @@
 
 		var s = $(this).attr("s")
 		var r = $(this).attr("r")
+		var friend = $(this).attr("friend")
 
 		// get the username we are communicating with
-		$.get("/getusername?id=" + $(this).attr("friend"), function(data){
+		$.get("/getusername?id=" + friend, function(data){
 			$(".message-window .info .friend").text(data)
 		})
+
+		// set our message create form to the proper recipient
+		$("select#message_recipient").val(friend)
 
 		// get messages from sender and recipient
 		$.get('/getdirectmessages?recipient=' + r + '&sender=' + s, function() {
