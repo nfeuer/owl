@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   # rails database api routes
   match '/getdirectmessages', to: 'main#getdirectmessages', via: 'get'
+  match '/setmessageread', to: 'main#setmessageread', via: 'get'
 
   # Twilio API routes
   match '/sendtext', to: 'main#sendtext', via: 'get'

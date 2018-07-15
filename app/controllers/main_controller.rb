@@ -14,29 +14,34 @@ class MainController < ApplicationController
 
   ##################### DATABASE API ROUTES TO PULL DATA
 
-  def getdirectmessages
 
+
+  ###### messaging API to get messages, set messages as read, etc.
+
+  def getdirectmessages
     @u1 = params[:sender]
     @u2 = params[:recipient]
     @messages = []
-
     Message.where("sender = ? AND recipient = ?", @u1.to_i, @u2.to_i).order(created_at: :desc).each do |f|
       @m = [f.sender, f.message, f.created_at.to_i]
       @messages.push(@m)
     end
-
     Message.where("sender = ? AND recipient = ?", @u2.to_i, @u1.to_i).order(created_at: :desc).each do |f|
       @m = [f.sender, f.message, f.created_at.to_i]
       @messages.push(@m)
     end
-
     @messages = @messages.sort {|a,b| a[2] <=> b[2]}
-
     respond_to do |format|
       # format.html { redirect_to "/", notice: 'Gene created.' }
       format.js { render action: 'getdirectmessages' }
     end
+  end
 
+  def setmessageread
+    @m = params[:mid]
+    @message = Message.find(@m)
+    @message.read = true
+    @message.save
   end
 
 

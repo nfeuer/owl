@@ -8,7 +8,7 @@
 				<h3>All Message</h3>
 				<div class="message-list">
 					<% @messages.each do |m| %>
-						<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>" s='<%= m.sender %>' r='<%= m.recipient %>'><%= m.message %></div>
+						<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>" s='<%= m.sender %>' r='<%= m.recipient %>' mid='<%= m.id %>'><%= m.message %></div>
 					<% end %>
 				</div>
 			</div>
@@ -31,6 +31,12 @@
 
 		// clear messages
 		$(".message-window .message").remove()
+
+		// if this is unread, make it read now that we've read it!
+		if($(this).hasClass("unread")) {
+			$(this).removeClass("unread")
+			$.get("/setmessageread?mid=" + $(this).attr("mid"))
+		}
 
 		var s = $(this).attr("s")
 		var r = $(this).attr("r")
