@@ -2,12 +2,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h1>Search for users</h1>
+				<h1>Search among <%= User.count %> people</h1>
 				<div class="search-widget">
 				  <input id="users" placeholder="username" class="form-control">
 				</div>
 				<div id="searchresult">
 
+				</div>
+
+				<div class="userlist">
+					<% User.all.each do |f| %>
+						<p><%= f.username %></p>
+					<% end %>
 				</div>
 			</div>
 		</div>

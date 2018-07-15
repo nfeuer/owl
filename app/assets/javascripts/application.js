@@ -564,6 +564,30 @@ jQuery.loadScript = function (url, callback) {
 
 
 
+///// generate random users to seed the database with a ton of random people
+function generatePeople() {
+
+  $.ajax({
+    url: 'https://randomuser.me/api?results=10&nat=us,dk,fr,gb',
+    dataType: 'json',
+    success: function(data) {
+      // console.log(data.results);
+
+      data.results.forEach(function(el,index){
+        var fullName = el.name.first + " " + el.name.last
+        var fullUsername = el.name.first[0] + el.name.last
+
+        $.get("/createuser?name=" + fullName + "&username=" + fullUsername)
+      })
+    }
+  });
+
+}
+
+
+
+
+
 ///////////// message array sorting function.  This is used specifically to sort arrays with dats in the [2] place
 // it is used like:  a.sort(sortFunction);
 

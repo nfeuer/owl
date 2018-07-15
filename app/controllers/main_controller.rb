@@ -12,15 +12,15 @@ class MainController < ApplicationController
   def search
     @us = ""
 
-    User.all.each_with_index do |f, index|
-      @us = @us + "," + f.username
+    User.all.order(username: :asc).each_with_index do |f, index|
+      @us = @us + "," + f.username + "  |  " + f.name.to_s.capitalize
     end
   end
 
 
 
 
-  ##################### DATABASE API ROUTES TO PULL DATA
+  ##################### DATABASE API ROUTES TO PUSH AND PULL DATA
 
 
 
@@ -72,8 +72,22 @@ class MainController < ApplicationController
 
   end
 
+  ######### Create random users
 
-  ##################### Twilio commands SMS Texting and Phone Calls
+  def createuser
+    @username = params[:username]
+    @name = params[:name]
+
+    @u = User.create(username: @username, name: @name, password: "password", password_digest: "password")
+    @u.save
+  end
+
+
+
+
+
+
+  ######################## Twilio commands SMS Texting and Phone Calls
 
   def sendtext
 

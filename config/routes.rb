@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   match '/getusername', to: 'main#getusername', via: 'get'
   match '/getdirectmessages', to: 'main#getdirectmessages', via: 'get'
   match '/setmessageread', to: 'main#setmessageread', via: 'get'
+  match '/createuser', to: 'main#createuser', via: 'get'
 
   # Twilio API routes
   match '/sendtext', to: 'main#sendtext', via: 'get'

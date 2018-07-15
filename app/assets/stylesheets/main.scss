@@ -333,24 +333,46 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	#searchresult {
+		position: relative;
+		z-index: 50;
+		background: #fff;
+		margin-bottom: 3em;
 
 		ul {
+			position: absolute;
+			left: 0;
+			top: 0;
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
+			z-index: 15;
+			background: rgba(255,255,255,1);
+			border: 1px solid #ccc;
+			box-shadow: 0 5px 8px rgba(0,0,0,.2);
 
 			li {
 				display: block;
 				font-size: 1em;
+				cursor: pointer;
 				line-height: 2em;
-				padding: .5em;
-				background: rgba(0,0,0,.05);
+				padding: .5em 1em;
+				background: rgba(0,0,0,.025);
 				border-bottom: 1px solid #ccc;
 			}
 
 			li:hover {
 				background: rgba(0,0,0,.1);
 			}
+		}
+	}
+
+	.userlist {
+
+		p {
+			margin: 0;
+			font-size: 1.15em;
+			line-height: 2.5em;
+			border-bottom: 1px solid #ddd;
 		}
 	}
 }
