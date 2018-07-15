@@ -9,6 +9,14 @@ class MainController < ApplicationController
     @message = Message.new
   end
 
+  def search
+    @us = ""
+
+    User.all.each_with_index do |f, index|
+      @us = @us + "," + f.username
+    end
+  end
+
 
 
 

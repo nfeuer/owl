@@ -321,6 +321,43 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 }
 
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+#search {
+	padding: 4em 0;
+
+	.search-widget {
+
+	}
+
+	#searchresult {
+
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				display: block;
+				font-size: 1em;
+				line-height: 2em;
+				padding: .5em;
+				background: rgba(0,0,0,.05);
+				border-bottom: 1px solid #ccc;
+			}
+
+			li:hover {
+				background: rgba(0,0,0,.1);
+			}
+		}
+	}
+}
+
+
+
+
 
 
 

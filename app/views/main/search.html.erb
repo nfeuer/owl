@@ -1,0 +1,27 @@
+<div id="search">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h1>Search for users</h1>
+				<div class="search-widget">
+				  <input id="users" placeholder="username" class="form-control">
+				</div>
+				<div id="searchresult">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+  var users = "<%= @us %>"
+  var userArray = users.split(",")
+  $( "#users" ).autocomplete({
+    source: userArray,
+  	appendTo: "#searchresult"
+  })
+</script>
+ 
+					
