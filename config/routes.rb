@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   ########## API ROUTES
 
   # rails database api routes
+  match '/getusername', to: 'main#getusername', via: 'get'
   match '/getdirectmessages', to: 'main#getdirectmessages', via: 'get'
   match '/setmessageread', to: 'main#setmessageread', via: 'get'
 

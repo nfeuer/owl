@@ -18,6 +18,13 @@ class MainController < ApplicationController
 
   ###### messaging API to get messages, set messages as read, etc.
 
+  def getusername
+    @u = params[:id]
+    @username = User.find(@u).username
+    respond_to do |format|
+      format.text { render plain: @username }
+    end
+  end
   def getdirectmessages
     @u1 = params[:sender]
     @u2 = params[:recipient]

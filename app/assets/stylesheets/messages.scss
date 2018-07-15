@@ -29,7 +29,21 @@
 		margin-bottom: 4em;
 	}
 
+	.messages-container {
+		position: relative;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
 	.message-list {
+		position: relative;
+		left: 0;
+		width: 100%;
+		top: 0;
+		transition: all .25s;
+		-ms-transition: all .25s;
+		-moz-transition: all .25s;
+		-webkit-transition: all .25s;
 
 		.message {
 			position: relative;
@@ -75,10 +89,21 @@
 		}
 	}
 
+	.message-list.out {
+		left: -100%;
+	}
+
 	.message-window {
-		margin: 3em 0;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
 		border: 1px solid #ccc;
 		padding: .75em;
+		transition: all .25s;
+		-ms-transition: all .25s;
+		-moz-transition: all .25s;
+		-webkit-transition: all .25s;
 
 		.messages-response {
 			display: none;
@@ -93,5 +118,30 @@
 			margin-bottom: .75em;
 			border-radius: 5px;
 		}
+
+
+		.info {
+			position: relative;
+			margin-bottom: 1em;
+
+			.back {
+				display: inline-block;
+				padding: .5em;
+				cursor: pointer;
+				margin-right: .5em;
+			}
+
+			.back:hover {
+				background: rgba(0,0,0,.075);
+			}
+
+			.friend {
+				display: inline-block;
+			}
+		}
+	}
+
+	.message-window.out {
+		left: 100%;
 	}
 }
