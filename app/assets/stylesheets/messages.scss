@@ -6,7 +6,28 @@
 
 
 #messages {
-	padding: 6em 0;
+	padding: 2em 0;
+
+	h1 {
+		font-size: 2em;
+		margin: 0 0 1.5em;
+		line-height: 1.15em;
+	}
+
+	h3 {
+		font-size: 1.5em;
+		margin: 0 0 1em;
+		line-height: 1.15em;
+	}
+
+	select {
+		padding: .5em;
+		display: block;
+	}
+
+	form {
+		margin-bottom: 4em;
+	}
 
 	.message-list {
 
@@ -51,7 +72,7 @@
 
 		.message {
 			padding: .5em;
-			background: #ccc;
+			background: rgba(0,0,0,.075);
 			color: #333;
 			font-size: 1em;
 			line-height: 1.25em;

@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to "/", notice: 'Message created.' }
+        format.html { redirect_to "/messages", notice: 'Message created.' }
         format.json { render action: 'show', status: :created, location: @message }
       else
         format.html { render action: 'new' }
