@@ -8,38 +8,55 @@
 #messages {
 	padding: 6em 0;
 
-	.message {
-		position: relative;
-		display: block;
-		padding: .75em 1em;
-		border-bottom: 1px solid #ccc;
-		background: rgba(0,0,0,0);
-		cursor: pointer;
-		transition: all .1s;
-		-ms-transition: all .1s;
-		-moz-transition: all .1s;
-		-webkit-transition: all .1s;
-	}
+	.message-list {
 
-	.message:hover {
-		background: rgba(0,0,0,.075);
-	}
+		.message {
+			position: relative;
+			display: block;
+			padding: .75em 1em;
+			border-bottom: 1px solid #ccc;
+			background: rgba(0,0,0,0);
+			cursor: pointer;
+			transition: all .1s;
+			-ms-transition: all .1s;
+			-moz-transition: all .1s;
+			-webkit-transition: all .1s;
+		}
 
-	.message.unread:before {
-		display: block;
-		content: "";
-		width: .5em;
-		height: .5em;
-		background: royalblue;
-		border-radius: .5em;
-		position: absolute;
-		left: .25em;
-		top: 38%;
+		.message:hover {
+			background: rgba(0,0,0,.075);
+		}
+
+		.message.unread:before {
+			display: block;
+			content: "";
+			width: .5em;
+			height: .5em;
+			background: royalblue;
+			border-radius: .5em;
+			position: absolute;
+			left: .25em;
+			top: 38%;
+		}
 	}
 
 	.message-window {
 		margin: 3em 0;
 		border: 1px solid #ccc;
 		padding: .75em;
+
+		.messages-response {
+			display: none;
+		}
+
+		.message {
+			padding: .5em;
+			background: #ccc;
+			color: #333;
+			font-size: 1em;
+			line-height: 1.25em;
+			margin-bottom: .75em;
+			border-radius: 5px;
+		}
 	}
 }

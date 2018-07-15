@@ -2,7 +2,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h1>All Messages</h1>
+				<h1>Messages</h1>
+				<h3>Create a new Message</h3>
+				<%= render 'messages/form' %>
+				<h3>All Message</h3>
 				<div class="message-list">
 					<% @messages.each do |m| %>
 						<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>"><%= m.message %></div>
@@ -22,9 +25,17 @@
 
 <script type="text/javascript">
 	
+	var messagesResponse = ""
+
 	$(".message-list .message").on("click", function() {
 
-		// add thread to message window
-		$(".message-window")
+		// get thread from messages-response html and convert to json for preparation
+		var msgArray = JSON.parse($(".message-window .messages-response").text())
+		
+		// take messages response JSON and add to window
+		for (var i = 0; i <= msgArray.length - 1; i++) {
+			var html = '<div class="message">' + msgArray[i][1] + '</div>'
+			$(".message-window").append(html)
+		}
 	})
 </script>

@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @user = current_user
+    @message = Message.new
     @messages = Message.where("sender = ? OR recipient = ?", @user.id, @user.id).order(created_at: :desc)
   end
 

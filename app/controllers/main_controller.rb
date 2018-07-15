@@ -20,9 +20,17 @@ class MainController < ApplicationController
     @u2 = params[:recipient]
     @messages = []
 
-    Message.where("sender = ? OR recipient = ?", @u1.to_i, @u2.to_i).order(created_at: :desc).each do |f|
-      @messages.push(f.message)
+    Message.where("sender = ? AND recipient = ?", @u1.to_i, @u2.to_i).order(created_at: :desc).each do |f|
+      @m = [f.sender, f.message, f.created_at.to_i]
+      @messages.push(@m)
     end
+
+    Message.where("sender = ? AND recipient = ?", @u2.to_i, @u1.to_i).order(created_at: :desc).each do |f|
+      @m = [f.sender, f.message, f.created_at.to_i]
+      @messages.push(@m)
+    end
+
+    @messages = @messages.sort {|a,b| a[2] <=> b[2]}
 
     respond_to do |format|
       # format.html { redirect_to "/", notice: 'Gene created.' }

@@ -562,3 +562,19 @@ jQuery.loadScript = function (url, callback) {
 
 
 
+
+
+///////////// message array sorting function.  This is used specifically to sort arrays with dats in the [2] place
+// it is used like:  a.sort(sortFunction);
+
+function sortFunction(a, b) {
+    if (a[2] === b[2]) {
+        return 0;
+    }
+    else {
+        return (a[2] < b[2]) ? -1 : 1;
+    }
+}
+
+
+
