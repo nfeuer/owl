@@ -10,20 +10,20 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 
 #index {
-	padding: 8em 0;
+	padding: 20vh 0;
 
 	.introduction {
 		text-align: center;
 
 		img.logo {
 			display: block;
-			width: 10em;
-			margin: 0 auto 2em;
+			height: 20vh;
+			margin: 0 auto 10vh;
 		}
 
 		h1 {
 			font-weight: 700;
-			margin: 0 0 .25em;
+			margin: 0 0 .5em;
 			line-height: 1.25em;
 		}
 

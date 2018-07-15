@@ -568,7 +568,7 @@ jQuery.loadScript = function (url, callback) {
 function generatePeople() {
 
   $.ajax({
-    url: 'https://randomuser.me/api?results=10&nat=us,dk,fr,gb',
+    url: 'https://randomuser.me/api?results=250&nat=us,dk,fr,gb',
     dataType: 'json',
     success: function(data) {
       // console.log(data.results);
