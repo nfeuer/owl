@@ -28,6 +28,7 @@
 	.messages-container {
 		position: relative;
 		max-width: 100%;
+		min-height: 50vh;
 		overflow-x: hidden;
 	}
 
@@ -44,14 +45,24 @@
 		.message {
 			position: relative;
 			display: block;
+			font-size: 1.15em;
+			font-weight: 600;
 			padding: .75em 1em;
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid rgba(0,0,0,.1);
 			background: rgba(0,0,0,0);
 			cursor: pointer;
 			transition: all .1s;
 			-ms-transition: all .1s;
 			-moz-transition: all .1s;
 			-webkit-transition: all .1s;
+
+			span {
+				font-size: .85em;
+				font-weight: 300;
+				color: #999;
+				display: inline-block;
+				margin-left: 1em;
+			}
 
 			.delete-btn {
 				float: right;
@@ -93,6 +104,7 @@
 		position: absolute;
 		left: 0;
 		top: 0;
+		min-height: 50vh;
 		width: 100%;
 		border: 1px solid #ccc;
 		padding: .75em .75em 4em;

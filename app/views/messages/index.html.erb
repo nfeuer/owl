@@ -11,9 +11,17 @@
 						</div>
 					</div>
 					<div class="message-list">
+						<% @friendArr = [] %>
 						<% @messages.each do |m| %>
 							<% if current_user.id != m.sender %> <% @friend = m.sender %> <% elsif current_user.id != m.recipient %> <% @friend = m.recipient %> <% elsif current_user.id == m.sender && current_user.id == m.recipient %> <% @friend = m.sender %> <% end %>
-							<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>" s='<%= m.sender %>' r='<%= m.recipient %>' mid='<%= m.id %>' friend="<%= @friend %>"><%= m.message %> <%= link_to "X", m, method: :delete, data: { confirm: "Are you sure you want to delete this message?" }, class: "delete-btn" %></div>
+							
+							<% if User.exists?(id: @friend) %> <% @friendname = User.find(@friend).username %> <% else %> <% @friendname = "No user" %> <% end %>
+
+							<% unless @friendArr.include?(@friend) %>
+								<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>" s='<%= m.sender %>' r='<%= m.recipient %>' mid='<%= m.id %>' friend="<%= @friend %>"><%= @friendname %> <span><%= truncate(m.message, length: 75) %></span> <%= link_to "X", m, method: :delete, data: { confirm: "Are you sure you want to delete this message?" }, class: "delete-btn" %></div>
+							<% end %>
+
+							<% @friendArr.push(@friend) %>
 						<% end %>
 					</div>
 				</div>

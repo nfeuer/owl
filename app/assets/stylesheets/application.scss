@@ -41,6 +41,14 @@ header#header {
 		margin: 0;
 		line-height: 7rem;
 		display: inline-block;
+
+		a {
+			padding: 0;
+		}
+
+		a:hover {
+			background: transparent;
+		}
 	}
 
 	a {

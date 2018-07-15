@@ -54,10 +54,22 @@ class MainController < ApplicationController
   end
 
   def setmessageread
+
+    # get message from API request
     @m = params[:mid]
+
+    # find details about this message, like sender and recipient
     @message = Message.find(@m)
-    @message.read = true
-    @message.save
+    @r = @message.recipient
+    @s = @message.sender
+
+    # set all messages in these two users' thread to "read=true" because maybe several were unread
+    @fullthreadmessages = Message.where("sender = ? AND recipient = ?", @s, @r)
+    @fullthreadmessages.each do |f|
+      f.read = true
+      f.save
+    end
+
   end
 
 
