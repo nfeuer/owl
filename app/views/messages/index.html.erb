@@ -31,6 +31,7 @@
 <script type="text/javascript">
 	
 	var messagesResponse = ""
+	var currentUser = "<%= current_user.id %>"
 
 	$(".message-list .message").on("click", function() {
 
@@ -59,7 +60,14 @@
 			
 			// take messages response JSON and add to window
 			for (var i = 0; i <= msgArray.length - 1; i++) {
-				var html = '<div class="message">' + msgArray[i][1] + '</div>'
+				var mdirection = ""
+				if (msgArray[i][0] == currentUser) {
+					console.log("ayooo we da same")
+					mdirection = "outgoing"
+				} else {
+					mdirection = "incoming"
+				}
+				var html = '<div class="message ' + mdirection + '">' + msgArray[i][1] + '</div>'
 				$(".message-window").append(html)
 			}
 

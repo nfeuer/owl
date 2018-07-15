@@ -110,8 +110,9 @@
 		}
 
 		.message {
-			padding: .5em;
-			background: rgba(0,0,0,.075);
+			width: 84%;
+			padding: .5em .75em;
+			background: rgba(0,0,0,.05);
 			color: #333;
 			font-size: 1em;
 			line-height: 1.25em;
@@ -119,6 +120,10 @@
 			border-radius: 5px;
 		}
 
+		.message.incoming {
+			margin-left: 15%;
+			background: rgba(15,125,255,.15)
+		}
 
 		.info {
 			position: relative;

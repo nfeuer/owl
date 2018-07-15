@@ -25,6 +25,7 @@ class MainController < ApplicationController
       format.text { render plain: @username }
     end
   end
+  
   def getdirectmessages
     @u1 = params[:sender]
     @u2 = params[:recipient]
