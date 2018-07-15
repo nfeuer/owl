@@ -122,6 +122,38 @@
 			left: 0;
 			bottom: 0;
 			width: 100%;
+			border-top: 1px solid rgba(0,0,0,.15);
+
+			.form-control {
+				box-shadow: 0 0 0;
+				border: 0;
+				outline: 0;
+				font-size: 1em;
+				line-height: 2em;
+				height: auto;
+			}
+
+			.button-container {
+				position: absolute;
+				right: 0;
+				top: 0;
+				height: 100%;
+
+				.button {
+					position: absolute;
+					top: 0;
+					right: 0;
+					height: 100%;
+					outline: 0;
+					border: 0;
+					padding: .5em 1.75em;
+				}
+
+				.button:hover {
+					color: #111;
+					background: #ddd;
+				}
+			}
 		}
 
 		.message {
