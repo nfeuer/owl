@@ -107,7 +107,7 @@
 		min-height: 50vh;
 		width: 100%;
 		border: 1px solid #ccc;
-		padding: 5em .75em;
+		padding: 4em .75em;
 		transition: all .25s;
 		-ms-transition: all .25s;
 		-moz-transition: all .25s;
@@ -211,3 +211,34 @@
 		left: 100%;
 	}
 }
+
+
+
+
+
+
+@media(max-width: 768px) {
+
+	#messages {
+
+		.messages-container {
+			min-height: 82vh;
+
+			.message-window {
+				min-height: 80vh;
+
+				.messages-content {
+					min-height: 63vh;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
