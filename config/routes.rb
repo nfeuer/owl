@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   match '/visualizer', to: 'main#visualizer', via: 'get'
   match '/nlu', to: 'main#nlu', via: 'get'
   match '/translate', to: 'main#translate', via: 'get'
+  match '/identifylanguage', to: 'main#identifylanguage', via: 'get'
   
 end

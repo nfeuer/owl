@@ -261,6 +261,36 @@ class MainController < ApplicationController
     end
   end
 
+  def identifylanguage
+
+    require 'net/http'
+    require 'uri'
+
+    uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/identify?version=2018-05-01")
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.content_type = "text/plain"
+    request.body = "Language translator translates text from one language to another"
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    puts " "
+    puts "----translator"
+    puts @response.body
+    puts " "
+    puts @response
+    
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
 
 
 

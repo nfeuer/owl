@@ -600,7 +600,24 @@ function generatePeople() {
       })
     }
   });
+}
 
+
+
+
+/////////// identify language in text
+
+function identifyLanguage(text) {
+
+    $.get("/identifylanguage?text=" + text, function(data){
+
+        var d = data
+        var j = JSON.parse(d).languages[0].language
+
+        // console.log(d)
+        console.log(j)
+
+    })
 }
 
 
