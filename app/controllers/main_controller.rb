@@ -123,6 +123,8 @@ class MainController < ApplicationController
   end
 
 
+
+
   ###################### IBM WATSON API INTELLIGENCE COMMANDS
 
   def analyzetone
@@ -184,13 +186,13 @@ class MainController < ApplicationController
   	@text = params[:text]
   	@text = "how hot will it be outside today?"
 
-	{
-	  "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-	  "username": "e8f3ecb4-979e-45c1-8939-bdd29b9d7474",
-	  "password": "7h6goCtngjoN"
-	}
+  	{
+  	  "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+  	  "username": "e8f3ecb4-979e-45c1-8939-bdd29b9d7474",
+  	  "password": "7h6goCtngjoN"
+  	}
 
-	@endpoint = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1/classify?text=" + @text
+  	@endpoint = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1/classify?text=" + @text
   end
 
   def nlu
@@ -198,41 +200,68 @@ class MainController < ApplicationController
   	##### IBM Watson Natural Language Understanding Base models for text
 
   	# @text = params[:text]
-	@text = "IBM is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries."
+  	@text = "IBM is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries."
 
-	# @features = "concepts,categories,emotion,entities,keywords,metadata,relations,semantic_roles,sentiment"
-	@features = "keywords,entities"
+  	# @features = "concepts,categories,emotion,entities,keywords,metadata,relations,semantic_roles,sentiment"
+  	@features = "keywords,entities"
 
-	@endpoint = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-16&features=" + @features + "&text=" + @text
-	@nlu = HTTParty.get(@endpoint, headers: { Authorization: 'Basic NGJhODRmYWQtN2E0NC00ZTg3LTkwYTgtM2ZkZGEyYmI0OGJhOnRERDNEdTU4QVhIMw==', 'Content-type' => 'application/json' }, body: {})
+  	@endpoint = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-16&features=" + @features + "&text=" + @text
+  	@nlu = HTTParty.get(@endpoint, headers: { Authorization: 'Basic NGJhODRmYWQtN2E0NC00ZTg3LTkwYTgtM2ZkZGEyYmI0OGJhOnRERDNEdTU4QVhIMw==', 'Content-type' => 'application/json' }, body: {})
 
-	puts " "
-	puts "----- nlu"
-	puts @nlu
+  	puts " "
+  	puts "----- nlu"
+  	puts @nlu
 
   end
 
   def stt
-
   end
 
   def tts
-
   	@endpoint = "https://stream.watsonplatform.net/text-to-speech/api"
-
   end
 
   def translate
+    @text = params[:text]
+    if @text.to_s == ""
+      @text = "hello world!"
+    end
 
-	{
-	  "apikey": "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_",
-	  "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:language-translator:us-south:a/a05e0398b87df931aa0f181fc49d23ee:466ff35e-5f99-4ab4-862c-e8203daee5b2::",
-	  "iam_apikey_name": "auto-generated-apikey-621c31ed-7ff1-4f73-a5e9-3b4180ef0d69",
-	  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-	  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/a05e0398b87df931aa0f181fc49d23ee::serviceid:ServiceId-87a8b3ec-e5c9-44f9-a9cc-ce27e4bc6028",
-	  "url": "https://gateway.watsonplatform.net/language-translator/api"
-	}
+    require 'net/http'
+    require 'uri'
+    require 'json'
 
+    uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01")
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.content_type = "application/json"
+    request.body = JSON.dump({
+      "text" => [
+        @text
+      ],
+      "model_id" => "en-es"
+    })
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    puts " "
+    puts "----translator"
+    puts @response.body
+    puts " "
+    puts @response
+    
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
   end
+
+
+
 
 end

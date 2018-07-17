@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   match '/eye', to: 'main#eye', via: 'get'
   match '/test', to: 'main#test', via: 'get'
   match '/search', to: 'main#search', via: 'get'
+  match '/translator', to: 'main#translator', via: 'get'
 
   
   ########## API ROUTES
@@ -42,5 +43,6 @@ Rails.application.routes.draw do
   match '/analyzetone', to: 'main#analyzetone', via: 'get'
   match '/visualizer', to: 'main#visualizer', via: 'get'
   match '/nlu', to: 'main#nlu', via: 'get'
+  match '/translate', to: 'main#translate', via: 'get'
   
 end
