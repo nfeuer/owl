@@ -1,0 +1,260 @@
+<div class="conversation">
+    <div class="dialogue">
+
+    </div>
+    <div class="input-container">
+        <button id="startBtn"><i class="fas fa-microphone"></i></button>
+        <input id="readout" type="text" placeholder="How can I help?">
+    </div>
+    <div class="conversation-list">
+
+    </div>
+    
+    <!-- The SDK has a dependency on requirejs (http://requirejs.org/). -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+
+    <!-- SDK REFERENCE -->
+    <script src="https://s3.amazonaws.com/speech-assets/speech.browser.sdk-min.js"></script>
+
+    <!-- SDK USAGE -->
+    <script>
+        // On doument load resolve the SDK dependecy
+        function Initialize(onComplete) {
+            // require(["https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"], function(e){
+                
+            // })
+            require(["Speech.Browser.Sdk"], function(SDK) {
+                onComplete(SDK);
+            });
+        }
+        
+        // Setup the recongizer
+        function RecognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
+            
+            switch (recognitionMode) {
+                case "Interactive" :
+                    recognitionMode = SDK.RecognitionMode.Interactive;    
+                    break;
+                case "Conversation" :
+                    recognitionMode = SDK.RecognitionMode.Conversation;    
+                    break;
+                case "Dictation" :
+                    recognitionMode = SDK.RecognitionMode.Dictation;    
+                    break;
+                default:
+                    recognitionMode = SDK.RecognitionMode.Interactive;
+            }
+
+            var recognizerConfig = new SDK.RecognizerConfig(
+                new SDK.SpeechConfig(
+                    new SDK.Context(
+                        new SDK.OS(navigator.userAgent, "Browser", null),
+                        new SDK.Device("SpeechSample", "SpeechSample", "1.0.00000"))),
+                recognitionMode,
+                language, // Supported laguages are specific to each recognition mode. Refer to docs.
+                format); // SDK.SpeechResultFormat.Simple (Options - Simple/Detailed)
+
+            // Alternatively use SDK.CognitiveTokenAuthentication(fetchCallback, fetchOnExpiryCallback) for token auth
+            var authentication = new SDK.CognitiveSubscriptionKeyAuthentication(subscriptionKey);
+            
+            return SDK.CreateRecognizer(recognizerConfig, authentication);
+
+
+            // var files = document.getElementById('filePicker').files;
+            // if (!files.length) {
+            //     return SDK.CreateRecognizer(recognizerConfig, authentication);
+            // } else {
+            //     return SDK.CreateRecognizerWithFileAudioSource(recognizerConfig, authentication, files[0]);
+            // }
+        }
+
+        // Start the recognition
+        function RecognizerStart(SDK, recognizer) {
+            recognizer.Recognize((event) => {
+                /*
+                 Alternative syntax for typescript devs.
+                 if (event instanceof SDK.RecognitionTriggeredEvent)
+                */
+                switch (event.Name) {
+                    case "RecognitionTriggeredEvent" :
+                        UpdateStatus("Initializing");
+                        break;
+                    case "ListeningStartedEvent" :
+                        UpdateStatus("Listening");
+                        break;
+                    case "RecognitionStartedEvent" :
+                        UpdateStatus("Listening_Recognizing");
+                        break;
+                    case "SpeechStartDetectedEvent" :
+                        UpdateStatus("Listening_DetectedSpeech_Recognizing");
+                        console.log(JSON.stringify(event.Result)); // check console for other information in result
+                        break;
+                    case "SpeechHypothesisEvent" :
+                        UpdateRecognizedHypothesis(event.Result.Text, false);
+                        console.log(JSON.stringify(event.Result)); // check console for other information in result
+                        break;
+                    case "SpeechFragmentEvent" :
+                        UpdateRecognizedHypothesis(event.Result.Text, true);
+                        console.log(JSON.stringify(event.Result)); // check console for other information in result
+                        break;
+                    case "SpeechEndDetectedEvent" :
+                        OnSpeechEndDetected();
+                        UpdateStatus("Processing_Adding_Final_Touches");
+                        console.log(JSON.stringify(event.Result)); // check console for other information in result
+                        break;
+                    case "SpeechSimplePhraseEvent" :
+                        UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
+                        break;
+                    case "SpeechDetailedPhraseEvent" :
+                        UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
+                        break;
+                    case "RecognitionEndedEvent" :
+                        OnComplete();
+                        UpdateStatus("Idle");
+
+                        var output = $("#readout").val()
+
+                        dialogue(output)
+
+                        // Speak the words with text-to-speech
+                        //responsiveVoice.speak(output, "UK English Female", {rate: .9});
+
+                        console.log(JSON.stringify(event)); // Debug information
+                        break;
+                    default:
+                        console.log(JSON.stringify(event)); // Debug information
+                }
+            })
+            .On(() => {
+                // The request succeeded. Nothing to do here.
+            },
+            (error) => {
+                console.error(error);
+            });
+        }
+
+        // Stop the Recognition.
+        function RecognizerStop(SDK, recognizer) {
+            // recognizer.AudioSource.Detach(audioNodeId) can be also used here. (audioNodeId is part of ListeningStartedEvent)
+            recognizer.AudioSource.TurnOff();
+        }
+    </script>
+
+    <!-- Browser Hooks -->
+    <script>
+        var startBtn, stopBtn, readout, phraseDiv, statusDiv;
+        var key, languageOptions, formatOptions, recognitionMode, inputSource, filePicker;
+        var SDK;
+        var recognizer;
+        var previousSubscriptionKey;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            createBtn = document.getElementById("createBtn");
+            startBtn = document.getElementById("startBtn");
+            stopBtn = document.getElementById("stopBtn");
+            phraseDiv = document.getElementById("phraseDiv");
+            readout = document.getElementById("readout");
+            statusDiv = document.getElementById("statusDiv");
+            key = "069403cc26d64b3b837f8b98f6a3af44"
+            languageOptions = document.getElementById("languageOptions");
+            formatOptions = document.getElementById("formatOptions");
+            inputSource = document.getElementById("inputSource");
+            recognitionMode = document.getElementById("recognitionMode");
+            // filePicker = document.getElementById('filePicker');
+
+            // languageOptions.addEventListener("change", Setup);
+            // formatOptions.addEventListener("change", Setup);
+            // recognitionMode.addEventListener("change", Setup);
+
+            startBtn.addEventListener("click", function () {
+                if (key == "" || key == "YOUR_BING_SPEECH_API_KEY") {
+                    alert("Please enter your Bing Speech subscription key!");
+                    return;
+                }
+
+                if (!recognizer || previousSubscriptionKey != key) {
+                    previousSubscriptionKey = key;
+                    Setup();
+                }
+
+                if ($("#startBtn").hasClass("active")) {
+
+                    // Recording is on, turn off and stop recording
+                    $("#startBtn").toggleClass("active")
+                    // We just turned off active, so stop the recording
+                    RecognizerStop(SDK, recognizer);
+
+                } else {
+                    // recording is off, so turn it on
+                    $("#startBtn").toggleClass("active")
+
+                    // $("#readout").val("")
+                    // phraseDiv.innerHTML = "";
+                    RecognizerStart(SDK, recognizer);
+                }
+
+            });
+
+            Initialize(function (speechSdk) {
+                SDK = speechSdk;
+            });
+        });
+
+        function startRecordingStream() {
+            if (!recognizer || previousSubscriptionKey != key.value) {
+                previousSubscriptionKey = key.value;
+                Setup();
+            }
+
+            RecognizerStart(SDK, recognizer);
+
+            // Talk button is clicked, toggle active and swap out the icon using CSS
+            $("#startBtn").toggleClass("active")
+            
+            // Stop button is clicked, turn off audio.
+            // stopBtn.on("click", function() { startBtn.removeClass("active")})
+
+            if ($(startBtn).hasClass("active")) {
+                // If we're active, do things
+            } else {
+                // otherwise, we're turned off
+            }
+        }
+
+        function Setup() {
+            recognizer = RecognizerSetup(SDK, "Interactive", "en-US", SDK.SpeechResultFormat["Simple"], key);
+            
+            // recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat["Simple"], key.value);
+        }
+
+        function UpdateStatus(status) {
+            // statusDiv.innerHTML = status;
+        }
+
+        function UpdateRecognizedHypothesis(text, append) {
+            if (append) 
+                readout.value += text + " ";
+            else 
+                readout.value = text;
+
+            var length = readout.value.length;
+            if (length > 203) {
+                readout.value = "..." + readout.value.substr(length-200, length);
+            }
+        }
+
+        function OnSpeechEndDetected() {
+            $("#startBtn").removeClass("active")
+
+        }
+
+        function UpdateRecognizedPhrase(json) {
+            // readout.innerHTML = "";
+            // phraseDiv.innerHTML += json + "\n";
+        }
+
+        function OnComplete() {
+
+        }
+    </script>
+</div>

@@ -1,0 +1,11 @@
+<%= form_for @incident do |f| %>
+	
+	<%= f.text_field :name, class: "form-control", placeholder: "Incident Name" %>
+	<%= f.text_field :location, class: "form-control", placeholder: "Incident Location" %>
+	<%= f.text_field :managers, class: "form-control", placeholder: "Incident Manager" %>
+	<%= f.text_field :impacted, class: "form-control", placeholder: "Individuals Impacted from Incident" %>
+	<%= f.text_field :casualties, class: "form-control", placeholder: "Incident Casualties" %>
+	
+	<%= f.submit %>
+
+<% end %>

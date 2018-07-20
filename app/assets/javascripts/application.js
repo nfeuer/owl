@@ -18,6 +18,19 @@
 
 $(document).ready(function() {
 
+
+
+    // Deal with typed instead of spoken
+    $("#readout").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+          // grab output typed in
+          var output = $("#readout").val()
+          dialogue(output)
+          $("#readout").val("")
+          $("#readout").blur()
+      }
+    })
+    
 })
 
 
@@ -635,6 +648,386 @@ function sortFunction(a, b) {
         return (a[2] < b[2]) ? -1 : 1;
     }
 }
+
+
+
+
+
+
+
+
+
+////////////////////////// function dialogue for the dialogue stack
+//////////////////// Dialogue Stack variables
+var intents = []
+var entities = []
+var quantity = 0
+var machineResponse = ""
+var userResponse = ""
+var showDemo;
+
+function dialogue(text) {
+
+    // clear metadata
+    intents = []
+    entities = []
+    quantity = 0
+
+    // Prepare dailogue text by downcasing
+    var preparedText = text.toLowerCase()
+
+    ////////////////////// Run through to find intents, calculate the intent here
+
+    // Text wants to "create", so unify for add, new, create, start, etc.
+    if (preparedText.includes("create") || preparedText.includes("add") || preparedText.includes("new") || preparedText.includes("start") || preparedText.includes("make")) {
+        intents.push("add")
+    }
+    if (preparedText.includes("hello") || preparedText.includes("hi") || preparedText.includes("hey")) {
+        intents.push("hello")
+    }
+    if (preparedText.includes("last") || preparedText.includes("recent")) {
+        intents.push("recent")
+    }
+    if (preparedText.includes("fill") || preparedText.includes("fix") || preparedText.includes("check")) {
+        intents.push("fix")
+    }
+    if (preparedText.includes("find") || preparedText.includes("show") || preparedText.includes("calculate") || preparedText.includes("can i see")) {
+        intents.push("find")
+    }
+    if (preparedText.includes("help")) {
+        intents.push("help")
+    }
+    if (preparedText.includes("save")) {
+        intents.push("save")
+    }
+    if (preparedText.includes("upload") || preparedText.includes("up load") || preparedText.includes("load up") || preparedText.includes("loadup")) {
+        intents.push("upload")
+    }
+    if (preparedText.includes("tutorial") || preparedText.includes("demo") || preparedText.includes("run through")) {
+        if (preparedText.includes("manual") || preparedText.includes("directed")) {
+          intents.push("manual tutorial")
+        } else {
+          intents.push("tutorial")
+        }
+    }
+    if (preparedText.includes("average") || preparedText.includes("mean")) {
+        intents.push("average")
+    }
+    if (preparedText.includes("merge")) {
+        intents.push("merge")
+    }
+    if (preparedText.includes("top") || preparedText.includes("highest")) {
+        intents.push("top")
+    }
+    if (preparedText.includes("setup") || preparedText.includes("set up")) {
+        intents.push("setup")
+    }
+    if (preparedText.includes("say") || preparedText.includes("speak")) {
+        intents.push("say")
+    }
+    if (preparedText.includes("play")) {
+        intents.push("play")
+    }
+    if (preparedText.includes("can you text") || preparedText.includes("send a text") || preparedText.includes("text my friend")) {
+        intents.push("text")
+    }
+    if (preparedText.includes("take me to") || preparedText.includes("direct me to") || preparedText.includes("direct to") || preparedText.includes("navigate me to") || preparedText.includes("navigate to")) {
+        intents.push("navigate")
+    }
+    if (preparedText.includes("open")) {
+        intents.push("open")
+    }
+    if (preparedText.includes("close")) {
+        intents.push("close")
+    }
+    if (preparedText.includes("remove")) {
+        intents.push("remove")
+    }
+    if (preparedText.includes("off")) {
+        intents.push("off")
+    }
+    if (preparedText.includes("on")) {
+        intents.push("on")
+    }
+    if (preparedText.includes("lock")) {
+        intents.push("lock")
+    }
+    if (preparedText.includes("unlock")) {
+        intents.push("unlock")
+    }
+    if (preparedText.includes("activate")) {
+        intents.push("activate")
+    }
+    if (preparedText.includes("deactivate")) {
+        intents.push("deactivate")
+    }
+    if (preparedText.includes("start")) {
+        intents.push("start")
+    }
+    if (preparedText.includes("stop")) {
+        intents.push("stop")
+    }
+    if (preparedText.includes("arm")) {
+        intents.push("arm")
+    }
+    if (preparedText.includes("unarm")) {
+        intents.push("unarm")
+    }
+    if (preparedText.includes("trigger")) {
+        intents.push("trigger")
+    }
+
+
+
+    ////////////////////// Determine entities from text
+    if (preparedText.includes("document") || preparedText.includes("documents") || preparedText.includes("doc")) {
+        entities.push("document")
+    }
+    if (preparedText.includes("file")) {
+        entities.push("file")
+    }
+    if (preparedText.includes("uploads") || preparedText.includes("upload")) {
+        entities.push("upload")
+    }
+    if (preparedText.includes("map")) {
+        entities.push("map")
+    }
+    if (preparedText.includes("tables")) {
+        entities.push("tables")
+    }
+    if (preparedText.includes("presentation")) {
+        entities.push("presentation")
+    }
+    if (preparedText.includes("api")) {
+        entities.push("api")
+    }
+    if (preparedText.includes("video") || preparedText.includes("youtube")) {
+        entities.push("video")
+    }
+    if (preparedText.includes("music") || preparedText.includes("song")) {
+        entities.push("music")
+    }
+    if (preparedText.includes("media")) {
+        entities.push("media")
+    }
+    if (preparedText.includes("contact")) {
+        entities.push("contact")
+    }
+    if (preparedText.includes("window")) {
+        entities.push("window")
+    }
+    if (preparedText.includes("door")) {
+        entities.push("door")
+    }
+    if (preparedText.includes("climate")) {
+        entities.push("climate")
+    }
+    if (preparedText.includes("dash")) {
+        entities.push("dash")
+    }
+    if (preparedText.includes("port")) {
+        entities.push("port")
+    }
+    if (preparedText.includes("engine")) {
+        entities.push("engine")
+    }
+    if (preparedText.includes("trunk")) {
+        entities.push("trunk")
+    }
+    if (preparedText.includes("lights")) {
+        entities.push("lights")
+    }
+    if (preparedText.includes("charging")) {
+        entities.push("charging")
+    }
+    if (preparedText.includes("emergency")) {
+        entities.push("emergency")
+    }
+    if (preparedText.includes("flashers")) {
+        entities.push("flashers")
+    }
+    if (preparedText.includes("roof")) {
+        entities.push("roof")
+    }
+    if (preparedText.includes("theft alarm")) {
+        entities.push("theft")
+    }
+    if (preparedText.includes("parking brake")) {
+        entities.push("pbrake")
+    }
+    if (preparedText.includes("parking ticket")) {
+        entities.push("pticket")
+    }
+    if (preparedText.includes("valet")) {
+        entities.push("valet")
+    }
+    if (preparedText.includes("gas flap")) {
+        entities.push("gflap")
+    }
+
+    ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
+
+    if (preparedText.includes("first") || preparedText.includes("second") || preparedText.includes("third") || preparedText.includes("1") || preparedText.includes("2") || preparedText.includes("3")) {
+
+        if (preparedText.includes("first") || preparedText.includes("1")) {
+            quantity = 1
+        } else if (preparedText.includes("second") || preparedText.includes("2")) {
+            quantity = 2
+        } else if (preparedText.includes("third") || preparedText.includes("3")) {
+            quantity = 3
+        } else if (preparedText.includes("fourth") || preparedText.includes("4")) {
+            quantity = 4
+        } else if (preparedText.includes("fifth") || preparedText.includes("5")) {
+            quantity = 5
+        } else if (preparedText.includes("sixth") || preparedText.includes("6")) {
+            quantity = 6
+        } else if (preparedText.includes("seventh") || preparedText.includes("7")) {
+            quantity = 7
+        }
+
+    } else if (preparedText.includes("one") || preparedText.includes("two") || preparedText.includes("three")) {
+        if (preparedText.includes("one")) {
+            quantity = 1
+        } else if (preparedText.includes("two")) {
+            quantity = 2
+        } else if (preparedText.includes("three")) {
+            quantity = 3
+        } else if (preparedText.includes("four")) {
+            quantity = 4
+        } else if (preparedText.includes("five")) {
+            quantity = 5
+        } else if (preparedText.includes("six")) {
+            quantity = 6
+        } else if (preparedText.includes("seven")) {
+            quantity = 7
+        }
+    }
+
+    if (preparedText.includes("dozen")) {
+
+        if (quantity == 0) {
+            quantity = 1
+        }
+        quantity = quantity*12
+    }
+
+
+
+    //////////////// Dialogue Stack after we've determined intents and entitites
+
+    // We just wanted to say hello!
+    if (intents.indexOf("hello") > -1) {
+
+      machineResponse = "Hi there"
+
+      // if we also want the machine to say it..
+      if (intents.indexOf("say") > -1) {
+          machineResponse = "Hello there."
+          responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+      }
+    }
+
+
+    if (intents.indexOf("find") > -1 && preparedText.includes("ad")) {
+
+        $(".content .item").fadeOut(150)
+        $(".content .score").fadeOut(150)
+        $(".content h3").fadeOut(150)
+        $(".content p").fadeOut(150)
+        setTimeout(function() {
+          $(".search").css("display", "block").css("opacity","1")          
+          $(".search .element").each(function(index, el) {
+            var d = 175
+            d = d*(index+1)
+            console.log(el)
+            setTimeout(function(){
+              $(el).addClass("in")
+            },d)
+          })
+        }, 300)
+    }
+
+
+    ///////// deal with navigation
+
+    if (intents.indexOf("upload") > -1 && entities.indexOf("file") > -1) {
+        // upload
+        $(".uploads-form").addClass("in")
+        setTimeout(function() {
+          $(".uploads-form .file-input").click()
+        }, 250)
+    }
+
+
+    // Log intents, entities
+    console.log("Intents: " + intents)
+    console.log("Entities: " + entities)
+
+
+
+    // If we're in a place where we want the user input to show as a message...
+    // and make sure there is a message
+
+    if (typeof outputDialogue != "undefined") {
+        writeDialogue(preparedText)
+        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+    }
+
+
+    // Clear dialogue stuffs
+    intents = []
+    quantity = 0
+    machineResponse = ""
+
+}
+
+
+
+
+
+
+
+
+///////// output dialoge
+function writeDialogue(m,d) {
+
+    console.log(typeof d)
+
+    var delay = d
+
+    if (typeof d == "undefined") {
+      delay = 4500
+    }
+
+    // Create the message html object
+    var messageHtml = '<p class="out message"><span>' + m + '</span></p>'
+
+    // Append to conversation list
+    $(".dialogue").append(messageHtml)
+
+    // Turn on new message
+    setTimeout(function() {
+      
+      // Move the message
+      $(".dialogue p.out").removeClass("out")
+
+      // eliminate readout
+      $("#readout").val("")
+
+      var el = $(".dialogue p").last()
+
+      // prepare to fade this
+      setTimeout(function() {
+          el.addClass("fadeout")
+
+          setTimeout(function() {
+            el.remove()
+          }, 150)
+      }, delay)
+
+    }, 120)
+}
+
 
 
 

@@ -6,7 +6,11 @@ class MainController < ApplicationController
   end
 
   def home
-    @message = Message.new
+    if signed_in?
+      @message = Message.new
+    else
+      redirect_to "/"
+    end
   end
 
   def search

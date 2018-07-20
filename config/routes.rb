@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # dynamic resources
   resources :messages
+  resources :incidents
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

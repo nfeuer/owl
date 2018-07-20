@@ -9,8 +9,155 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 }
 
 
+
+.conversation {
+	position: relative;
+
+	.input-container {
+		padding: 1em;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 100%;
+		background: rgba(0,0,0,.1);
+
+		#readout {
+			background: transparent;
+			outline: 0;
+			box-shadow: 0;
+			border: 0;
+			font-size: 1.25em;
+			line-height: 1.25em;
+			height: auto;
+			color: #333;
+			border-radius: 0;
+			padding: 0;
+		}
+
+		#startBtn {
+			background: transparent;
+			color: #333;
+			box-shadow: 0 0 0;
+			border: 2px solid rgba(0,0,0,.75);
+			margin-right: .25em;
+			font-size: 1.15em;
+			outline: 0;
+			width: 2.5em;
+			height: 2.5em;
+			border-radius: 1.5em;
+		}
+
+		#startBtn.active {
+			background: rgba(0,0,0,1);
+			color: orange;
+			box-shadow: 0 0 15px rgba(0,0,0,.5);
+		}
+	}
+
+	.dialogue {
+		position: relative;
+		z-index: 50;
+		padding: 1em;
+		min-height: 10em;
+		margin: 2em auto;
+		text-align: center;
+		display: block;
+		width: 100%;
+		border: 1px solid #ccc;
+
+		.uploads-form {
+			margin-top: 5em;
+			margin-bottom: 2em;
+			position: relative;
+			top: 15px;
+			opacity: 0;
+			display: none;
+			transition: all .25s;
+			-ms-transition: all .25s;
+			-moz-transition: all .25s;
+			-webkit-transition: all .25s;
+
+			.file-box {
+				position: relative;
+				display: block;
+				cursor: pointer;
+
+				.file-label {
+					cursor: pointer;
+					padding: 3em 2em;
+					font-size: 1.5em;
+					border: 5px solid orange;
+					position: relative;
+					color: orange;
+					z-index: 15;
+					text-align: center;
+					display: block;
+				}
+
+				.file-input {
+					cursor: pointer;
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					z-index: 50;
+					color: #fff;
+					opacity: 0;
+				}
+			}
+
+			.file-box:hover {
+
+				.file-label {
+					color: #333;
+					background: orange;
+				}
+			}
+		}
+
+		.uploads-form.in {
+			display: block;
+			top: 0px;
+			opacity: 1;
+		}
+
+		p.message {
+			display: block;
+			position: relative;
+			text-align: left;
+			font-weight: 300;
+			padding: 0;
+			margin: 0 0 1em;
+			top: 0;
+			font-size: 2em;
+			height: 3.5em;
+			height: auto;
+			color: rgba(0,0,0,.9);
+			opacity: 1;
+			transition: all .35s;
+
+			svg {
+				display: inline-block;
+				margin-right: .5em;
+			}
+		}
+
+		p.message.out {
+			opacity: 0;
+			top: 20px;
+		}
+
+		p.message.fadeout {
+			opacity: 0;
+			top: -20px;
+		}
+	}
+}
+
+
 #index {
-	padding: 20vh 0;
+	padding: 20vh 0 8em;
 
 	.introduction {
 		text-align: center;
@@ -416,7 +563,6 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 	}
 }
-
 
 
 
