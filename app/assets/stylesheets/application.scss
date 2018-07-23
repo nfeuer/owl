@@ -114,3 +114,26 @@ header#header {
 		}
 	}
 }
+
+
+
+
+
+@media (max-width: 768px) {
+
+	header#header {
+
+		a.logo {
+			line-height: 5rem;
+
+			img {
+				max-height: 3rem;
+			}
+		}
+
+		a {
+			font-size: .85em;
+			line-height: 5rem;
+		}
+	}
+}
