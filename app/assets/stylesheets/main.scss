@@ -16,10 +16,11 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.input-container {
 		padding: 1em;
 		position: absolute;
+		text-align: left;
 		left: 0;
-		top: 100%;
+		bottom: 0;
 		width: 100%;
-		background: rgba(0,0,0,.1);
+		z-index: 15;
 
 		#readout {
 			background: transparent;
@@ -56,10 +57,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 	.dialogue {
 		position: relative;
-		z-index: 50;
+		z-index: 10;
 		padding: 1em;
-		min-height: 10em;
-		margin: 2em auto;
+		min-height: 40vh;
+		margin: 2em auto 0;
 		text-align: center;
 		display: block;
 		width: 100%;
@@ -155,9 +156,25 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 }
 
+#wavesContainer {
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	overflow-x: hidden;
+	opacity: 1;
+	transition: all .5s;
+	-ms-transition: all .5s;
+	-moz-transition: all .5s;
+	-webkit-transition: all .5s;
+
+	canvas {
+		width: 100%;
+	}
+}
+
 
 #index {
-	padding: 20vh 0 8em;
+	padding: 10vh 0 8em;
 
 	.introduction {
 		text-align: center;

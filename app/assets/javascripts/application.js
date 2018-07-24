@@ -637,6 +637,66 @@ function identifyLanguage(text) {
 
 
 
+
+
+
+function embedWaves() {
+
+  var embed = '<canvas id="waves"></canvas>'
+    $("#wavesContainer").append(embed)
+    var waves = new SineWaves({
+      el: document.getElementById('waves'),
+      speed: 3,
+      width: 700,
+      height: 40,
+      ease: 'SineInOut',
+      wavesWidth: '100%',
+      waves: [
+      {
+        timeModifier: .5,
+        lineWidth: 3,
+        amplitude: -15,
+        wavelength: 140
+      },
+      {
+        timeModifier: 1.25,
+        lineWidth: 2,
+        amplitude: -25,
+        wavelength: 270
+      },
+      {
+        timeModifier: 0.25,
+        lineWidth: 5,
+        amplitude: -10,
+        wavelength: 350
+      }
+      ],
+
+      // Called on window resize
+      resizeEvent: function() {
+      var gradient = this.ctx.createLinearGradient(0, 0, this.width, 0);
+      gradient.addColorStop(0,"rgba(0,0,0, 0)");
+      gradient.addColorStop(0.5,"rgba(0,0,0, 1)");
+      gradient.addColorStop(1,"rgba(0,0,0, 0)");
+
+      var index = -1;
+      var length = this.waves.length;
+      while(++index < length){
+      this.waves[index].strokeStyle = gradient;
+      }
+
+      // Clean Up
+      index = void 0;
+      length = void 0;
+      gradient = void 0;
+      }
+    });
+}
+
+
+
+
+
 ///////////// message array sorting function.  This is used specifically to sort arrays with dats in the [2] place
 // it is used like:  a.sort(sortFunction);
 
@@ -672,6 +732,7 @@ function dialogue(text) {
     intents = []
     entities = []
     quantity = 0
+    machineResponse = ""
 
     // Prepare dailogue text by downcasing
     var preparedText = text.toLowerCase()
@@ -924,6 +985,10 @@ function dialogue(text) {
       if (intents.indexOf("say") > -1) {
           machineResponse = "Hello there."
           responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+
+          setTimeout(function(){
+            writeDialogue(machineResponse)
+          }, 750)
       }
     }
 
@@ -970,14 +1035,7 @@ function dialogue(text) {
 
     if (typeof outputDialogue != "undefined") {
         writeDialogue(preparedText)
-        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
     }
-
-
-    // Clear dialogue stuffs
-    intents = []
-    quantity = 0
-    machineResponse = ""
 
 }
 
@@ -991,12 +1049,10 @@ function dialogue(text) {
 ///////// output dialoge
 function writeDialogue(m,d) {
 
-    console.log(typeof d)
-
     var delay = d
 
     if (typeof d == "undefined") {
-      delay = 4500
+      delay = 7500
     }
 
     // Create the message html object
