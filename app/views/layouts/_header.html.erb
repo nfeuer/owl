@@ -3,9 +3,6 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<% if signed_in? %>
-					<% if current_user.incident.to_s != "" %>
-						<div class="user-incident"><%= Incident.find(current_user.incident).name %></div>
-					<% end %>
 					<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
 					<div class="links">
 						<a href="/incidents" class="incidents"><i class="fas fa-exclamation-triangle"></i></a>
@@ -28,6 +25,16 @@
 				<% else %>
 					<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
 				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="status-bar">
+					<% if current_user.incident.to_s != "" %>
+						<div class="user-incident"><%= Incident.find(current_user.incident).name %></div>
+					<% end %>
+					<p>Hi <%= current_user.username %>, it's <%= DateTime.now.strftime("%l:%M %p") %></p>
+				</div>
 			</div>
 		</div>
 	</div>

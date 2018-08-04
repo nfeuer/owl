@@ -36,7 +36,6 @@ header#header {
 	background: #f1f1f1;
 	z-index: 500;
 
-
 	a.logo {
 		padding: 0;
 		display: inline-block;
@@ -51,13 +50,23 @@ header#header {
 		margin-top: 0;
 	}
 
-	.user-incident {
-		position: absolute;
-		left: 6em;
-		line-height: 7rem;
-		font-size: .85em;
-		text-transform: uppercase;
-		font-weight: 700;
+	.status-bar {
+
+		.user-incident {
+			display: inline-block;
+			font-size: .85em;
+			text-transform: uppercase;
+			font-weight: 700;
+			margin: 0 2em 0 0;
+			line-height: 1.5em;
+			background: rgba(255,255,50,.5);
+			padding: .25em .5em;
+			border: 1px solid rgba(200,200,50,.5);
+		}
+
+		p {
+			display: inline-block;
+		}
 	}
 
 	a.logo:hover {

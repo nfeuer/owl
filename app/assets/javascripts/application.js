@@ -654,19 +654,19 @@ function embedWaves() {
       waves: [
       {
         timeModifier: .5,
-        lineWidth: 3,
-        amplitude: -15,
+        lineWidth: 2,
+        amplitude: -20,
         wavelength: 140
       },
       {
-        timeModifier: 1.25,
-        lineWidth: 2,
+        timeModifier: 1,
+        lineWidth: 1,
         amplitude: -25,
         wavelength: 270
       },
       {
-        timeModifier: 0.25,
-        lineWidth: 5,
+        timeModifier: 0.1,
+        lineWidth: 3,
         amplitude: -10,
         wavelength: 350
       }
@@ -724,6 +724,7 @@ var entities = []
 var quantity = 0
 var machineResponse = ""
 var userResponse = ""
+var context = ""
 var showDemo;
 
 function dialogue(text) {
@@ -977,51 +978,30 @@ function dialogue(text) {
     //////////////// Dialogue Stack after we've determined intents and entitites
 
     // We just wanted to say hello!
-    if (intents.indexOf("hello") > -1) {
+    if (intents.indexOf("hello") > -1 && preparedText.length < 50) {
 
       machineResponse = "Hi there"
 
-      // if we also want the machine to say it..
-      if (intents.indexOf("say") > -1) {
-          machineResponse = "Hello there."
-          responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
-
-          setTimeout(function(){
-            writeDialogue(machineResponse)
-          }, 750)
-      }
+      setTimeout(function(){
+        writeDialogue(machineResponse)
+        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+      }, 500)
     }
 
 
-    if (intents.indexOf("find") > -1 && preparedText.includes("ad")) {
-
-        $(".content .item").fadeOut(150)
-        $(".content .score").fadeOut(150)
-        $(".content h3").fadeOut(150)
-        $(".content p").fadeOut(150)
-        setTimeout(function() {
-          $(".search").css("display", "block").css("opacity","1")          
-          $(".search .element").each(function(index, el) {
-            var d = 175
-            d = d*(index+1)
-            console.log(el)
-            setTimeout(function(){
-              $(el).addClass("in")
-            },d)
-          })
-        }, 300)
-    }
 
 
-    ///////// deal with navigation
 
-    if (intents.indexOf("upload") > -1 && entities.indexOf("file") > -1) {
-        // upload
-        $(".uploads-form").addClass("in")
-        setTimeout(function() {
-          $(".uploads-form .file-input").click()
-        }, 250)
-    }
+
+    ////////// owl project dialogue stack flows
+
+
+
+
+
+
+
+
 
 
     // Log intents, entities
