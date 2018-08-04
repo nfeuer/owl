@@ -51,6 +51,9 @@ header#header {
 	}
 
 	.status-bar {
+		background: #ddd;
+		display: block;
+		padding: .5em 0;
 
 		.user-incident {
 			display: inline-block;
@@ -58,13 +61,14 @@ header#header {
 			text-transform: uppercase;
 			font-weight: 700;
 			margin: 0 2em 0 0;
-			line-height: 1.5em;
+			line-height: 1.25em;
 			background: rgba(255,255,50,.5);
-			padding: .25em .5em;
+			padding: .15em .5em;
 			border: 1px solid rgba(200,200,50,.5);
 		}
 
 		p {
+			margin: 0;
 			display: inline-block;
 		}
 	}
@@ -92,7 +96,7 @@ header#header {
 	}
 
 	a:hover {
-		background: rgba(0,0,0,.1);		
+		background: #ddd;	
 	}
 
 	.links {
