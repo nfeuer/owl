@@ -51,6 +51,15 @@ header#header {
 		margin-top: 0;
 	}
 
+	.user-incident {
+		position: absolute;
+		left: 6em;
+		line-height: 7rem;
+		font-size: .85em;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+
 	a.logo:hover {
 		background: transparent;
 	}

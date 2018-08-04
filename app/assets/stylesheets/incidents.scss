@@ -10,5 +10,64 @@
 #incidents {
 	padding: 4em 0;
 
-	
+	.incident {
+		display: inline-block;
+		cursor: pointer;
+		text-decoration: none;
+		color: #333;
+		padding: 1em 1.5em;
+		border: 2px solid #ccc;
+		transition: all .15s;
+		-ms-transition: all .15s;
+		-moz-transition: all .15s;
+		-webkit-transition: all .15s;
+
+		h3 {
+			margin: 0;
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.incident:hover {
+		background: rgba(0,0,0,.05);
+	}
+
+	form {
+		margin-bottom: 3em;
+
+		.form-control {
+			margin: 0 0 1em;
+			border: 0;
+			border-bottom: 2px solid #ccc;
+			padding-left: 0;
+			height: auto;
+			box-shadow: 0 0 0;
+			outline: 0;
+			border-radius: 0;
+		}
+
+		.form-control:focus {
+			border-bottom: 2px solid #333;
+		}
+	}
+}
+
+
+#incident {
+
+	.setincident {
+		display: inline-block;
+		padding: .5em 1em;
+		cursor: pointer;
+		border: 1px solid #ccc;
+		color: #333;
+	}
+
+	.setincident:hover {
+		border: 1px solid #111;
+		background: #f1f1f1;
+	}
 }

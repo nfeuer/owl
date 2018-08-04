@@ -1,0 +1,41 @@
+<div id="incident">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-5 col-sm-offset-1">
+				<h1><%= @incident.name %></h1>
+				<p><%= @incident.location %></p>
+				<p>
+					<% @incident.managers.split(",").each do |f| %>
+						<%= User.find(f).username %> 
+					<% end %>
+				</p>
+				<p><%= @incident.impacted %></p>
+				<p><%= @incident.casualties %></p>
+
+				<div class="setincident">Set My Incident</div>
+			</div>
+			<div class="col-sm-5">
+				<h3>Update Incident Managers</h3>
+				<%= form_for @incident do |f| %>
+					<%= f.text_field :managers, class: "form-control", placeholder: "Managers" %>
+					<%= f.submit %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	
+	var userid = "<%= current_user.id.to_s %>"
+	var incidentid = "<%= @incident.id.to_s %>"
+
+	///// set user incident
+	$(".setincident").on("click", function() {
+		$.get("/setuserincident?user=" + userid + "&incident=" + incidentid)
+		location.reload()
+	})
+	
+</script>

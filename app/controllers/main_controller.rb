@@ -28,6 +28,20 @@ class MainController < ApplicationController
 
 
 
+  ###### set user main incident
+
+  def setuserincident
+
+    @uid = params[:user]
+    @iid = params[:incident]
+
+    @u = User.find(@uid)
+    @u.incident = @iid
+    @u.save
+    
+  end
+
+
   ###### messaging API to get messages, set messages as read, etc.
 
   def getusername

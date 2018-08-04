@@ -1,11 +1,15 @@
 <header id="header">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
+			<div class="col-sm-10 col-sm-offset-1">
 				<% if signed_in? %>
+					<% if current_user.incident.to_s != "" %>
+						<div class="user-incident"><%= Incident.find(current_user.incident).name %></div>
+					<% end %>
 					<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
 					<div class="links">
 						<a href="/incidents" class="incidents"><i class="fas fa-exclamation-triangle"></i></a>
+						<a href="/leaders" class="leaders"><i class="fas fa-users"></i></a>
 						<a href="/eye" class="eye"><i class="fas fa-globe-americas"></i></a>
 						<a href="/translator" class="translator"><i class="fas fa-language"></i></a>
 						<a href="/search" class="search"><i class="fas fa-search"></i></a>

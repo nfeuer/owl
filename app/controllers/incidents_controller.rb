@@ -7,6 +7,7 @@ class IncidentsController < ApplicationController
   end
 
   def show
+    @incident = Incident.find(params[:id])
   end
 
   def new
@@ -31,6 +32,7 @@ class IncidentsController < ApplicationController
   end
 
   def update
+    @incident = Incident.find(params[:id])
     respond_to do |format|
       if @incident.update(incident_params)
         format.html { redirect_to @incident, notice: 'Incident was successfully updated.' }
