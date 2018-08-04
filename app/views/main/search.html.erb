@@ -12,7 +12,10 @@
 
 				<div class="userlist">
 					<% User.all.each do |f| %>
-						<p><%= f.username %></p>
+						<p>
+							<%= f.username %>
+							
+						</p>
 					<% end %>
 				</div>
 			</div>
@@ -22,12 +25,39 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
+
   var users = "<%= @us %>"
   var userArray = users.split(",")
   $( "#users" ).autocomplete({
     source: userArray,
-  	appendTo: "#searchresult"
+  	appendTo: "#searchresult",
+  	select: function( event, ui ) {
+
+  	}
   })
+
+
+  // $( "#project" ).autocomplete({
+  //     minLength: 0,
+  //     source: projects,
+  //     focus: function( event, ui ) {
+  //       $( "#project" ).val( ui.item.label );
+  //       return false;
+  //     },
+  //     select: function( event, ui ) {
+  //       $( "#project" ).val( ui.item.label );
+  //       $( "#project-id" ).val( ui.item.value );
+  //       $( "#project-description" ).html( ui.item.desc );
+  //       $( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
+ 
+  //       return false;
+  //     }
+  //   })
+  //   .autocomplete( "instance" )._renderItem = function( ul, item ) {
+  //     return $( "<li>" )
+  //       .append( "<div>" + item.label + "<br>" + item.desc + "</div>" )
+  //       .appendTo( ul );
+  //   };
 </script>
  
 					
