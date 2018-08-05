@@ -14,11 +14,18 @@ class MainController < ApplicationController
   end
 
   def search
-    @us = ""
+    @us = []
 
     User.all.order(username: :asc).each_with_index do |f, index|
-      @us = @us + "," + f.username + "  |  " + f.name.to_s.capitalize
+      @el = {
+        value: f.username,
+        label: f.name.to_s.capitalize,
+        id: f.id
+      }
+
+      @us.push(@el)
     end
+    @us = @us.to_json
   end
 
 

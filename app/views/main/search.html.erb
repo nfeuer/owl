@@ -18,6 +18,8 @@
 						</p>
 					<% end %>
 				</div>
+
+				<div class="hidden users-json"><%= @us %></div>
 			</div>
 		</div>
 	</div>
@@ -26,15 +28,19 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
-  var users = "<%= @us %>"
-  var userArray = users.split(",")
+  var users = JSON.parse($(".users-json").html())
+
   $( "#users" ).autocomplete({
-    source: userArray,
+    source: users,
   	appendTo: "#searchresult",
   	select: function( event, ui ) {
 
   	}
-  })
+  }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( "<div class='row'><div class='col-sm-4'>" + item.label + "</div><div class='col-sm-4'>" + item.value + "</div><div class='col-sm-4'>" + item.id + "</div></div>" )
+        .appendTo( ul );
+  };
 
 
   // $( "#project" ).autocomplete({
@@ -58,6 +64,7 @@
   //       .append( "<div>" + item.label + "<br>" + item.desc + "</div>" )
   //       .appendTo( ul );
   //   };
+
 </script>
  
 					
