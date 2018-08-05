@@ -528,6 +528,13 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				padding: .5em 1em;
 				background: rgba(0,0,0,.025);
 				border-bottom: 1px solid #ccc;
+
+				a {
+					display: inline-block;
+					color: #333;
+					padding: .2em .5em;
+					background: rgba(0,0,0,.2);
+				}
 			}
 
 			li:hover {
@@ -543,6 +550,26 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			font-size: 1.15em;
 			line-height: 2.5em;
 			border-bottom: 1px solid #ddd;
+		}
+	}
+
+	.message-modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: none;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,.1);
+		z-index: 150;
+
+		.modal-content {
+			background: #fff;
+			border-radius: .5em;
+			box-shadow: 0 0 15px rgba(0,0,0,.5);
+			padding: 1em;
+			width: 45em;
+			margin: 25vh auto 0;
 		}
 	}
 }

@@ -26,6 +26,8 @@ class MainController < ApplicationController
       @us.push(@el)
     end
     @us = @us.to_json
+
+    @newmessage = Message.new
   end
 
 
