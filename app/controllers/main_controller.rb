@@ -3,6 +3,7 @@ class MainController < ApplicationController
   #################### Web Pages
 
   def index
+    render layout: "landing"
   end
 
   def home
@@ -242,6 +243,37 @@ class MainController < ApplicationController
   end
 
   def stt
+    # @text = params[:text]
+    # if @text.to_s == ""
+    #   @text = "hello world!"
+    # end
+
+    # require 'net/http'
+    # require 'uri'
+    # require 'json'
+
+    # uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01")
+    # request = Net::HTTP::Post.new(uri)
+    # request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    # request.content_type = "application/json"
+    # request.body = JSON.dump({
+    #   "text" => [
+    #     @text
+    #   ],
+    #   "model_id" => "en-es"
+    # })
+
+    # req_options = {
+    #   use_ssl: uri.scheme == "https",
+    # }
+
+    # @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    #   http.request(request)
+    # end
+    
+    # respond_to do |format|
+    #   format.text { render plain: @response.body }
+    # end
   end
 
   def tts

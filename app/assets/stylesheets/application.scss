@@ -30,7 +30,9 @@
 }
 
 header#header {
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
 	display: block;
 	width: 100%;
 	background: #f1f1f1;
@@ -64,7 +66,7 @@ header#header {
 			line-height: 1.25em;
 			background: rgba(255,255,50,.5);
 			padding: .15em .5em;
-			border: 1px solid rgba(200,200,50,.5);
+			border: 2px solid rgba(180,180,20,.8);
 		}
 
 		p {
