@@ -280,10 +280,25 @@ class MainController < ApplicationController
   	@endpoint = "https://stream.watsonplatform.net/text-to-speech/api"
   end
 
+  def translator
+
+    ###### this is the translator page
+    translatelanguages
+
+  end
+
   def translate
+
+    ###### this is the translate text API route
+
     @text = params[:text]
     if @text.to_s == ""
       @text = "hello world!"
+    end
+
+    @targetlang = params[:targetlang]
+    if @targetlang.to_s == ""
+      @targetlang = "es"
     end
 
     require 'net/http'
@@ -298,7 +313,7 @@ class MainController < ApplicationController
       "text" => [
         @text
       ],
-      "model_id" => "en-es"
+      "model_id" => "en-" + @targetlang
     })
 
     req_options = {
@@ -309,11 +324,11 @@ class MainController < ApplicationController
       http.request(request)
     end
 
-    puts " "
-    puts "----translator"
-    puts @response.body
-    puts " "
-    puts @response
+    # puts " "
+    # puts "----translator"
+    # puts @response.body
+    # puts " "
+    # puts @response
     
     respond_to do |format|
       format.text { render plain: @response.body }
@@ -329,7 +344,6 @@ class MainController < ApplicationController
     request = Net::HTTP::Post.new(uri)
     request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
     request.content_type = "text/plain"
-    request.body = "Language translator translates text from one language to another"
 
     req_options = {
       use_ssl: uri.scheme == "https",
@@ -339,15 +353,44 @@ class MainController < ApplicationController
       http.request(request)
     end
 
-    puts " "
-    puts "----translator"
-    puts @response.body
-    puts " "
-    puts @response
+    # puts " "
+    # puts "----translator"
+    # puts @response.body
+    # puts " "
+    # puts @response
     
     respond_to do |format|
       format.text { render plain: @response.body }
     end
+  end
+
+  def translatelanguages
+    
+    require 'net/http'
+    require 'uri'
+
+    uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/identifiable_languages?version=2018-05-01")
+    request = Net::HTTP::Get.new(uri)
+    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.content_type = "text/plain"
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    # puts " "
+    # puts "---- get translate languages"
+    # puts @response.body
+    # puts " "
+    # puts @response
+    
+    # respond_to do |format|
+    #   format.text { render plain: @response.body }
+    # end
   end
 
 
