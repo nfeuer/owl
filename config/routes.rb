@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'priorities/index'
+
   get 'main/index'
   root 'main#index'
 
   # dynamic resources
   resources :messages
   resources :incidents
+  resources :priorities
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
