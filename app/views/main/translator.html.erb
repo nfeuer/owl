@@ -8,7 +8,8 @@
 						<input type="text" class="translate-input form-control" placeholder="Enter text to translate" >
 					</div>
 					<div class="col-sm-3">
-						<input type="text" class="target-language form-control" placeholder="Target language" >
+						<h4 style="margin: 0; font-size: 1em; position: relative; top: -5px;">Target Language</h4>
+						<select class="target-language" id="targetLanguageSelect"></select>
 					</div>
 					<div class="col-sm-3">
 						<a href="#" class="translate">Translate Text</a>
@@ -21,9 +22,6 @@
 					<span style="margin-bottom: 1em; display: block;"></span>
 					<h3>Translated Response</h3>
 					<span></span>
-				</div>
-				<div class="targets">
-					<h3>Example Language Codes</h3>
 				</div>
 			</div>
 		</div>
@@ -226,36 +224,43 @@
 	///// append target languages for reference
 	for (var i = targetLanguages.languages.length - 1; i >= 0; i--) {
 		var el = targetLanguages.languages[i]
-		$(".targets").append("<p>" + el.name + " = " + el.language + "</p>")
+
+		/// add to collection select html input
+		var o = document.getElementById("targetLanguageSelect");
+		var option = document.createElement("option");
+		option.text = el.name;
+		option.value = el.language
+		o.add(option);
 	}
 
 	$("a.translate").on("click", function() {
 
 		var text = $(".translate-input").val()
 		var targetlang = $(".target-language").val()
+		var startlang = ""
 
 	    $.get("/identifylanguage?text=" + text, function(data){
 
 	        var d = data
 	        var j = JSON.parse(d).languages[0].language
+	        startlang = j
 
 	        // console.log(d)
 	        // console.log(j)
 
-	        $(".translate-response span").first().append(j)
+	        $(".translate-response span").first().html(j)
 
+			$.get("/translate?text=" + text + "&targetlang=" + targetlang + "&startlang=" + startlang, function(data){
+
+				var d = data
+
+				console.log(JSON.parse(d))
+				var j = JSON.parse(d).translations[0].translation
+
+				$(".translate-response span").first().next().next().html(j)
+				$(".translate-response span").last().html(d)
+			})	
 	    })
-
-		$.get("/translate?text=" + text + "&targetlang=" + targetlang, function(data){
-
-			var d = data
-
-			console.log(JSON.parse(d))
-			var j = JSON.parse(d).translations[0].translation
-
-			$(".translate-response span").first().next().next().append(j)
-			$(".translate-response span").last().append(d)
-		})
 	})
 
 	// check language

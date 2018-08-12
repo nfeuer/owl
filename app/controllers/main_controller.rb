@@ -295,11 +295,18 @@ class MainController < ApplicationController
     if @text.to_s == ""
       @text = "hello world!"
     end
+    
+    @startlang = params[:startlang]
+    if @startlang.to_s == ""
+      @startlang = "en"
+    end
 
     @targetlang = params[:targetlang]
     if @targetlang.to_s == ""
       @targetlang = "es"
     end
+
+    @model = @startlang + "-" + @targetlang
 
     require 'net/http'
     require 'uri'
@@ -313,7 +320,7 @@ class MainController < ApplicationController
       "text" => [
         @text
       ],
-      "model_id" => "en-" + @targetlang
+      "model_id" => @model
     })
 
     req_options = {
@@ -324,11 +331,13 @@ class MainController < ApplicationController
       http.request(request)
     end
 
-    # puts " "
-    # puts "----translator"
-    # puts @response.body
-    # puts " "
-    # puts @response
+    puts " "
+    puts "----translator"
+    puts " model"
+    puts @model
+    puts @response.body
+    puts " "
+    puts @response
     
     respond_to do |format|
       format.text { render plain: @response.body }
@@ -337,6 +346,11 @@ class MainController < ApplicationController
 
   def identifylanguage
 
+    @text = params[:text]
+    if @text.to_s == ""
+      @text = "hello world!"
+    end
+
     require 'net/http'
     require 'uri'
 
@@ -344,6 +358,7 @@ class MainController < ApplicationController
     request = Net::HTTP::Post.new(uri)
     request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
     request.content_type = "text/plain"
+    request.body = @text
 
     req_options = {
       use_ssl: uri.scheme == "https",
