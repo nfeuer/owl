@@ -55,5 +55,6 @@ Rails.application.routes.draw do
   
   # The Weather Company API Routes
   match '/getweatheralerts', to: 'main#getweatheralerts', via: 'get'
+  match '/getweatherforecast', to: 'main#getweatherforecast', via: 'get'
 
 end

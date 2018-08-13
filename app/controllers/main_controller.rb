@@ -443,14 +443,44 @@ class MainController < ApplicationController
     request["postman-token"] = 'f9989c6b-3f90-7ca9-6dd1-cae7a4140e04'
 
     @response = http.request(request)
-    puts " "
-    puts "----- weather alerts"
-    puts @response.read_body
+    # puts " "
+    # puts "----- weather alerts"
+    # puts @response.read_body
 
     respond_to do |format|
       format.text { render plain: @response.body }
     end
 
+  end
+
+
+  def getweatherforecast
+
+    @geocode = ""
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v3/wx/forecast/daily/3day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e%0A&format=json&geocode=34.063%2C-84.217")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+    request["postman-token"] = 'bc80387e-19bc-cade-06bc-0cae662b5a41'
+
+    @response = http.request(request)
+    # puts " "
+    # puts "----- weather forecast"
+    # puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
   end
 
 

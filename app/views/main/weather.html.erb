@@ -23,6 +23,25 @@
 							<div class="raw-response hidden"></div>
 						</div>
 					</div>
+				</div><div class="forecast block">
+					<h3>Daily Forecasts</h3>
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" class="geocode-form form-control" placeholder="Add a geocode latitude & longitude">
+						</div>
+						<div class="col-sm-4">
+							<a href="#" class="forecast">Test Forecasts <i class="fas fa-broadcast-tower"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h5>Response</h5>
+							<div class="response">
+
+							</div>
+							<div class="raw-response hidden"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -49,8 +68,27 @@
 			var stormreports = jResponse.stormreports
 
 			// append to visible response section
-			$(".response").append("<p><b>Metadata:</b> " + JSON.stringify(metadata) + "</p>")
-			$(".response").append("<p><b>Storm Reports:</b> " + JSON.stringify(stormreports) + "</p>")
+			$(".alerts .response").append("<p><b>Metadata:</b> " + JSON.stringify(metadata) + "</p>")
+			$(".alerts .response").append("<p><b>Storm Reports:</b> " + JSON.stringify(stormreports) + "</p>")
+		})
+	})
+
+	$("a.forecast").on("click", function() {
+		var g = $(".geocode-form").val()
+		$.get("/getweatherforecast?geoid=" + g, function(data){
+
+			// append to raw response
+			$(".forecast.block").find(".raw-response").append(data)
+
+			// grab the raw response and turn into json
+			var jResponse = JSON.parse($(".forecast.block .raw-response").html())
+			console.log(jResponse)
+
+			//// unpack the json
+			
+
+			// append to visible response section
+			$(".forecast .response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
 		})
 	})
 
