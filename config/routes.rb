@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   match '/search', to: 'main#search', via: 'get'
   match '/translator', to: 'main#translator', via: 'get'
   match '/leaders', to: 'main#leaders', via: 'get'
+  match '/weather', to: 'main#weather', via: 'get'
 
   
   ########## API ROUTES
@@ -52,4 +53,7 @@ Rails.application.routes.draw do
   match '/translate', to: 'main#translate', via: 'get'
   match '/identifylanguage', to: 'main#identifylanguage', via: 'get'
   
+  # The Weather Company API Routes
+  match '/getweatheralerts', to: 'main#getweatheralerts', via: 'get'
+
 end

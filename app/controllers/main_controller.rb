@@ -31,6 +31,10 @@ class MainController < ApplicationController
     @newmessage = Message.new
   end
 
+  def weather
+    
+  end
+
 
 
 
@@ -408,6 +412,46 @@ class MainController < ApplicationController
     # end
   end
 
+
+
+
+
+
+  ############### The weather company weather api data routes
+
+  def getweatheralerts
+
+    @geoid = params[:geoid]
+
+    if @geoid.to_s == ""
+      @geoid = "PAC113"
+    end
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&geoId=" + @geoid + "&format=json")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+    request["postman-token"] = 'f9989c6b-3f90-7ca9-6dd1-cae7a4140e04'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- weather alerts"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+
+  end
 
 
 
