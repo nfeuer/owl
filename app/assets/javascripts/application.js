@@ -493,6 +493,9 @@ function dialogue(text) {
     if (preparedText.includes("trigger")) {
         intents.push("trigger")
     }
+    if (preparedText.includes("translate")) {
+        intents.push("translate")
+    }
 
 
 
@@ -581,6 +584,21 @@ function dialogue(text) {
     if (preparedText.includes("gas flap")) {
         entities.push("gflap")
     }
+    if (preparedText.includes("english")) {
+        entities.push("english")
+    }
+    if (preparedText.includes("spanish")) {
+        entities.push("spanish")
+    }
+    if (preparedText.includes("french")) {
+        entities.push("french")
+    }
+    if (preparedText.includes("german")) {
+        entities.push("german")
+    }
+    if (preparedText.includes("korean")) {
+        entities.push("korean")
+    }
 
     ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
 
@@ -649,9 +667,64 @@ function dialogue(text) {
 
 
     ////////// owl project dialogue stack flows
+    ///////////////////////////////////////////////////////////////////////
 
 
+    ////////// translate text
+    if (intents.indexOf("translate") > -1) {
 
+        if (entities.indexOf("english") > -1) {
+            var text = preparedText.split("to english")[1]
+            $.get("/translate?startlang=en&targetlang=en&text=" + text, function(data){
+                console.log(data)
+            })
+        }
+
+        if (entities.indexOf("french") > -1) {
+            var text = preparedText.split("to french")[1]
+            $.get("/translate?startlang=en&targetlang=fr&text=" + text, function(data){
+                var r = JSON.parse(data).translations[0].translation
+                console.log(r)
+                machineResponse = r
+                writeDialogue(machineResponse)
+                responsiveVoice.speak(machineResponse, "French Female", {rate: 1})
+            })
+        }
+
+        if (entities.indexOf("spanish") > -1) {
+            var text = preparedText.split("to spanish")[1]
+            console.log(text)
+            $.get("/translate?startlang=en&targetlang=es&text=" + text, function(data){
+                var r = JSON.parse(data).translations[0].translation
+                console.log(r)
+                machineResponse = r
+                writeDialogue(machineResponse)
+                responsiveVoice.speak(machineResponse, "Spanish Latin American Female", {rate: 1})
+            })
+        }
+
+        if (entities.indexOf("german") > -1) {
+            var text = preparedText.split("to german")[1]
+            $.get("/translate?startlang=en&targetlang=de&text=" + text, function(data){
+                var r = JSON.parse(data).translations[0].translation
+                console.log(r)
+                machineResponse = r
+                writeDialogue(machineResponse)
+                responsiveVoice.speak(machineResponse, "Deutsch Female", {rate: 1})
+            })
+        }
+
+        if (entities.indexOf("korean") > -1) {
+            var text = preparedText.split("to korean")[1]
+            $.get("/translate?startlang=en&targetlang=ko&text=" + text, function(data){
+                var r = JSON.parse(data).translations[0].translation
+                console.log(r)
+                machineResponse = r
+                writeDialogue(machineResponse)
+                responsiveVoice.speak(machineResponse, "Korean Female", {rate: 1})
+            })
+        }
+    }
 
 
 

@@ -372,11 +372,11 @@ class MainController < ApplicationController
       http.request(request)
     end
 
-    # puts " "
-    # puts "----translator"
-    # puts @response.body
-    # puts " "
-    # puts @response
+    puts " "
+    puts "----translator"
+    puts @response.body
+    puts " "
+    puts @response
     
     respond_to do |format|
       format.text { render plain: @response.body }
