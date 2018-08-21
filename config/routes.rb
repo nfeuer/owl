@@ -59,5 +59,7 @@ Rails.application.routes.draw do
   match '/get15minforecast', to: 'main#get15minforecast', via: 'get'
   match '/getlocation', to: 'main#getlocation', via: 'get'
   match '/weathernowcast', to: 'main#weathernowcast', via: 'get'
+  match '/powerdisruption', to: 'main#powerdisruption', via: 'get'
+  match '/tropicalforecast', to: 'main#tropicalforecast', via: 'get'
 
 end

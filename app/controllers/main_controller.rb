@@ -563,12 +563,70 @@ class MainController < ApplicationController
 
     @response = http.request(request)
     puts " "
-    puts "----- Find Location"
+    puts "----- Weather Nowcast"
     puts @response.read_body
 
     respond_to do |format|
       format.text { render plain: @response.body }
     end
+  end
+
+  def powerdisruption
+
+    @location = "40.712399,-73.964152"
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v2/indices/powerDisruption/daypart/15day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&geocode=" + @location)
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Power Disruption"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
+
+  def tropicalforecast
+
+    @basin = "AL"
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v2/tropical/projectedpath?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&units=e&nautical=true&source=all&basin=" + @basin)
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Tropical Forecast"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+
   end
 
 
