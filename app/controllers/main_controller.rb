@@ -484,5 +484,68 @@ class MainController < ApplicationController
   end
 
 
+  def get15minforecast
+
+    @geocode = "40.712399/-73.964152"
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v1/geocode/" + @geocode + "/forecast/fifteenminute.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+    request["postman-token"] = 'a9983a5a-d29e-3891-311e-12f1b4b17494'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- 15 min weather forecast"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
+
+
+  def getlocation
+
+    @location = "New York, NY"
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v3/location/search?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&query=" + @location)
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+    request["postman-token"] = '6d7b5f40-9aa1-76ea-4497-174011147542'
+
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Find Location"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+
+  end
+
+
 
 end

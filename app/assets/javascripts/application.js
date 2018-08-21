@@ -295,28 +295,28 @@ function embedWaves() {
     var waves = new SineWaves({
       el: document.getElementById('waves'),
       speed: 3,
-      width: 700,
+      width: 300,
       height: 40,
       ease: 'SineInOut',
       wavesWidth: '100%',
       waves: [
       {
-        timeModifier: .5,
-        lineWidth: 2,
-        amplitude: -20,
-        wavelength: 140
+        timeModifier: .35,
+        lineWidth: 1,
+        amplitude: -10,
+        wavelength: 100
       },
       {
-        timeModifier: 1,
+        timeModifier: .6,
         lineWidth: 1,
-        amplitude: -25,
-        wavelength: 270
+        amplitude: -15,
+        wavelength: 170
       },
       {
         timeModifier: 0.1,
-        lineWidth: 3,
-        amplitude: -10,
-        wavelength: 350
+        lineWidth: 2,
+        amplitude: -5,
+        wavelength: 250
       }
       ],
 

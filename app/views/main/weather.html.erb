@@ -23,7 +23,8 @@
 							<div class="raw-response hidden"></div>
 						</div>
 					</div>
-				</div><div class="forecast block">
+				</div>
+				<div class="forecast block">
 					<h3>Daily Forecasts</h3>
 					<div class="row">
 						<div class="col-sm-8">
@@ -31,6 +32,46 @@
 						</div>
 						<div class="col-sm-4">
 							<a href="#" class="forecast">Test Forecasts <i class="fas fa-broadcast-tower"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h5>Response</h5>
+							<div class="response">
+
+							</div>
+							<div class="raw-response hidden"></div>
+						</div>
+					</div>
+				</div>
+				<div class="minuteforecast block">
+					<h3>15 Minute Forecasts</h3>
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" class="geocode-form form-control" placeholder="Add a geocode latitude & longitude">
+						</div>
+						<div class="col-sm-4">
+							<a href="#" class="minuteforecast">Test 15 Minute Forecasts <i class="fas fa-broadcast-tower"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h5>Response</h5>
+							<div class="response">
+
+							</div>
+							<div class="raw-response hidden"></div>
+						</div>
+					</div>
+				</div>
+				<div class="getlocation block">
+					<h3>Get Location</h3>
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" class="geocode-form form-control" placeholder="Add a location">
+						</div>
+						<div class="col-sm-4">
+							<a href="#" class="getlocation">Test Get Location <i class="fas fa-broadcast-tower"></i></a>
 						</div>
 					</div>
 					<div class="row">
@@ -53,7 +94,7 @@
 <script type="text/javascript">
 	
 	$("a.alerts").on("click", function() {
-		var g = $(".geoid-form").val()
+		var g = $(this).find(".geoid-form").val()
 		$.get("/getweatheralerts?geoid=" + g, function(data){
 
 			// append to raw response
@@ -74,7 +115,7 @@
 	})
 
 	$("a.forecast").on("click", function() {
-		var g = $(".geocode-form").val()
+		var g = $(this).find(".geocode-form").val()
 		$.get("/getweatherforecast?geoid=" + g, function(data){
 
 			// append to raw response
@@ -89,6 +130,48 @@
 
 			// append to visible response section
 			$(".forecast .response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
+		})
+	})
+
+	$("a.minuteforecast").on("click", function() {
+		var p = $(this).parents(".block")
+		var g = $(this).find(".geocode-form").val()
+		$.get("/get15minforecast?geoid=" + g, function(data){
+
+			// append to raw response
+			var raw = p.find(".raw-response")
+			raw.append(data)
+
+			// grab the raw response and turn into json
+			var jResponse = JSON.parse(raw.html())
+			console.log(jResponse)
+
+			//// unpack the json
+			
+
+			// append to visible response section
+			p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
+		})
+	})
+
+	$("a.getlocation").on("click", function() {
+		var p = $(this).parents(".block")
+		var g = $(this).find(".geocode-form").val()
+		$.get("/getlocation?location=" + g, function(data){
+
+			// append to raw response
+			var raw = p.find(".raw-response")
+			raw.append(data)
+
+			// grab the raw response and turn into json
+			var jResponse = JSON.parse(raw.html())
+			console.log(jResponse)
+
+			//// unpack the json
+			
+
+			// append to visible response section
+			p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
 		})
 	})
 
