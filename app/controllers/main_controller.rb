@@ -627,7 +627,57 @@ class MainController < ApplicationController
     respond_to do |format|
       format.text { render plain: @response.body }
     end
+  end
 
+  def weatheralmanac
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v3/wx/almanac/daily/5day?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&geocode=40.712399%2C-73.964152&startDay=22&startMonth=08&format=json")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Weather Almanac"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
+  def currentsondemand
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v3/wx/observations/current?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&geocode=40.712399%2C-73.964152&language=en-US&format=json")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Currents on Demand"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
   end
 
 

@@ -144,6 +144,46 @@
 						</div>
 					</div>
 				</div>
+				<div class="weatheralmanac block">
+					<h3>Weather Almanac</h3>
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" class="geocode-form form-control" placeholder="Add a location">
+						</div>
+						<div class="col-sm-4">
+							<a class="weatheralmanac">Test Weather Almanac <i class="fas fa-broadcast-tower"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h5>Response</h5>
+							<div class="response">
+
+							</div>
+							<div class="raw-response hidden"></div>
+						</div>
+					</div>
+				</div>
+				<div class="currentsondemand block">
+					<h3>Currents on Demand</h3>
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" class="geocode-form form-control" placeholder="Add a location">
+						</div>
+						<div class="col-sm-4">
+							<a class="currentsondemand">Test Currents on Demand <i class="fas fa-broadcast-tower"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h5>Response</h5>
+							<div class="response">
+
+							</div>
+							<div class="raw-response hidden"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -281,6 +321,49 @@
 		var p = $(this).parents(".block")
 		var g = $(this).find(".geocode-form").val()
 		$.get("/tropicalforecast?location=" + g, function(data){
+
+			// append to raw response
+			var raw = p.find(".raw-response")
+			raw.append(data)
+
+			// grab the raw response and turn into json
+			var jResponse = JSON.parse(raw.html())
+			console.log(jResponse)
+
+			//// unpack the json
+			
+
+			// append to visible response section
+			p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
+		})
+	})
+
+
+	$("a.weatheralmanac").on("click", function() {
+		var p = $(this).parents(".block")
+		var g = $(this).find(".geocode-form").val()
+		$.get("/weatheralmanac", function(data){
+
+			// append to raw response
+			var raw = p.find(".raw-response")
+			raw.append(data)
+
+			// grab the raw response and turn into json
+			var jResponse = JSON.parse(raw.html())
+			console.log(jResponse)
+
+			//// unpack the json
+			
+
+			// append to visible response section
+			p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
+		})
+	})
+
+	$("a.currentsondemand").on("click", function() {
+		var p = $(this).parents(".block")
+		var g = $(this).find(".geocode-form").val()
+		$.get("/currentsondemand", function(data){
 
 			// append to raw response
 			var raw = p.find(".raw-response")
