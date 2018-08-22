@@ -63,5 +63,7 @@ Rails.application.routes.draw do
   match '/tropicalforecast', to: 'main#tropicalforecast', via: 'get'
   match '/weatheralmanac', to: 'main#weatheralmanac', via: 'get'
   match '/currentsondemand', to: 'main#currentsondemand', via: 'get'
+  match '/tropicalcurrent', to: 'main#tropicalcurrent', via: 'get'
+  match '/siteobservations', to: 'main#siteobservations', via: 'get'
 
 end

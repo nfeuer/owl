@@ -629,6 +629,36 @@ class MainController < ApplicationController
     end
   end
 
+
+  def tropicalcurrent
+
+    @basin = "AL"
+
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v2/tropical/currentposition?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&language=en-US&format=json&nautical=true&source=all&basin=" + @basin)
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Tropical Storm Current Position"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
+
   def weatheralmanac
 
     require 'uri'
@@ -673,6 +703,31 @@ class MainController < ApplicationController
     @response = http.request(request)
     puts " "
     puts "----- Currents on Demand"
+    puts @response.read_body
+
+    respond_to do |format|
+      format.text { render plain: @response.body }
+    end
+  end
+
+  def siteobservations
+    require 'uri'
+    require 'net/http'
+
+    url = URI("https://api.weather.com/v1/geocode/40.712399/-73.964152/observations.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request["accept-encoding"] = 'application/gzip'
+    request["content-type"] = 'application/json'
+    request["cache-control"] = 'no-cache'
+
+    @response = http.request(request)
+    puts " "
+    puts "----- Site based observations, current condition"
     puts @response.read_body
 
     respond_to do |format|
