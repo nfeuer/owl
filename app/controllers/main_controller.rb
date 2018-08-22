@@ -423,14 +423,16 @@ class MainController < ApplicationController
 
     @geoid = params[:geoid]
 
-    if @geoid.to_s == ""
-      @geoid = "PAC113"
+    if @geoid.to_s == "undefined" || @geoid.to_s == ""
+      @geoid = ""
     end
 
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&geoId=" + @geoid + "&format=json")
+    # includes below a geoid so you can localize
+    # url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&geoId=" + @geoid + "&format=json")
+    url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&format=json")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -440,12 +442,11 @@ class MainController < ApplicationController
     request["accept-encoding"] = 'application/gzip'
     request["content-type"] = 'application/json'
     request["cache-control"] = 'no-cache'
-    request["postman-token"] = 'f9989c6b-3f90-7ca9-6dd1-cae7a4140e04'
 
     @response = http.request(request)
-    # puts " "
-    # puts "----- weather alerts"
-    # puts @response.read_body
+    puts " "
+    puts "----- weather alerts"
+    puts @response.read_body
 
     respond_to do |format|
       format.text { render plain: @response.body }
