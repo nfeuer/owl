@@ -4,7 +4,7 @@
 
 
 
-$bg: #2d3b43;
+$bg: #0f253a;
 
 h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	font-family: 'Oxygen', sans-serif;
@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	position: relative;
 
 	.input-container {
-		padding: 1em;
+		padding: 1em 0;
 		position: absolute;
 		text-align: left;
 		left: 0;
@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			border: 0;
 			font-size: 1.25em;
 			line-height: 1.25em;
-			width: 85%;
+			width: 75%;
 			height: auto;
 			color: #fff;
 			border-radius: 0;
@@ -40,9 +40,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 		#startBtn {
 			background: transparent;
-			color: #fff;
+			color: rgba(255,255,255,.6);
 			box-shadow: 0 0 0;
-			border: 3px solid rgba(255,255,255,.75);
+			border: 2px solid rgba(255,255,255,.5);
 			margin-right: .25em;
 			font-size: 1.15em;
 			outline: 0;
@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 		#startBtn:hover {
 			background: rgba(255,255,255,1);
-			color: #333;
+			color: $bg;
 		}
 
 		#startBtn.active {
@@ -67,9 +67,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.dialogue {
 		position: relative;
 		z-index: 10;
-		padding: 1em;
-		min-height: 65vh;
-		margin: 2em auto 0;
+		padding: 10em 1em 1em;
+		min-height: 100vh;
+		margin: 0 auto 0;
 		text-align: center;
 		display: block;
 		width: 100%;
@@ -184,7 +184,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 #index {
 	background: $bg;
-	padding: 15vh 0 8em;
+	padding: 0 0;
 	min-height: 100vh;
 	color: #fff;
 
@@ -223,6 +223,16 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				text-align: left;
 			}
 		}
+	}
+
+	.dialogue-container {
+		border-right: 2px solid rgba(255,255,255,.15);
+	}
+
+	.notifications-container {
+		border-left: 2px solid rgba(255,255,255,.15);
+		min-height: 100vh;
+		padding-top: 6rem;
 	}
 }
 

@@ -1,47 +1,58 @@
 <header id="header">
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1">
-				<% if signed_in? %>
-					<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
-					<div class="links">
-						<a href="/priorities" class="priorities"><i class="fas fa-exclamation-triangle"></i></a>
-						<a href="/incidents" class="incidents"><i class="fas fa-list-alt"></i></a>
-						<a href="/leaders" class="leaders"><i class="fas fa-users"></i></a>
-						<a href="/eye" class="eye"><i class="fas fa-globe-americas"></i></a>
-						<a href="/weather" class="weather"><i class="fas fa-umbrella"></i></a>
-						<a href="/translator" class="translator"><i class="fas fa-language"></i></a>
-						<a href="/search" class="search"><i class="fas fa-search"></i></a>
-						<a href="/messages" class="messages"><i class="far fa-envelope"></i><span></span></a>
-						<a href="/signin">Log Out</a>
-					</div>
-
-					<script type="text/javascript">
-						var ms = "<%= Message.all.where(recipient: current_user.id).where(read: false).count %>"
-						console.log(ms)
-						if (parseInt(ms) > 0) {
-							$(".links .messages").addClass("unread")
-							$(".links .messages span").text(ms)
-						}
-					</script>
-				<% else %>
-					<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
-				<% end %>
-			</div>
-		</div>
+		
 	</div>
 	<% if signed_in? %>
 		<div class="status-bar">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1">
-						<% if current_user.incident.to_s != "" %>
-							<div class="user-incident"><%= Incident.find(current_user.incident).name %></div>
-						<% end %>
-						<p>Hi <%= current_user.username %>, it's <%= DateTime.now.strftime("%l:%M %p") %></p>
+					<div class="col-sm-3">
+						<a href="/home" class="logo"><img class="logo" src="/assets/owl_logo_light.png" /></a>
+					</div>
+					<div class="col-sm-6">
+
+					</div>
+					<div class="col-sm-3">
+						<h3>Notifications</h3>
 					</div>
 				</div>
 			</div>
 		</div>
 	<% end %>
 </header>
+
+<!-- 
+<% if current_user.incident.to_s != "" %>
+	<div class="user-incident"><%= Incident.find(current_user.incident).name %></div>
+<% end %>
+<p>Hi <%= current_user.username %>, it's <%= DateTime.now.strftime("%l:%M %p") %></p> -->
+
+<!-- <div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<% if signed_in? %>
+			<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
+			<div class="links">
+				<a href="/priorities" class="priorities"><i class="fas fa-exclamation-triangle"></i></a>
+				<a href="/incidents" class="incidents"><i class="fas fa-list-alt"></i></a>
+				<a href="/leaders" class="leaders"><i class="fas fa-users"></i></a>
+				<a href="/eye" class="eye"><i class="fas fa-globe-americas"></i></a>
+				<a href="/weather" class="weather"><i class="fas fa-umbrella"></i></a>
+				<a href="/translator" class="translator"><i class="fas fa-language"></i></a>
+				<a href="/search" class="search"><i class="fas fa-search"></i></a>
+				<a href="/messages" class="messages"><i class="far fa-envelope"></i><span></span></a>
+				<a href="/signin">Log Out</a>
+			</div>
+
+			<script type="text/javascript">
+				var ms = "<%= Message.all.where(recipient: current_user.id).where(read: false).count %>"
+				console.log(ms)
+				if (parseInt(ms) > 0) {
+					$(".links .messages").addClass("unread")
+					$(".links .messages span").text(ms)
+				}
+			</script>
+		<% else %>
+			<a href="/home" class="logo"><img class="logo" src="/assets/owl_icon.png" /></a>
+		<% end %>
+	</div>
+</div> -->

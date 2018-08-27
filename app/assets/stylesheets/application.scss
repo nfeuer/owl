@@ -35,25 +35,25 @@ header#header {
 	left: 0;
 	display: block;
 	width: 100%;
-	background: #f1f1f1;
+	background: rgba(255,255,255,.1);
 	z-index: 500;
 
 	a.logo {
 		padding: 0;
 		display: inline-block;
-		padding: 1rem 0;
+		padding: .5rem 0;
 		font-size: 1em;
 		vertical-align: top;
 	}
 
 	img {
 		display: block;
-		max-height: 5rem;
+		max-height: 2rem;
 		margin-top: 0;
 	}
 
 	.status-bar {
-		background: #ddd;
+		background: rgba(255,255,255,.001);
 		display: block;
 		padding: .5em 0;
 
@@ -73,6 +73,17 @@ header#header {
 			margin: 0;
 			display: inline-block;
 		}
+
+		h3 {
+			font-size: 1.25em;
+			margin: 0;
+			line-height: 3.5rem;
+			color: rgba(255,255,255,.85);
+			font-weight: 300;
+			text-transform: uppercase;
+			font-style: italic;
+			letter-spacing: 2px;
+		}
 	}
 
 	a.logo:hover {
@@ -86,7 +97,7 @@ header#header {
 	a {
 		display: inline-block;
 		font-size: 1.25em;
-		color: #333;
+		color: rgba(255,255,255,1);
 		padding: 0 1em;
 		line-height: 7rem;
 		text-decoration: none;
