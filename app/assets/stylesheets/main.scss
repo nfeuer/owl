@@ -225,6 +225,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 	}
 
+	.action-container {
+		padding-top: 6rem;
+	}
+
 	.dialogue-container {
 		border-right: 2px solid rgba(255,255,255,.15);
 	}
@@ -232,7 +236,83 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.notifications-container {
 		border-left: 2px solid rgba(255,255,255,.15);
 		min-height: 100vh;
-		padding-top: 6rem;
+		padding: 6rem 0 0;
+
+		.notifications {
+
+			.notification {
+				position: relative;
+				padding: 0 0 0 15px;
+
+				.info {
+
+				}
+
+				.time {
+					position: absolute;
+					right: 0;
+					top: 0;
+					height: 100%;
+					width: 4em;
+
+					p {
+						margin: 0;
+						font-size: .85em;
+
+						span {
+							display: block;
+							font-size: 1.5em;
+						}
+					}
+				}
+			}
+		}
+
+		.priorities {
+			position: absolute;
+			right: 0;
+			width: 100%;
+			top: 50vh;
+
+			h3 {
+				margin:0;
+				line-height: 4rem;
+				font-size: 1.25em;
+				background: rgba(255,255,255,.05);
+				font-style: italic;
+				font-weight: 300;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: rgba(255,255,255,.85);
+				padding: 0 0 0 15px;
+				width: 100%;
+				display: block;
+			}
+		}
+	}
+
+	.menu {
+
+		.menu-item {
+			text-align: center;
+			padding: 1em;
+			
+			.icon {
+				width: auto;
+				display: block;
+				max-width: 40%;
+				margin: 0 auto 1.5em;
+			}
+
+			h4 {
+				font-size: 1.15em;
+				line-height: 1.25em;
+				margin: 0;
+				font-style: italic;
+				text-transform: uppercase;
+				font-weight: 300;
+			}
+		}
 	}
 }
 
