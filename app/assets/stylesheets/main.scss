@@ -243,6 +243,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.notification {
 				position: relative;
 				padding: 0 0 0 15px;
+				border-bottom: 1px solid rgba(255,255,255,.1);
+				min-height: 6rem;
 
 				.info {
 
@@ -287,6 +289,14 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				padding: 0 0 0 15px;
 				width: 100%;
 				display: block;
+			}
+
+			.priorities-list {
+
+				.priority {
+					padding: .75em 15px;
+					border-bottom: 1px solid rgba(255,255,255,.1);
+				}
 			}
 		}
 	}
