@@ -90,8 +90,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-2 notifications-container">
+			<div class="notifications-container">
 				<div class="notifications">
+					<h3>Notifications</h3>
 					<div class="notifications-list">
 						<div class="notification">
 							<div class="info">
@@ -122,21 +123,13 @@
 				<div class="priorities">
 					<h3>Priorities</h3>
 					<div class="priorities-list">
-						<div class="priority">
-							<p>Priority One</p>
-						</div>
-						<div class="priority">
-							<p>Priority Two</p>
-						</div>
-						<div class="priority">
-							<p>Priority Three</p>
-						</div>
-						<div class="priority">
-							<p>Priority Four</p>
-						</div>
-						<div class="priority">
-							<p>Priority Five</p>
-						</div>
+						<% Priority.all.each_with_index do |p,i| %>
+							<div class="priority">
+								<h4><%= p.name %></h4>
+								<p><%= truncate(p.details, length: 27) %></p>
+								<div class="num"><%= i+1 %></div>
+							</div>
+						<% end %>
 					</div>
 				</div>
 			</div>

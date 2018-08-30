@@ -234,11 +234,37 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.notifications-container {
+		position: fixed;
+		top: 0;
+		right: -15em;
+		height: 100%;
+		width: 20em;
 		border-left: 2px solid rgba(255,255,255,.15);
 		min-height: 100vh;
-		padding: 6rem 0 0;
+		z-index: 50;
+		background: $bg;
+		padding: 0 0 0;
+		transition: all .175s;
+		-ms-transition: all .175s;
+		-moz-transition: all .175s;
+		-webkit-transition: all .175s;
 
 		.notifications {
+
+			h3 {
+				margin:0;
+				height: 4.5rem;
+				line-height: 4.5rem;
+				font-size: 1.25em;
+				font-style: italic;
+				font-weight: 300;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: rgba(255,255,255,.85);
+				padding: 0 0 0 15px;
+				width: 100%;
+				display: block;
+			}
 
 			.notification {
 				position: relative;
@@ -303,6 +329,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.priorities-list {
 
 				.priority {
+					cursor: pointer;
+					position: relative;
 					padding: 1.5em 15px;
 					border-bottom: 1px solid rgba(255,255,255,.1);
 					background: rgba(255,255,255,0);
@@ -311,10 +339,32 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 					-moz-transition: all .125s;
 					-webkit-transition: all .125s;
 
+					h4 {
+						font-size: 1em;
+						font-weight: 600;
+						margin: 0;
+						line-height: 1.25em;
+					}
+
 					p {
 						margin: 0;
 						font-size: 1em;
+						font-weight: 300;
 						line-height: 1.25em;
+					}
+
+					.num {
+						position: absolute;
+						right: 0;
+						top: 0;
+						height: 100%;
+						background: rgba(255,255,255,.05);
+						font-size: 2.5em;
+						line-height: 2.25em;
+						text-align: center;
+						font-weight: 700;
+						font-style: italic;
+						width: 1.5em;
 					}
 				}
 
@@ -323,6 +373,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				}
 			}
 		}
+	}
+
+	.notifications-container:hover {
+		right: 0;
 	}
 
 	.menu {
@@ -353,7 +407,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				font-size: 1.15em;
 				line-height: 1.25em;
 				margin: 0;
-				font-style: italic;
+				letter-spacing: 1px;
 				text-transform: uppercase;
 				font-weight: 300;
 			}
@@ -368,19 +422,6 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		.menu-item.out {
 			opacity: 0;
 			top: 15px;
-		}
-
-		.menu-item.in {
-			opacity: .7;
-			top: 0;
-		}
-	}
-
-	.menu.out {
-		opacity: 0;
-
-		.menu-item {
-
 		}
 	}
 }

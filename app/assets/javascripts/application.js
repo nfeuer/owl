@@ -47,9 +47,6 @@ function showMenu() {
     // $("#readout").val(" ")
 
     $(".menu .menu-item").addClass("out")
-
-    $(".menu").removeClass("out")
-
     // delay
     var time = 100;
 
