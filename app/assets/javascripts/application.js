@@ -36,6 +36,55 @@ $(document).ready(function() {
 
 
 
+////////////////////////////// dashboard fade in UI
+function showMenu() {
+
+    // show dashboard
+    // var menu = $(".menu").detach()
+    // $("#index").prepend(menu)
+
+    // clear readout
+    // $("#readout").val(" ")
+
+    $(".menu .menu-item").addClass("out")
+
+    $(".menu").removeClass("out")
+
+    // delay
+    var time = 100;
+
+    $(".menu .menu-item").each(function(index, el) {
+
+        setTimeout( function(){
+          $(el).removeClass("out")
+        }, time)
+        time += 75;
+    })
+}
+
+////////////////////////////// remove dashboard fade out UI
+function removeDash() {
+
+    // clear readout
+    $("#readout").val(" ")
+
+    // delay
+    var time = 100;
+
+    $("#dashboard .action").each(function(index, el) {
+
+        setTimeout( function(){
+          $(el).removeClass("in")
+        }, time)
+        time += 50;
+    })
+
+    setTimeout(function() {
+        $("body #dashboard").removeClass("in")
+        $("body #dashboard").addClass("out") 
+    }, time)
+}
+
 
 
 
