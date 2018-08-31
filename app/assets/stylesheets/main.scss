@@ -304,29 +304,46 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			.notification {
 				position: relative;
-				padding: 0 0 0 15px;
+				padding: 0 0 0 1.5em;
 				border-bottom: 1px solid rgba(255,255,255,.1);
 				background: rgba(255,255,255,0);
 				min-height: 6rem;
+				opacity: .6;
 				transition: all .125s;
 				-ms-transition: all .125s;
 				-moz-transition: all .125s;
 				-webkit-transition: all .125s;
 
 				.info {
+					padding-top: .85em;
 
+					h4 {
+						font-size: 1em;
+						font-weight: 400;
+						margin: 0;
+						line-height: 1.15em;
+					}
+
+					p {
+						font-size: .9em;
+						font-weight: 300;
+						margin: 0;
+						color: rgba(255,255,255,.85);
+					}
 				}
 
 				.time {
 					position: absolute;
 					right: 0;
 					top: 0;
+					padding-top: 1em;
 					height: 100%;
 					width: 4em;
 
 					p {
 						margin: 0;
 						font-size: .85em;
+						line-height: 1.15em;
 
 						span {
 							display: block;
@@ -338,6 +355,22 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			.notification:hover {
 				background: rgba(255,255,255,.05);
+			}
+
+			.notification.active {
+				opacity: 1;
+			}
+
+			.notification.active:after {
+				content: '';
+				display: block;
+				position: absolute;
+				left: .5em;
+				top: 43%;
+				width: 6px;
+				height: 6px;
+				background: #fff;
+				border-radius: 4px;
 			}
 		}
 
