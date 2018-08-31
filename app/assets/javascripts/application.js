@@ -46,7 +46,10 @@ function showMenu() {
     // clear readout
     // $("#readout").val(" ")
 
+
     $(".menu .menu-item").addClass("out")
+    $(".menu").addClass("in")
+
     // delay
     var time = 100;
 
@@ -60,26 +63,25 @@ function showMenu() {
 }
 
 ////////////////////////////// remove dashboard fade out UI
-function removeDash() {
+function removeMenu() {
 
     // clear readout
-    $("#readout").val(" ")
+    // $("#readout").val(" ")
 
     // delay
     var time = 100;
 
-    $("#dashboard .action").each(function(index, el) {
+    $(".menu .menu-item").each(function(index, el) {
 
         setTimeout( function(){
-          $(el).removeClass("in")
+          $(el).addClass("out")
         }, time)
         time += 50;
     })
 
     setTimeout(function() {
-        $("body #dashboard").removeClass("in")
-        $("body #dashboard").addClass("out") 
-    }, time)
+        // $(".menu").removeClass("in")
+    }, 500)
 }
 
 
@@ -591,6 +593,9 @@ function dialogue(text) {
     if (preparedText.includes("dash")) {
         entities.push("dash")
     }
+    if (preparedText.includes("menu")) {
+        entities.push("menu")
+    }
     if (preparedText.includes("port")) {
         entities.push("port")
     }
@@ -714,6 +719,17 @@ function dialogue(text) {
 
     ////////// owl project dialogue stack flows
     ///////////////////////////////////////////////////////////////////////
+
+    ////////// show dashboard/show menu
+    if (intents.indexOf("find") > -1 && (entities.indexOf("dash") > -1 || entities.indexOf("menu") > -1)) {
+
+        // show the menu!
+        showMenu()
+    } else if ((intents.indexOf("close") > -1 || intents.indexOf("remove") > -1) && (entities.indexOf("dash") > -1 || entities.indexOf("menu") > -1)) {
+
+        // remove menu!
+        removeMenu()
+    }
 
 
     ////////// translate text
