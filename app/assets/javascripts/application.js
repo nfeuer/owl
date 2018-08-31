@@ -85,7 +85,59 @@ function removeMenu() {
 }
 
 
+//////// show the weather in the action area
+function showWeather() {
 
+    $(".action-container .content-image").fadeOut("fast")
+    setTimeout(function(){
+        $(".content-image").remove()
+        $(".action-container").append("<img class='content-image' src='/assets/content_weather.jpg' />")
+    }, 150)
+
+    setTimeout(function(){
+        $(".action-container .content-image").css("opacity", "1")
+        machineResponse = "Here is the current weather for your area."
+        writeDialogue(machineResponse, "machine")
+        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+    }, 750)
+
+}
+
+
+function showMapping() {
+
+    $(".action-container .content-image").fadeOut("fast")
+    setTimeout(function(){
+        $(".content-image").remove()
+        $(".action-container").append("<img class='content-image' src='/assets/content_mapping.jpg' />")
+    }, 150)
+
+    setTimeout(function(){
+        $(".action-container .content-image").css("opacity", "1")
+        machineResponse = "I've shown location information for the current incident."
+        writeDialogue(machineResponse, "machine")
+        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+    }, 750)
+
+}
+
+
+function showResources() {
+
+    $(".action-container .content-image").fadeOut("fast")
+    setTimeout(function(){
+        $(".content-image").remove()
+        $(".action-container").append("<img class='content-image' src='/assets/content_resources.jpg' />")
+    }, 150)
+    
+    setTimeout(function(){
+        $(".action-container .content-image").css("opacity", "1")
+        machineResponse = "Here is an overview of incident resources."
+        writeDialogue(machineResponse, "machine")
+        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+    }, 750)
+
+}
 
 
 
@@ -456,7 +508,7 @@ function dialogue(text) {
     if (preparedText.includes("fill") || preparedText.includes("fix") || preparedText.includes("check")) {
         intents.push("fix")
     }
-    if (preparedText.includes("find") || preparedText.includes("show") || preparedText.includes("calculate") || preparedText.includes("can i see")) {
+    if (preparedText.includes("find") || preparedText.includes("show") || preparedText.includes("calculate") || preparedText.includes("see")) {
         intents.push("find")
     }
     if (preparedText.includes("help")) {
@@ -587,8 +639,8 @@ function dialogue(text) {
     if (preparedText.includes("door")) {
         entities.push("door")
     }
-    if (preparedText.includes("climate")) {
-        entities.push("climate")
+    if (preparedText.includes("climate") || preparedText.includes("weather")) {
+        entities.push("weather")
     }
     if (preparedText.includes("dash")) {
         entities.push("dash")
@@ -650,6 +702,9 @@ function dialogue(text) {
     if (preparedText.includes("korean")) {
         entities.push("korean")
     }
+    if (preparedText.includes("resource")) {
+        entities.push("resource")
+    }
 
     ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
 
@@ -702,14 +757,14 @@ function dialogue(text) {
     //////////////// Dialogue Stack after we've determined intents and entitites
 
     // We just wanted to say hello!
-    if (intents.indexOf("hello") > -1 && preparedText.length < 50) {
+    if (intents.indexOf("hello") > -1 && preparedText.length < 30) {
 
       machineResponse = "Hi there"
 
       setTimeout(function(){
-        writeDialogue(machineResponse)
+        writeDialogue(machineResponse, "machine")
         responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
-      }, 500)
+      }, 600)
     }
 
 
@@ -732,6 +787,28 @@ function dialogue(text) {
     }
 
 
+    ////////// show weather and analytics
+    if (intents.indexOf("find") > -1 && (entities.indexOf("weather") > -1 )) {
+
+        // show the menu!
+        showWeather()
+    }
+
+    ////////// show mapping
+    if (intents.indexOf("find") > -1 && (entities.indexOf("map") > -1 )) {
+
+        // show the menu!
+        showMapping()
+    }
+
+    ////////// show resources
+    if (intents.indexOf("find") > -1 && (entities.indexOf("resource") > -1 )) {
+
+        // show the menu!
+        showResources()
+    }
+
+
     ////////// translate text
     if (intents.indexOf("translate") > -1) {
 
@@ -748,7 +825,7 @@ function dialogue(text) {
                 var r = JSON.parse(data).translations[0].translation
                 console.log(r)
                 machineResponse = r
-                writeDialogue(machineResponse)
+                writeDialogue(machineResponse, "machine")
                 responsiveVoice.speak(machineResponse, "French Female", {rate: 1})
             })
         }
@@ -760,7 +837,7 @@ function dialogue(text) {
                 var r = JSON.parse(data).translations[0].translation
                 console.log(r)
                 machineResponse = r
-                writeDialogue(machineResponse)
+                writeDialogue(machineResponse, "machine")
                 responsiveVoice.speak(machineResponse, "Spanish Latin American Female", {rate: 1})
             })
         }
@@ -771,7 +848,7 @@ function dialogue(text) {
                 var r = JSON.parse(data).translations[0].translation
                 console.log(r)
                 machineResponse = r
-                writeDialogue(machineResponse)
+                writeDialogue(machineResponse, "machine")
                 responsiveVoice.speak(machineResponse, "Deutsch Female", {rate: 1})
             })
         }
@@ -782,7 +859,7 @@ function dialogue(text) {
                 var r = JSON.parse(data).translations[0].translation
                 console.log(r)
                 machineResponse = r
-                writeDialogue(machineResponse)
+                writeDialogue(machineResponse, "machine")
                 responsiveVoice.speak(machineResponse, "Korean Female", {rate: 1})
             })
         }
@@ -804,7 +881,7 @@ function dialogue(text) {
     // and make sure there is a message
 
     if (typeof outputDialogue != "undefined") {
-        writeDialogue(preparedText)
+        writeDialogue(preparedText, "user")
     }
 
 }
@@ -817,42 +894,53 @@ function dialogue(text) {
 
 
 ///////// output dialoge
-function writeDialogue(m,d) {
+function writeDialogue(m,t,d) {
 
     var delay = d
+    var type = t
 
     if (typeof d == "undefined") {
-      delay = 7500
+      delay = 20000
     }
 
     // Create the message html object
-    var messageHtml = '<p class="out message"><span>' + m + '</span></p>'
+    if (t == "user") {
+        var messageHtml = '<div class="out message"><user>' + currentUsername + '<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div>'
+    } else if (t == "machine") {
+        var messageHtml = '<div class="out message"><div class="row"><div class="col-xs-2"><img src="/assets/owl_logo_light.png" /></div><div class="col-xs-10"><user>OWL<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
+    }
 
     // Append to conversation list
     $(".dialogue").append(messageHtml)
+
+    // focus cursor back on readout
+    $("#readout").focus()
 
     // Turn on new message
     setTimeout(function() {
       
       // Move the message
-      $(".dialogue p.out").removeClass("out")
+      $(".dialogue .out").removeClass("out")
 
       // eliminate readout
       $("#readout").val("")
 
-      var el = $(".dialogue p").last()
+      var el = $(".dialogue .message").last()
 
       // prepare to fade this
-      setTimeout(function() {
-          el.addClass("fadeout")
+      // setTimeout(function() {
+      //     el.addClass("fadeout")
 
-          setTimeout(function() {
-            el.remove()
-          }, 150)
-      }, delay)
+      //     setTimeout(function() {
+      //       el.remove()
+      //     }, 150)
+      // }, delay)
 
     }, 120)
 }
+
+
+
 
 
 

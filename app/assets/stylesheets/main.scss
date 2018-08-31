@@ -5,6 +5,7 @@
 
 
 $bg: #0f253a;
+$highlight: #fcc802;
 
 h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	font-family: 'Oxygen', sans-serif;
@@ -67,7 +68,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.dialogue {
 		position: relative;
 		z-index: 10;
-		padding: 10em 1em 1em;
+		padding: 8rem 1em 1em;
 		min-height: 100vh;
 		margin: 0 auto 0;
 		text-align: center;
@@ -131,33 +132,56 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			opacity: 1;
 		}
 
-		p.message {
+		.message {
 			display: block;
 			position: relative;
 			text-align: left;
 			font-weight: 300;
 			padding: 0;
-			margin: 0 0 1em;
+			margin: 0 0 1.75em;
 			top: 0;
-			font-size: 2em;
+			font-size: 1.25em;
 			height: 3.5em;
 			height: auto;
 			color: rgba(255,255,255,1);
 			opacity: 1;
 			transition: all .35s;
 
+			user {
+				display: block;
+				font-size: .85em;
+				font-weight: 600;
+				font-style: italic;
+				color: rgba(255,255,255,.5);
+
+				t {
+					display: inline;
+					margin-left: .35em;
+					font-weight: 300;
+				}
+			}
+
+			span {
+				display: block;
+			}
+
 			svg {
 				display: inline-block;
 				margin-right: .5em;
 			}
+
+			img {
+				display: block;
+				width: 100%;
+			}
 		}
 
-		p.message.out {
+		.message.out {
 			opacity: 0;
 			top: 20px;
 		}
 
-		p.message.fadeout {
+		.message.fadeout {
 			opacity: 0;
 			top: -20px;
 		}
@@ -227,6 +251,16 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 	.action-container {
 		padding-top: 6rem;
+
+		.content-image {
+			display: block;
+			width: 100%;
+			opacity: 0;
+			transition: all .2s;
+			-ms-transition: all .2s;
+			-moz-transition: all .2s;
+			-webkit-transition: all .2s;
+		}
 	}
 
 	.dialogue-container {
@@ -417,7 +451,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		.menu-item:hover {
 			opacity: 1;
 			background: rgba(255,255,255,.05);
-			border: 2px solid rgba(255,255,255,.5);
+			border: 2px solid $highlight;
+			color: $highlight;
 		}
 
 		.menu-item.out {

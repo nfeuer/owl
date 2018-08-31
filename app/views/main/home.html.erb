@@ -6,7 +6,7 @@
 					<%= render 'main/modularVoice' %>
 				</div>
 			</div>
-			<div class="col-sm-7 action-container">
+			<div class="col-sm-8 action-container">
 				<div class="menu out">
 					<div class="row">
 						<div class="col-sm-4">
@@ -141,7 +141,7 @@
 <script type="text/javascript">
 	
 	var outputDialogue = true
-	
+	var currentUsername = "<%= current_user.username.to_s %>"
 
 	// start waves
 	embedWaves()
