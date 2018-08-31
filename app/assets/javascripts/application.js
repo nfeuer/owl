@@ -80,8 +80,8 @@ function removeMenu() {
     })
 
     setTimeout(function() {
-        // $(".menu").removeClass("in")
-    }, 500)
+        $(".menu").removeClass("in").addClass("out")
+    }, 600)
 }
 
 
@@ -96,7 +96,7 @@ function showWeather() {
 
     setTimeout(function(){
         $(".action-container .content-image").css("opacity", "1")
-        machineResponse = "Here is the current weather for your area."
+        machineResponse = "Here is the current weather as well as the forecast for your area."
         writeDialogue(machineResponse, "machine")
         responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
     }, 750)
@@ -767,6 +767,22 @@ function dialogue(text) {
       }, 600)
     }
 
+
+
+
+
+
+
+    /////// THIS IS A TEST DELETE IT LATER MADE FOR DEMO
+
+    if (preparedText.includes("hurricane condition")) {
+
+        setTimeout(function() {
+            machineResponse = "This hurricane is currently a category 4 and about 100 miles in diameter.  You will likely avoid catastrophic damage, but will still experience strong winds and flash flooding. I recommend you seek shelter."
+            writeDialogue(machineResponse, "machine")
+            responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+        }, 750)
+    }
 
 
 
