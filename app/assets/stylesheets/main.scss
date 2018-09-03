@@ -991,12 +991,44 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 
 #clusterduck {
-	padding: 4em 0 12em;
+	padding: 6em 0 12em;
 	background: #260065;
+	min-height: 100vh;
+
+	h3 {
+		font-size: 1.75em;
+		font-weight: 400;
+		color: #fff;
+		margin: 0 0 1em;
+	}
+
+	.legend {
+		margin-bottom: 2em;
+		
+		.link {
+			display: inline-block;
+			background: transparent;
+			color: #fff;
+			border: 3px solid #fff;
+			padding: .5em 1.5em;
+			font-size: 1.25em;
+			cursor: pointer;
+			line-height: 1.15em;
+		}
+
+		.link:hover {
+			background: #fff;
+			color: #260065;
+		}
+	}
 
 	img {
 		display: block;
 		width: 100%;
+	}
+
+	.product-roadmap, .cost-effectiveness {
+		display: none;
 	}
 }
 
