@@ -923,7 +923,7 @@ function writeDialogue(m,t,d) {
     if (t == "user") {
         var messageHtml = '<div class="out message"><user>' + currentUsername + '<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div>'
     } else if (t == "machine") {
-        var messageHtml = '<div class="out message"><div class="row"><div class="col-xs-2"><img src="/assets/owl_logo_light.png" /></div><div class="col-xs-10"><user>OWL<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
+        var messageHtml = '<div class="out message"><div class="img-container"><img src="/assets/owl_logo_light.png" /></div><div class="content-container"><user>OWL<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
     }
 
     // Append to conversation list
@@ -939,9 +939,11 @@ function writeDialogue(m,t,d) {
       $(".dialogue .out").removeClass("out")
 
       // eliminate readout
-      $("#readout").val("")
+      // $("#readout").val("")
 
+      // scroll element
       var el = $(".dialogue .message").last()
+      $(".dialogue").animate({scrollTop: el.offset().top});
 
       // prepare to fade this
       // setTimeout(function() {

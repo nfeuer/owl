@@ -14,6 +14,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 .conversation {
 	position: relative;
+	height: 100vh;
 
 	.input-container {
 		padding: 1em 0;
@@ -69,9 +70,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		position: relative;
 		z-index: 10;
 		padding: 8rem 1em 1em;
-		min-height: 100vh;
+		height: 90vh;
 		margin: 0 auto 0;
 		text-align: center;
+		overflow: auto;
 		display: block;
 		width: 100%;
 
@@ -138,7 +140,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			text-align: left;
 			font-weight: 300;
 			padding: 0;
-			margin: 0 0 1.75em;
+			margin: 0 0 1.5em;
 			top: 0;
 			font-size: 1.25em;
 			height: 3.5em;
@@ -159,6 +161,19 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 					margin-left: .35em;
 					font-weight: 300;
 				}
+			}
+
+			.img-container {
+				width: 1.5em;
+				display: inline-block;
+				vertical-align: top;
+				margin-right: .75em;
+			}
+
+			.content-container {
+				display: inline-block;
+				vertical-align: top;
+
 			}
 
 			span {
@@ -187,6 +202,20 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 	}
 }
+
+.conversation:after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 8em;
+	width: 100%;
+	z-index: 300;
+	background: rgb(15,37,58);
+	background: linear-gradient(180deg, rgba(15,37,58,1) 20%, rgba(15,37,58,0) 100%);
+}
+
 
 #wavesContainer {
 	position: relative;
