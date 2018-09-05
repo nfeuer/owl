@@ -939,7 +939,7 @@ function writeDialogue(m,t,d) {
       $(".dialogue .out").removeClass("out")
 
       // eliminate readout
-      // $("#readout").val("")
+      $("#readout").val("")
 
       // scroll element
       var el = $(".dialogue .message").last()

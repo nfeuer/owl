@@ -333,11 +333,12 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			.notification {
 				position: relative;
+				cursor: pointer;
 				padding: 0 0 0 1.5em;
 				border-bottom: 1px solid rgba(255,255,255,.1);
 				background: rgba(255,255,255,0);
 				min-height: 6rem;
-				opacity: .6;
+				opacity: .5;
 				transition: all .125s;
 				-ms-transition: all .125s;
 				-moz-transition: all .125s;
@@ -383,7 +384,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			}
 
 			.notification:hover {
-				background: rgba(255,255,255,.05);
+				opacity: 1;
+				background: rgba(255,255,255,.075);
 			}
 
 			.notification.active {
@@ -467,7 +469,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				}
 
 				.priority:hover {
-					background: rgba(255,255,255,.05);
+					background: rgba(255,255,255,.075);
 				}
 			}
 		}
