@@ -231,6 +231,22 @@ function getGeocode(address, lat, lng) {
     var geocoder; geocoder = new google.maps.Geocoder(); geocoder.geocode( { 'address': address}, function(results, status) { if (status == 'OK') {lat = results[0].geometry.location.lat();lng = results[0].geometry.location.lng();} else {console.log('GeoCode failed: ' + status);}})
 }
 
+function showPosition(position) {
+    console.log("YOUR POSITION:")
+    console.log(position.coords.latitude + 
+    ", " + position.coords.longitude)
+
+    return position.coords.latitude + ", " + position.coords.longitude
+}
+
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        console.log("Geolocation is not supported by this browser.")
+    }
+}
+
 function mapsRequest(destination, dName, dLat, dLng, origin, oName, oLat, oLng, scenic) {
     var tm = 'DRIVING'
     if (scenic == true) {

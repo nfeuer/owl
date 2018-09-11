@@ -523,12 +523,16 @@ class MainController < ApplicationController
 
   def get15minforecast
 
-    @geocode = "40.712399/-73.964152"
+    if params[:location].to_s == ""
+      @location = "40.712399/-73.964152"
+    else
+      @location = params[:location]
+    end
 
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v1/geocode/" + @geocode + "/forecast/fifteenminute.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+    url = URI("https://api.weather.com/v1/geocode/" + @location + "/forecast/fifteenminute.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -553,7 +557,7 @@ class MainController < ApplicationController
 
   def getlocation
 
-    @location = "New York, NY"
+    @location = params[:location]
 
     require 'uri'
     require 'net/http'
@@ -583,7 +587,11 @@ class MainController < ApplicationController
 
   def weathernowcast
 
-    @location = "40.712399/-73.964152"
+    if params[:location].to_s == ""
+      @location = "40.712399/-73.964152"
+    else
+      @location = params[:location]
+    end
 
     require 'uri'
     require 'net/http'
@@ -611,7 +619,11 @@ class MainController < ApplicationController
 
   def powerdisruption
 
-    @location = "40.712399,-73.964152"
+    if params[:location].to_s == ""
+      @location = "40.712399,-73.964152"
+    else
+      @location = params[:location]
+    end
 
     require 'uri'
     require 'net/http'

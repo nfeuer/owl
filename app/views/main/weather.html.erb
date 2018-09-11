@@ -275,7 +275,7 @@
 
 	$("a.minuteforecast").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/get15minforecast?geoid=" + g, function(data){
 
 			// append to raw response
@@ -296,7 +296,12 @@
 
 	$("a.getlocation").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
+		if (g == "") {
+			g = "New York City"
+		}
+
+		console.log(g)
 		$.get("/getlocation?location=" + g, function(data){
 
 			// append to raw response
@@ -317,7 +322,7 @@
 
 	$("a.nowcast").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/weathernowcast?location=" + g, function(data){
 
 			// append to raw response
@@ -338,7 +343,7 @@
 
 	$("a.powerdisruption").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/powerdisruption?location=" + g, function(data){
 
 			// append to raw response
@@ -359,7 +364,7 @@
 
 	$("a.tropicalforecast").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/tropicalforecast?location=" + g, function(data){
 
 			// append to raw response
@@ -381,7 +386,7 @@
 
 	$("a.weatheralmanac").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/weatheralmanac", function(data){
 
 			// append to raw response
@@ -402,7 +407,7 @@
 
 	$("a.currentsondemand").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/currentsondemand", function(data){
 
 			// append to raw response
@@ -423,7 +428,7 @@
 
 	$("a.tropicalcurrent").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/tropicalcurrent", function(data){
 
 			// append to raw response
@@ -444,7 +449,7 @@
 
 	$("a.siteobservations").on("click", function() {
 		var p = $(this).parents(".block")
-		var g = $(this).find(".geocode-form").val()
+		var g = $(p).find(".geocode-form").val()
 		$.get("/siteobservations", function(data){
 
 			// append to raw response
