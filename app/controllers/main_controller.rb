@@ -119,6 +119,21 @@ class MainController < ApplicationController
 
 
 
+  ######################## clusterduck input data
+  def clusterduckdata
+
+    @data = "ayooooo!1!!"
+
+    # @params = params[]
+
+    Clusterdatum.create(content: @data)
+
+  end
+
+
+
+
+
   ######################## Twilio commands SMS Texting and Phone Calls
 
   def sendtext

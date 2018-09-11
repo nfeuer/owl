@@ -1,0 +1,2 @@
+class Clusterdatum < ApplicationRecord
+end

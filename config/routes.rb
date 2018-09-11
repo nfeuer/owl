@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   match '/sendtext', to: 'main#sendtext', via: 'get'
   match '/sendcall', to: 'main#sendcall', via: 'get'
 
+  # Clusterduck API routes
+  match '/clusterduck-data', to: 'main#clusterduckdata', via: 'get'
+
   # IBM Watson API Routes
   match '/analyzetone', to: 'main#analyzetone', via: 'get'
   match '/visualizer', to: 'main#visualizer', via: 'get'
