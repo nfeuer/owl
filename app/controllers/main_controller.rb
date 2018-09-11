@@ -128,6 +128,10 @@ class MainController < ApplicationController
 
     Clusterdatum.create(content: @data)
 
+    respond_to do |format|
+      format.text { render plain: "Hi Magus" }
+    end
+
   end
 
 
