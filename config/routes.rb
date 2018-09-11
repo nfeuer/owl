@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   match '/leaders', to: 'main#leaders', via: 'get'
   match '/weather', to: 'main#weather', via: 'get'
   match '/clusterduck', to: 'main#clusterduck', via: 'get'
+  match '/clusterdata', to: 'main#clusterdata', via: 'get'
 
   
   ########## API ROUTES

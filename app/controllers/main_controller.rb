@@ -148,6 +148,10 @@ class MainController < ApplicationController
 
   end
 
+  def clusterdata
+    @clusterdata = Clusterdatum.all.order(created_at: :desc)
+  end
+
 
 
 

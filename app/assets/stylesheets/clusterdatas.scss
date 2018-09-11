@@ -1,3 +1,25 @@
 // Place all the styles related to the clusterdatas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+#clusterdata {
+	padding: 8em 0;
+
+	.cluster-data {
+
+		p {
+			display: block;
+			font-size: 1.15em;
+			font-weight: 300;
+			line-height: 1.25em;
+			margin: 0 1.5em;
+			padding: .75em 0;
+			border: 0;
+			border-bottom: 1px solid #ccc;
+		}
+	}
+}
+
