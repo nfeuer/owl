@@ -123,7 +123,7 @@ class MainController < ApplicationController
   ######################## clusterduck input data
   def clusterduckdata
 
-    @data = request.body.to_s + " " +  request.body.read.to_s + " " +  request.params.to_s + " " + request.headers.to_s
+    @data = request.body.read.to_s
 
 
     puts " "
@@ -134,7 +134,7 @@ class MainController < ApplicationController
     # puts request.params
     # puts request.headers
     puts @data
-    
+
     puts "------- end request"
     puts " "
 
