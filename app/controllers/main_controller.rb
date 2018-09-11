@@ -140,7 +140,7 @@ class MainController < ApplicationController
 
     # @params = params[]
 
-    # Clusterdatum.create(content: @data)
+    Clusterdatum.create(content: @data)
 
     respond_to do |format|
       format.text { render plain: "Hi Magus" }
