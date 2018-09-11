@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+    skip_before_action :verify_authenticity_token
 
   #################### Web Pages
 
@@ -122,11 +123,24 @@ class MainController < ApplicationController
   ######################## clusterduck input data
   def clusterduckdata
 
-    @data = "ayooooo!1!!"
+    @data = request.body.to_s + " " +  request.body.read.to_s + " " +  request.params.to_s + " " + request.headers.to_s
+
+
+    puts " "
+    puts "------- request clusterduck"
+    # puts request
+    # puts request.body
+    # puts request.body.read
+    # puts request.params
+    # puts request.headers
+    puts @data
+    
+    puts "------- end request"
+    puts " "
 
     # @params = params[]
 
-    Clusterdatum.create(content: @data)
+    # Clusterdatum.create(content: @data)
 
     respond_to do |format|
       format.text { render plain: "Hi Magus" }
