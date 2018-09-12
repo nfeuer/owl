@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'priorities/index'
 
   get 'main/index'
-  root 'main#index'
+  root 'main#home'
 
   # dynamic resources
   resources :messages

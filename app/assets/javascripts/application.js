@@ -88,18 +88,9 @@ function removeMenu() {
 //////// show the weather in the action area
 function showWeather() {
 
+    // fade out current content
     $(".action-container .content-image").fadeOut("fast")
-    setTimeout(function(){
-        $(".content-image").remove()
-        $(".action-container").append("<img class='content-image' src='/assets/content_weather.jpg' />")
-    }, 150)
-
-    setTimeout(function(){
-        $(".action-container .content-image").css("opacity", "1")
-        machineResponse = "Here is the current weather as well as the forecast for your area."
-        writeDialogue(machineResponse, "machine")
-        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
-    }, 750)
+    
 
 }
 
@@ -138,6 +129,43 @@ function showResources() {
     }, 750)
 
 }
+
+
+
+
+
+
+
+//////////////////////////// weather functionality for weather dashboard
+
+function getForecast(geocode) {
+
+    var g;
+
+    if (typeof geocode == "undefined") {
+        g = "35.613,-77.366"
+    } else {
+        g = geocode
+    }
+
+    console.log(g)
+
+    $.get("/getweatherforecast?geoid=" + g, function(data){
+
+        // grab the raw response and turn into json
+        $("body").find(".data-response").html("").append(data)
+        var jResponse = JSON.parse($(".data-response").html())
+
+        //// unpack the json
+        console.log(jResponse)
+
+        var day1
+    })
+}
+
+
+
+
 
 
 

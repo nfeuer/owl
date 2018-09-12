@@ -494,12 +494,18 @@ class MainController < ApplicationController
 
   def getweatherforecast
 
-    @geocode = ""
+    if params[:geoid].to_s == "" || params[:geoid].to_s == "undefined"
+      @geocode = "35.613,-77.366"
+    else
+      @geocode = params[:geoid]
+    end
 
+    puts @geocode
+    
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v3/wx/forecast/daily/3day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e%0A&format=json&geocode=34.063%2C-84.217")
+    url = URI("https://api.weather.com/v3/wx/forecast/daily/3day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e%0A&format=json&geocode=" + @geocode)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
