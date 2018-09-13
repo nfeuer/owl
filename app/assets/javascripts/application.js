@@ -91,7 +91,7 @@ function showWeather() {
     // fade out current content
     $(".action-container .content-image").fadeOut("fast")
     
-
+    getForecast()
 }
 
 
