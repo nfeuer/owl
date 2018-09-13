@@ -92,6 +92,7 @@ function showWeather() {
     $(".action-container .content-image").fadeOut("fast")
     
     getForecast()
+    getNowcast()
 }
 
 
@@ -224,6 +225,29 @@ function getNowcast(geocode) {
     })    
 }
 
+function getTropicalCurrentPosition() {
+
+    $.get("/tropicalcurrent", function(data){
+        
+        $("body").find(".data-response").html("").append(data)
+        var jResponse = JSON.parse($(".data-response").html())
+
+        //// unpack the json
+        console.log(jResponse)
+
+        var advisoryinfo = jResponse.advisoryinfo
+        var laststorm = advisoryinfo[4]
+        var stormname = laststorm.storm_name
+        var stormtype = laststorm.currentposition.storm_type
+        var stormcategory = laststorm.currentposition.storm_sub_type
+
+        /// append nomenclature
+        $(".weather-content .warning em b").html(stormtype + " " + stormname)
+        $(".weather-content .warning .storm-desc").html(stormcategory)
+        
+
+    })
+}
 
 
 

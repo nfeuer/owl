@@ -7,8 +7,8 @@
 			<div class="col-sm-8 action-container">
 
 				<div class="weather-content">
-					<h4><span class="datetime">7:58 AM Wednesday, August 22</span><span class="location">Greenville, North Carolina</span></h4>
-					<div class="warning"><em><b>Tropical Storm Warning</b></em>&ensp;<b>|</b>&ensp;Hurricane Florence Making Landfall 8am</div>
+					<h4><span class="datetime"></span><span class="location">Greenville, North Carolina</span></h4>
+					<div class="warning"><em><b></b></em>&ensp;<b>|</b>&ensp;<span class="storm-desc"></span></div>
 					<p class="description">Currently a Category 4 Hurricane, Florence is expexted to cause widespread damage and flooding.  Evacuation recommended</p>
 
 					<div class="four-day-forecast">
@@ -57,5 +57,14 @@
 
 	// start waves
 	// embedWaves()
+
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if(dd<10) { dd = '0'+dd }
+	if(mm<10) { mm = '0'+mm }
+	today = mm + '/' + dd + '/' + yyyy;
+	$(".weather-content .datetime").html(today)
 
 </script>
