@@ -148,8 +148,7 @@ function getForecast(geocode) {
         g = geocode
     }
 
-    console.log(g)
-
+    ////////////// get 4 day forecast
     $.get("/getweatherforecast?geoid=" + g, function(data){
 
         // grab the raw response and turn into json
@@ -159,8 +158,70 @@ function getForecast(geocode) {
         //// unpack the json
         console.log(jResponse)
 
-        var day1
+        var daypart = jResponse.daypart
+        var dayofweek = jResponse.dayOfWeek
+        var narrative = jResponse.narrative
+        var tempmin = jResponse.temperatureMin
+        var tempmax = jResponse.temperatureMax
+
+        // iterate through days and add data
+        $(".four-day-forecast .day-container").each(function(index, el) {
+
+            /// add day of week
+            $(this).find("h3").html(dayofweek[index])
+
+            /// add temps
+            var m = tempmin[index]
+            var n = tempmax[index]
+            if (m == null) { m = "" } else { m = m + "F"}
+            if (n == null) { n = "" } else { n = n + "F"}
+            $(this).find("h4").html(m + " / " + n)
+
+            /// add description
+            $(this).find("h5").html(narrative[index])
+
+            // update icons
+            if (narrative[index].includes("thunderstorm")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_thunderstorms.png")
+            } else if (narrative[index].includes("windy")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
+            } else if (narrative[index].includes("cloudy")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
+            } else if (narrative[index].includes("sun")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
+            } else if (narrative[index].includes("shower")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_rainy.png")
+            }            
+        })
     })
+}
+
+
+function getNowcast(geocode) {
+
+    var g;
+
+    if (typeof geocode == "undefined") {
+        g = "35.613/-77.366"
+    } else {
+        g = geocode
+    }
+
+    //////////////////// get nowcast for subtitle
+    $.get("/weathernowcast?location=" + g, function(data){
+        
+        $("body").find(".data-response").html("").append(data)
+        var jResponse = JSON.parse($(".data-response").html())
+
+        //// unpack the json
+        console.log(jResponse)
+
+        var desc = jResponse.forecast.narrative_256char
+
+        /// append description
+        $(".weather-content p.description").html(desc)
+
+    })    
 }
 
 

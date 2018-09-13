@@ -11,7 +11,7 @@ class MainController < ApplicationController
     if signed_in?
       @message = Message.new
     else
-      redirect_to "/"
+      redirect_to "/signin"
     end
   end
 
