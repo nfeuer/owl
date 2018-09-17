@@ -93,6 +93,9 @@ function showWeather() {
     
     getForecast()
     getNowcast()
+    getTropicalCurrentPosition()
+
+    $(".weather-content").detach().appendTo(".action-container").fadeIn("fast")
 }
 
 
@@ -182,15 +185,16 @@ function getForecast(geocode) {
             $(this).find("h5").html(narrative[index])
 
             // update icons
-            if (narrative[index].includes("thunderstorm")) {
+            var s = narrative[index].toLowerCase()
+            if (s.includes("thunderstorm")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_thunderstorms.png")
-            } else if (narrative[index].includes("windy")) {
+            } else if (s.includes("windy")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
-            } else if (narrative[index].includes("cloudy")) {
+            } else if (s.includes("cloudy")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
-            } else if (narrative[index].includes("sun")) {
+            } else if (s.includes("sun")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
-            } else if (narrative[index].includes("shower")) {
+            } else if (s.includes("shower") || (s.includes("rain"))) {
                 $(this).find("img.icon").attr("src", "/assets/icon_rainy.png")
             }            
         })
@@ -221,6 +225,8 @@ function getNowcast(geocode) {
 
         /// append description
         $(".weather-content p.description").html(desc)
+
+        responsiveVoice.speak(desc, "UK English Female", {rate: 1.075});
 
     })    
 }

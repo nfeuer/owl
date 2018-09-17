@@ -1,0 +1,86 @@
+<div id="civilian">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0">
+
+			    <form class="form" action='' method='get'>
+			      <h2 style="color:gold">DuckLink Captive Portal</h2>
+
+			      <input type="hidden" name="ID" id="ID_UNIQUE" />
+			      	<p><input name='name' class="form-control" placeholder="Name"></input></p>
+			      	<p><input name='location' placeholder="Street" required class="form-control"></input>
+			        <p><input name="not_gonna_submit" disabled="disabled" value="Greenville, NC" class="form-control"/></p>
+			        <p><input name='phone' placeholder="Phone Number *" required class="form-control"></input></p>
+			        <p><input name='vacancy' placeholder="Is your house vacant?" class="form-control"></input></p>
+			        <p><input name='emergency' placeholder="Are you in immediate danger? Immobile? *" class="form-control" required></input></p>
+			        <p><input name='occupants' class="form-control" placeholder="Number of occupants (include pets)"></input></p>
+			        <p><input name='needs' class="form-control" placeholder="Water? Food? First Aid?"></input></p>
+
+			        <button type='submit' id='submit' class="button sos">SOS</button>
+
+			    </form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+
+
+.percent {
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: lighter;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percent__inner {
+    display: inline-block;
+  }
+
+.percent__num {
+    display: inline-block;
+    font-size: 6rem;
+  }
+
+.percent__sign {
+    display: inline-block;
+    font-size: 4rem;
+  }
+
+@-webkit-keyframes button-shadow {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+
+@keyframes button-shadow {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+
+</style>
