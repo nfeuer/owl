@@ -1000,6 +1000,12 @@ function dialogue(text) {
     if (preparedText.includes("resource")) {
         entities.push("resource")
     }
+    if (preparedText.includes("notification")) {
+        entities.push("notification")
+    }
+    if (preparedText.includes("priority")) {
+        entities.push("priority")
+    }
 
     ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
 
@@ -1118,6 +1124,69 @@ function dialogue(text) {
         // show the menu!
         showResources()
     }
+
+
+
+
+
+    //////////////////// create notifications
+
+    if (entities.indexOf("notification") > -1 && intents.indexOf("add") > -1) {
+
+        var t = ""
+        var c = ""
+
+        // separate
+        if (preparedText.includes("title that says")) {
+            t = preparedText.split("title that says")[1]
+        }
+
+        if (preparedText.includes("and text that says")) {
+            c = t.split("and text that says")[1]
+            t = t.split("and text that says")[0]
+            t = t.replace("and text that says", "")
+        }
+
+        // console.log("notification")
+        // console.log(t)
+        // console.log(c)
+
+        /// finally, create the notification
+        $.get("/createnotification?title=" + t + "&text=" + c)
+    }
+
+
+    //////////////////// create priorities
+
+    if (entities.indexOf("priority") > -1 && intents.indexOf("add") > -1) {
+
+        var t = ""
+        var c = ""
+
+        // separate
+        if (preparedText.includes("title that says")) {
+            t = preparedText.split("title that says")[1]
+        }
+
+        if (preparedText.includes("and text that says")) {
+            c = t.split("and text that says")[1]
+            t = t.split("and text that says")[0]
+            t = t.replace("and text that says", "")
+        }
+
+        // console.log("notification")
+        // console.log(t)
+        // console.log(c)
+
+        /// finally, create the notification
+        $.get("/createpriority?title=" + t + "&text=" + c)
+    }
+
+
+
+
+
+
 
 
     ////////// translate text

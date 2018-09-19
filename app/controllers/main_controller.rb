@@ -13,6 +13,8 @@ class MainController < ApplicationController
     else
       redirect_to "/signin"
     end
+
+    @notifications = Notification.all
   end
 
   def search
@@ -120,6 +122,26 @@ class MainController < ApplicationController
   end
 
 
+
+  ######## create and read notifications
+
+  def createnotification
+
+    @title = params[:title]
+    @text = params[:text]
+    @n = Notification.create(title: @title, content: @text)
+    @n.save
+
+  end
+
+  def createpriority
+
+    @title = params[:title]
+    @text = params[:text]
+    @p = Priority.create(name: @title, details: @text)
+    @p.save
+
+  end
 
 
 
