@@ -1240,6 +1240,13 @@ function dialogue(text) {
         setTimeout(function() {
             checknotifications()
         }, 250)
+
+        setTimeout(function() {
+            machineResponse = "Notification created."
+            writeDialogue(machineResponse, "machine")
+            responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1.075})
+        }, 400)
+
         setTimeout(function() {
             $(".notifications-container").removeClass("open")
         }, 4000)
@@ -1277,6 +1284,12 @@ function dialogue(text) {
         setTimeout(function() {
             checkpriorities()
         }, 250)
+
+        setTimeout(function() {
+            machineResponse = "Priority created."
+            writeDialogue(machineResponse, "machine")
+            responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1.075})
+        }, 400)
 
         setTimeout(function() {
             $(".notifications-container").removeClass("open")
