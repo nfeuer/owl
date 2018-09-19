@@ -260,6 +260,40 @@ function getTropicalCurrentPosition() {
 
 
 
+// Validate filetypes
+
+function validateFiles(inputFile) {
+  var maxExceededMessage = "This file exceeds the maximum allowed file size (5 MB)";
+  var extErrorMessage = "Only image file with extension: .jpg, .jpeg, .gif or .png is allowed";
+  var allowedExtension = ["jpg", "jpeg", "gif", "png"];
+  
+  var extName;
+  var maxFileSize = $(inputFile).data('max-file-size');
+  var sizeExceeded = false;
+  var extError = false;
+  
+  $.each(inputFile.files, function() {
+    if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
+    extName = this.name.toLowerCase().split('.').pop();
+    if ($.inArray(extName, allowedExtension) == -1) {extError=true;};
+  });
+  if (sizeExceeded) {
+    window.alert(maxExceededMessage);
+    $(inputFile).val('');
+  };
+  
+  if (extError) {
+    window.alert(extErrorMessage);
+    $(inputFile).val('');
+  };
+}
+
+
+
+
+
+
+
 
 /////////////////////////////// Maps functionality for navigation and directions
 //////////////////////////////  basic configurations and then functional elements
@@ -272,6 +306,40 @@ var adpSummary;
 var routeTimeEst;
 var routeDistEst;
 
+
+function loadCivilianMap() {
+
+    /// check if our map exists, if not then load it in
+
+    if ($("#map").length < 1) {
+      var mapsHtml = '<div id="maps"><div id="navigation"><div class="navlist"><div id="directionsPanel" style="height 100%;"></div></div></div><div id="mapOverlay"><h3>Loading maps...<span></span></h3></div><div id="map"></div></div>'
+      $("#civilian").append(mapsHtml)
+
+      $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initCivilianMap', function() { });
+    }
+
+    ///// Maps functionality
+
+    // Fade in maps after a second so we don't get background flicker!
+    setTimeout(function() {
+        $("#maps").css("opacity", "1")
+        $("#mapOverlay h3 span").css("width", "100%").css("opacity", "1")
+    }, 150)
+    setTimeout(function() {
+        $("#mapOverlay").fadeOut("fast")
+        $("#readout").val(" ")
+    }, 600)
+
+    setTimeout(function() {
+
+        // scenic route
+        // loadDestination(dest, true)
+
+        // // normal destination
+        loadCivilianDestination("grand central station")
+    }, 750)
+
+}
 
 function loadMap() {
 
@@ -305,6 +373,37 @@ function loadMap() {
 		loadDestination("grand central station")
 	}, 750)
 
+}
+
+function loadCivilianDestination(destination, scenic) {
+
+    mapQuery = destination
+    mapAction = ""
+
+    var origin = "410 south 4th street brooklyn new york"
+    var oLat = 0
+    var oLng = 0
+
+    // Geocode origin & dest
+    var geocoder; geocoder = new google.maps.Geocoder(); geocoder.geocode( { 'address': origin }, function(results, status) { if (status == 'OK') {oLat = results[0].geometry.location.lat();oLng = results[0].geometry.location.lng();} else {console.log('GeoCode failed: ' + status);}})
+    geocoder = new google.maps.Geocoder(); geocoder.geocode( { 'address': mapQuery}, function(results, status) { if (status == 'OK') {newLat = results[0].geometry.location.lat();newLng = results[0].geometry.location.lng();} else {console.log('GeoCode failed: ' + status);}})
+
+    setTimeout(function() {
+
+        // var newDLat = newCoords[0]
+        // var newDLng = newCoords[1]
+
+        // console.log(newLat)
+        // console.log(newLng)
+
+        // fade in navigation panel
+        $("#navigation").fadeIn("fast")
+
+        // Maps request function is set up as below:
+        // mapsRequest(destination, dName, dLat, dLng, origin, oName, oLat, oLng)
+        civilianMapsRequest(mapQuery, mapQuery, newLat, newLng, origin, origin, oLat, oLng, scenic)
+
+    }, 1000)
 }
 
 function loadDestination(destination, scenic) {
@@ -364,6 +463,65 @@ function getCurrentLocation() {
     } else { 
         console.log("Geolocation is not supported by this browser.")
     }
+}
+
+
+function civilianMapsRequest(destination, dName, dLat, dLng, origin, oName, oLat, oLng, scenic) {
+    var tm = 'DRIVING'
+    if (scenic == true) {
+      tm = 'BICYCLING'
+    }
+    var request = {
+      destination: destination,
+      origin: origin,
+      travelMode: tm
+    };
+
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true,
+        polylineOptions: {
+          strokeColor: "#00ffff"
+        }
+    });
+
+
+    // var cyanDotTop = {
+    //     path: google.maps.SymbolPath.CIRCLE,
+    //     fillColor: '#05bfc0',
+    //     fillOpacity: 1,
+    //     scale: 8,
+    //     strokeColor: '#05bfc0',
+    //     strokeWeight: 3,
+    //     labelOrigin: new google.maps.Point(19, -3),
+    // };
+
+    // var cyanDotBot = {
+    //     path: google.maps.SymbolPath.CIRCLE,
+    //     fillColor: '#05bfc0',
+    //     fillOpacity: 1,
+    //     scale: 8,
+    //     strokeColor: '#05bfc0',
+    //     strokeWeight: 3,
+    //     labelOrigin: new google.maps.Point(23, -3),
+    // };
+
+    // new google.maps.Marker({
+    //     position: {lat: dLat, lng: dLng},
+    //     map: map,
+    //     label: {text: dName, color: "white", fontSize: "28px", fontWeight: "300"},
+    //     icon: cyanDotBot
+    // });
+
+    // new google.maps.Marker({
+    //     position: {lat: oLat, lng: oLng},
+    //     map: map,
+    //         label: {text: oName, color: "white", fontSize: "28px", fontWeight: "300"},
+    //     icon: cyanDotTop
+    // });
+
+
+    // Speak out the directions!
 }
 
 function mapsRequest(destination, dName, dLat, dLng, origin, oName, oLat, oLng, scenic) {
@@ -515,6 +673,8 @@ function identifyLanguage(text) {
 
     })
 }
+
+
 
 
 

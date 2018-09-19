@@ -2,15 +2,107 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				
+				<div class="menu">
+					<div class="row">
+						<div class="col-xs-4">
+							<div class="menu-item civilian-map">
+								<img class="icon" src="/assets/icon_map.png" />
+								<h4>Mapping</h4>
+							</div>`
+						</div>
+						<div class="col-xs-4">
+							<div class="menu-item claims">
+								<img class="icon" src="/assets/icon_camera.png" />
+								<h4>Claims</h4>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="menu-item">
+								<img class="icon" src="/assets/icon_health.png" />
+								<h4>Emergency</h4>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<%= render 'main/modularVoice' %>
+	<div class="claims-form">
+		<div class="exit">X</div>
+		<%= form_for @newclaim do |f| %>
+			<p class="message">Upload a New Photo</p>
+			<%= f.file_field :file, :onchange =>"validateFiles(this);", class: "file-input form-control" %>
+			<%= f.submit "Submit", class: "button submit" %>
+		<% end %>
+	</div>
 </div>
 
 <script type="text/javascript">
 	
 	/// add send button to input container
 	$(".input-container").append("<div class='button send'>Send</div>")
+
+</script>
+
+
+<script>
+
+
+	$(".menu-item.civilian-map").on("click",function() {
+		removeMenu()
+		setTimeout(function() {
+			loadCivilianMap()
+		}, 500)
+		
+	})
+
+	$(".menu-item.claims").on("click",function() {
+		removeMenu()
+		setTimeout(function() {
+			$(".claims-form").detach().appendTo(".dialogue")
+			$(".claims-form").fadeIn("fast")
+		}, 500)
+	})
+
+	$(".claims-form .exit").on("click", function() {
+		$(this).parents(".claims-form").fadeOut("fast")
+		showMenu()
+	})
+
+
+      function initCivilianMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.697403, lng: -74.1201062},
+          zoom: 8
+        });
+
+        // var drawingManager = new google.maps.drawing.DrawingManager({
+        //   drawingMode: google.maps.drawing.OverlayType.MARKER,
+        //   drawingControl: true,
+        //   drawingControlOptions: {
+        //     position: google.maps.ControlPosition.TOP_CENTER,
+        //     drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+        //   },
+        //   markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+        //   circleOptions: {
+        //     fillColor: '#ffff00',
+        //     fillOpacity: 1,
+        //     strokeWeight: 5,
+        //     clickable: false,
+        //     editable: true,
+        //     zIndex: 1
+        //   },
+        //   polygonOptions: {
+        //   	fillColor: '#ff0000',
+        //   	fillOpacity: .25,
+        //   	strokeColor: '#ff0000',
+        //   	strokeWeight: 3,
+        //   	clickable: true,
+        //   	editable: true,
+        //   	zIndex: 1
+        //   }
+        // });
+        // drawingManager.setMap(map);
+      }
 </script>

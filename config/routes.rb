@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :incidents
   resources :priorities
+  resources :claims
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

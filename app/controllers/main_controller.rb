@@ -36,6 +36,10 @@ class MainController < ApplicationController
     
   end
 
+  def civilian
+    @newclaim = Claim.new
+  end
+
 
 
 
