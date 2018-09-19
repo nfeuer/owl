@@ -276,11 +276,25 @@ function checknotifications() {
     })
 }
 
+function checkpriorities() {
+
+    $.get("/checkpriorities", function(data){
+
+        // get id of last notification and check if it matches last notification in panel
+        var n = $(".priorities-list .priority").first()
+        var nid = n.attr("id")
+        console.log(nid)
+        console.log(data)
+
+        if (nid != data) {
+            getpriority()
+        }
+    })
+}
+
 function getnotification() {
 
     $.get("/getnotification", function(data){
-
-        console.log(data)
 
         var nid = data.nid
         var t = data.title
@@ -296,6 +310,26 @@ function getnotification() {
         $(".notifications-list").prepend(nhtml)
         setTimeout(function() {
             $(".notifications-list .notification.out").removeClass("out")
+        }, 100)
+    })
+}
+
+function getpriority() {
+
+    $.get("/getpriority", function(data){
+
+        var nid = data.nid
+        var t = data.title
+        var c = data.content
+        var num = $(".priority").length + 1
+
+        // add notification
+
+        var phtml = '<div class="priority out" id="' + nid + '"><h4>' + t + '</h4><p>' + c + '</p><div class="num">' + num + '</div></div>'
+        $(".priorities-list").append(phtml)
+
+        setTimeout(function() {
+            $(".priorities-list .priority.out").removeClass("out")
         }, 100)
     })
 }
@@ -1239,6 +1273,10 @@ function dialogue(text) {
 
         // open notifications and update
         $(".notifications-container").addClass("open")
+
+        setTimeout(function() {
+            checkpriorities()
+        }, 250)
 
         setTimeout(function() {
             $(".notifications-container").removeClass("open")

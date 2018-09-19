@@ -81,7 +81,7 @@
 		<h3>Priorities</h3>
 		<div class="priorities-list">
 			<% Priority.all.each_with_index do |p,i| %>
-				<div class="priority">
+				<div class="priority" id="<%= p.id %>">
 					<h4><%= p.name %></h4>
 					<p><%= truncate(p.details, length: 27) %></p>
 					<div class="num"><%= i+1 %></div>

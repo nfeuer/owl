@@ -152,11 +152,27 @@ class MainController < ApplicationController
     end
   end
 
+  def checkpriorities
+    @ns = Priority.order(created_at: :desc).first
+
+    respond_to do |format|
+      format.text { render plain: @ns.id }
+    end
+  end
+
   def getnotification
     @ns = Notification.order(created_at: :desc).first
 
     respond_to do |format|
       format.json {render json: {title: @ns.title, content: @ns.content, nid: @ns.id} }
+    end
+  end
+
+  def getpriority
+    @ns = Priority.order(created_at: :desc).first
+
+    respond_to do |format|
+      format.json {render json: {title: @ns.name, content: @ns.details, nid: @ns.id} }
     end
   end
 

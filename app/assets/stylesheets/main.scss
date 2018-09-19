@@ -683,14 +683,15 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 				.priority {
 					cursor: pointer;
+					height: 7rem;
 					position: relative;
-					padding: 1.5em 15px 1.5em 1.75em;
+					padding: 1em 15px 1em 1.75em;
 					border-bottom: 1px solid rgba(255,255,255,.1);
 					background: rgba(255,255,255,0);
-					transition: all .125s;
-					-ms-transition: all .125s;
-					-moz-transition: all .125s;
-					-webkit-transition: all .125s;
+					transition: height .35s, opacity .125s, padding .35s;
+					-ms-transition: height .35s, opacity .125s, padding .35s;
+					-moz-transition: height .35s, opacity .125s, padding .35s;
+					-webkit-transition: height .35s, opacity .125s, padding .35s;
 
 					h4 {
 						font-size: 1em;
@@ -714,7 +715,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 						height: 100%;
 						background: rgba(255,255,255,.05);
 						font-size: 2.5em;
-						line-height: 2.25em;
+						line-height: 1.75em;
 						text-align: center;
 						font-weight: 700;
 						font-style: italic;
@@ -724,6 +725,14 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 				.priority:hover {
 					background: rgba(255,255,255,.075);
+				}
+
+				.priority.out {
+					height: 0;
+					overflow: hidden;
+					opacity: 0;
+					min-height: 0;
+					padding-left: 4em;
 				}
 			}
 		}
