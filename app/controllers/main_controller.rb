@@ -177,6 +177,23 @@ class MainController < ApplicationController
   end
 
 
+  ######### create a new incident
+  def newincident
+
+    @n = params[:name]
+    @l = params[:location]
+
+    @i = Incident.create(name: @n, location: @l, managers: current_user.id.to_s)
+
+    @u = current_user
+    @u.incident = @i.id
+
+    @u.save
+    @i.save
+
+  end
+
+
 
 
 

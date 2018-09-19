@@ -39,9 +39,11 @@ $(document).ready(function() {
 ////////////////////////////// dashboard fade in UI
 function showMenu() {
 
-    // show dashboard
-    // var menu = $(".menu").detach()
-    // $("#index").prepend(menu)
+    // clear dashboard
+    $(".action-element").fadeOut("fast")
+    setTimeout(function() {
+        $(".action-element").remove()
+    }, 175)
 
     // clear readout
     // $("#readout").val(" ")
@@ -69,37 +71,52 @@ function removeMenu() {
     // $("#readout").val(" ")
 
     // delay
-    var time = 100;
+    var time = 50;
 
     $(".menu .menu-item").each(function(index, el) {
 
         setTimeout( function(){
           $(el).addClass("out")
         }, time)
-        time += 50;
+        time += 30;
     })
 
     setTimeout(function() {
         $(".menu").removeClass("in").addClass("out")
-    }, 600)
+    }, 450)
+}
+
+function removeActionElement() {
+    $(".action-element").fadeOut("fast")
+    setTimeout(function() {
+        $(".action-element").remove()
+    }, 175)
 }
 
 
 //////// show the weather in the action area
 function showWeather() {
 
+    removeMenu()
+    removeActionElement()
+    
     // fade out current content
     $(".action-container .content-image").fadeOut("fast")
     
-    getForecast()
-    getNowcast()
-    getTropicalCurrentPosition()
+    setTimeout(function() {
+        getForecast()
+        getNowcast()
+        getTropicalCurrentPosition()
 
-    $(".weather-content").detach().appendTo(".action-container").fadeIn("fast")
+        $(".weather-content").detach().appendTo(".action-container").fadeIn("fast")
+    }, 550)
 }
 
 
 function showMapping() {
+    
+    removeMenu()
+    removeActionElement()
 
     $(".action-container .content-image").fadeOut("fast")
     setTimeout(function(){
@@ -118,6 +135,9 @@ function showMapping() {
 
 
 function showResources() {
+
+    removeMenu()
+    removeActionElement()
 
     $(".action-container .content-image").fadeOut("fast")
     setTimeout(function(){
@@ -302,8 +322,8 @@ function getnotification() {
         var tw = ""
         if (c.includes(":twitter")) {
             tw = '<div class="twitter"><i class="fab fa-twitter"></i></div>'
-            c = c.replace(":twitter", "").substring(0,35)
         }
+        c = c.replace(":twitter", "").substring(0,30) + "..."
 
         // add notification
         var nhtml = '<div class="notification active out" id="' + nid + '">' + tw + '<div class="info"><h4>' + t + '</h4><p>' + c + '</p></div><div class="time"><p><span>1</span>mins</p></div></div>'
@@ -336,6 +356,18 @@ function getpriority() {
 
 
 
+
+
+///// create an incident
+function newincident(name, location) {
+
+    var n = name
+    var l = location
+
+    $.get("/newincident?name=" + n + "&location=" + l, function(data) {
+        console.log(data)
+    })
+}
 
 
 // Validate filetypes
@@ -1084,6 +1116,9 @@ function dialogue(text) {
     if (preparedText.includes("priority")) {
         entities.push("priority")
     }
+    if (preparedText.includes("incident")) {
+        entities.push("incident")
+    }
 
     ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
 
@@ -1299,6 +1334,43 @@ function dialogue(text) {
 
 
 
+
+    ///////// create an incident
+
+    if (intents.indexOf("add") > -1 && entities.indexOf("incident") > -1) {
+
+        var n = ""
+        var l = ""
+
+        // separate
+        if (preparedText.includes("name is ")) {
+            n = preparedText.split("name is ")[1]
+        }
+
+        if (preparedText.includes("and the location is ")) {
+            l = n.split("and the location is ")[1]
+            n = n.split("and the location is ")[0]
+        }
+
+        // create incident
+        newincident(n,l)
+
+        setTimeout(function() {
+            machineResponse = "Incident created, would you like to add a priority?"
+            writeDialogue(machineResponse, "machine")
+            responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1.075})
+        }, 350)
+
+        //// add visual UI stuffs
+        var inchtml = '<div class="incident action-element"><h3>New Incident</h3><h2>Hurricane Florence</h2><h4><b>Incident Manager:</b>  Bryan</h4><h4><b>Location:</b>  Houston, Texas</h4></div>'
+        $(".action-container").append(inchtml)
+
+        // update user incident in status bar if empty
+        if ($(".status-bar .user-incident").text() == "") {
+            $(".status-bar .user-incident").text(n)
+            $(".status-bar .user-incident").removeClass("out")
+        }
+    }
 
 
 

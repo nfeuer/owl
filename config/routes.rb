@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   match '/checknotifications', to: 'main#checknotifications', via: 'get'
   match '/getnotification', to: 'main#getnotification', via: 'get'
   match '/getpriority', to: 'main#getpriority', via: 'get'
+  match '/newincident', to: 'main#newincident', via: 'get'
 
   # Twilio API routes
   match '/sendtext', to: 'main#sendtext', via: 'get'

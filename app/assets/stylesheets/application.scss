@@ -55,7 +55,7 @@ header#header {
 	.status-bar {
 		background: rgba(255,255,255,.001);
 		display: block;
-		padding: .75rem 0;
+		padding: 1rem 0 .5rem;
 
 		.user-incident {
 			display: inline-block;
@@ -63,14 +63,29 @@ header#header {
 			text-transform: uppercase;
 			font-weight: 700;
 			margin: 0 2em 0 0;
-			line-height: 1.25em;
-			background: rgba(255,255,50,.5);
+			line-height: 1.5em;
+			background: #d88c00;
 			padding: .15em .5em;
-			border: 2px solid rgba(180,180,20,.8);
+			border: 2px solid #d88c00;
+			overflow: hidden;
+			width: auto;
+			height: auto;
+			transition: all .25s;
+			-ms-transition: all .25s;
+			-webkit-transition: all .25s;
+			-moz-transition: all .25s;
+		}
+
+		.user-incident.out {
+			opacity: 0;
+			width: 0;
+			height: 0;
 		}
 
 		p {
 			margin: 0;
+			vertical-align: top;
+			line-height: 1.75em;
 			display: inline-block;
 		}
 
@@ -83,6 +98,10 @@ header#header {
 			text-transform: uppercase;
 			font-style: italic;
 			letter-spacing: 2px;
+		}
+
+		.status-info {
+			color: #fff;
 		}
 	}
 
