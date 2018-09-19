@@ -260,6 +260,50 @@ function getTropicalCurrentPosition() {
 
 
 
+function checknotifications() {
+
+    $.get("/checknotifications", function(data){
+
+        // get id of last notification and check if it matches last notification in panel
+        var n = $(".notifications-list .notification").first()
+        var nid = n.attr("id")
+        console.log(nid)
+        console.log(data)
+
+        if (nid != data) {
+            getnotification()
+        }
+    })
+}
+
+function getnotification() {
+
+    $.get("/getnotification", function(data){
+
+        console.log(data)
+
+        var nid = data.nid
+        var t = data.title
+        var c = data.content
+        var tw = ""
+        if (c.includes(":twitter")) {
+            tw = '<div class="twitter"><i class="fab fa-twitter"></i></div>'
+            c = c.replace(":twitter", "").substring(0,35)
+        }
+
+        // add notification
+        var nhtml = '<div class="notification active out" id="' + nid + '">' + tw + '<div class="info"><h4>' + t + '</h4><p>' + c + '</p></div><div class="time"><p><span>1</span>mins</p></div></div>'
+        $(".notifications-list").prepend(nhtml)
+        setTimeout(function() {
+            $(".notifications-list .notification.out").removeClass("out")
+        }, 100)
+    })
+}
+
+
+
+
+
 // Validate filetypes
 
 function validateFiles(inputFile) {
@@ -1135,6 +1179,7 @@ function dialogue(text) {
 
         var t = ""
         var c = ""
+        var tw = ""
 
         // separate
         if (preparedText.includes("title that says")) {
@@ -1147,12 +1192,23 @@ function dialogue(text) {
             t = t.replace("and text that says", "")
         }
 
-        // console.log("notification")
-        // console.log(t)
-        // console.log(c)
+        if (preparedText.includes("twitter")) {
+            tw = " :twitter"
+            t = t.replace("twitter", "")
+        }
 
         /// finally, create the notification
-        $.get("/createnotification?title=" + t + "&text=" + c)
+        $.get("/createnotification?title=" + t + "&text=" + c + tw)
+
+        // open notifications and update
+        $(".notifications-container").addClass("open")
+
+        setTimeout(function() {
+            checknotifications()
+        }, 250)
+        setTimeout(function() {
+            $(".notifications-container").removeClass("open")
+        }, 4000)
     }
 
 
@@ -1180,6 +1236,13 @@ function dialogue(text) {
 
         /// finally, create the notification
         $.get("/createpriority?title=" + t + "&text=" + c)
+
+        // open notifications and update
+        $(".notifications-container").addClass("open")
+
+        setTimeout(function() {
+            $(".notifications-container").removeClass("open")
+        }, 4000)
     }
 
 

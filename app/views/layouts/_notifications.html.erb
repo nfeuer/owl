@@ -4,18 +4,24 @@
 		<div class="notifications-list">
 
 			<% @notifications.each do |f| %>
-				<div class="notification">
+				<% @diff = ((Time.now - f.created_at)/60).round %>
+				<div class="notification <% if @diff < 25 %>active <% end %>" id="<%= f.id %>">
+					<% @c = f.content.to_s %>
+					<% if @c.include?(" :twitter") %>
+						<% @c = @c.gsub(" :twitter") %>
+						<div class="twitter"><i class="fab fa-twitter"></i></div>
+					<% end %>
 					<div class="info">
 						<h4><%= f.title.to_s %></h4>
 						<p><%= truncate(f.content.to_s, length: 35) %></p>
 					</div>
 					<div class="time">
-						<p><span>22</span>mins</p>
+						<p><span><%= @diff %></span>mins</p>
 					</div>
 				</div>
 			<% end %>
 
-			<div class="notification active">
+			<!-- <div class="notification active">
 				<div class="info">
 					<h4>Medical Evac Set</h4>
 					<p>Evacuation corridor has been est...</p>
@@ -68,7 +74,7 @@
 				<div class="time">
 					<p><span>72</span>mins</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div class="priorities">

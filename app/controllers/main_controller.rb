@@ -14,7 +14,7 @@ class MainController < ApplicationController
       redirect_to "/signin"
     end
 
-    @notifications = Notification.all
+    @notifications = Notification.all.order(created_at: :desc).limit(7)
   end
 
   def search
@@ -129,6 +129,7 @@ class MainController < ApplicationController
 
     @title = params[:title]
     @text = params[:text]
+    @twitter = params[:twitter]
     @n = Notification.create(title: @title, content: @text)
     @n.save
 
@@ -142,6 +143,23 @@ class MainController < ApplicationController
     @p.save
 
   end
+
+  def checknotifications
+    @ns = Notification.order(created_at: :desc).first
+
+    respond_to do |format|
+      format.text { render plain: @ns.id }
+    end
+  end
+
+  def getnotification
+    @ns = Notification.order(created_at: :desc).first
+
+    respond_to do |format|
+      format.json {render json: {title: @ns.title, content: @ns.content, nid: @ns.id} }
+    end
+  end
+
 
 
 
