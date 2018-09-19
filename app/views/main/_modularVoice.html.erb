@@ -92,6 +92,7 @@
                     case "SpeechHypothesisEvent" :
                         UpdateRecognizedHypothesis(event.Result.Text, false);
                         console.log(JSON.stringify(event.Result)); // check console for other information in result
+                        output = event.Result.Text
                         break;
                     case "SpeechFragmentEvent" :
                         UpdateRecognizedHypothesis(event.Result.Text, true);
@@ -111,8 +112,6 @@
                     case "RecognitionEndedEvent" :
                         OnComplete();
                         UpdateStatus("Idle");
-
-                        var output = $("#readout").val()
 
                         dialogue(output)
 
