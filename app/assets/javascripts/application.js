@@ -1362,7 +1362,7 @@ function dialogue(text) {
         }, 350)
 
         //// add visual UI stuffs
-        var inchtml = '<div class="incident action-element"><h3>New Incident</h3><h2>Hurricane Florence</h2><h4><b>Incident Manager:</b>  Bryan</h4><h4><b>Location:</b>  Houston, Texas</h4></div>'
+        var inchtml = '<div class="incident action-element"><h3>New Incident</h3><h2>Hurricane Florence</h2><h4><b>Incident Manager:</b>  Bryan</h4><h4><b>Location:</b>  Greenville, North Carolina</h4></div>'
         $(".action-container").append(inchtml)
 
         // update user incident in status bar if empty
