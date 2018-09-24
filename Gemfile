@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.4.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -43,3 +43,4 @@ gem 'mini_magick'
 gem 'twilio-ruby'
 gem "fog"
 gem 'httparty'
+gem 'cf'

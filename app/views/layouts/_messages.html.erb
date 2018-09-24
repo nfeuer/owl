@@ -1,0 +1,107 @@
+<div id="messages">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="messages-container">
+					<div class="message-window out">
+						<div class="info"><div class="back"><i class="fas fa-chevron-left"></i></div><div class="friend">Username</div></div>
+						<div class="messages-content"></div>
+						<div class="message-input">
+							<%= render 'messages/form' %>
+						</div>
+					</div>
+					<div class="message-list">
+						<% @friendArr = [] %>
+						<% @messages.each do |m| %>
+							<% if current_user.id != m.sender %> <% @friend = m.sender %> <% elsif current_user.id != m.recipient %> <% @friend = m.recipient %> <% elsif current_user.id == m.sender && current_user.id == m.recipient %> <% @friend = m.sender %> <% end %>
+							
+							<% if User.exists?(id: @friend) %> <% @friendname = User.find(@friend).username %> <% else %> <% @friendname = "No user" %> <% end %>
+
+							<% unless @friendArr.include?(@friend) %>
+								<div class="message <% if m.read == false && m.recipient == current_user.id %>unread<% end %>" s='<%= m.sender %>' r='<%= m.recipient %>' mid='<%= m.id %>' friend="<%= @friend %>"><%= @friendname %> <span><%= truncate(m.message, length: 75) %></span> <%= link_to "X", m, method: :delete, data: { confirm: "Are you sure you want to delete this message?" }, class: "delete-btn" %></div>
+							<% end %>
+
+							<% @friendArr.push(@friend) %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	var messagesResponse = ""
+	var currentUser = "<%= current_user.id %>"
+
+	$(".message-list .message").on("click", function() {
+
+		// clear messages
+		$(".message-window .message").remove()
+
+		// if this is unread, make it read now that we've read it!
+		if($(this).hasClass("unread")) {
+			$(this).removeClass("unread")
+			$.get("/setmessageread?mid=" + $(this).attr("mid"))
+		}
+
+		var s = $(this).attr("s")
+		var r = $(this).attr("r")
+		var friend = $(this).attr("friend")
+
+		// get the username we are communicating with
+		$.get("/getusername?id=" + friend, function(data){
+			$(".message-window .info .friend").text(data)
+		})
+
+		// set our message create form to the proper recipient
+		$("select#message_recipient").val(friend)
+
+		// get messages from sender and recipient
+		$.get('/getdirectmessages?recipient=' + r + '&sender=' + s, function() {
+
+			// get thread from messages-response html and convert to json for preparation
+			var msgArray = JSON.parse($(".message-window .messages-response").text())
+			
+			// take messages response JSON and add to window
+			for (var i = 0; i <= msgArray.length - 1; i++) {
+				var mdirection = ""
+				if (msgArray[i][0] == currentUser) {
+					mdirection = "incoming"
+				} else {
+					mdirection = "outgoing"
+				}
+				var html = '<div class="message ' + mdirection + '">' + msgArray[i][1] + '</div>'
+				$(".message-window .messages-content").append(html)
+			}
+
+			// clear messages response
+			$(".messages-response").remove()
+
+			// fade in UI to show the messages
+			$(".message-window").removeClass("out")
+			$(".message-list").addClass("out")
+
+			// and last, scroll dialogue to where we're at
+			$('.messages-content').animate({
+				scrollTop: $(".messages-content").prop("scrollHeight")
+			}, 650);
+		})
+	})
+
+	// if message list back button clicked, go back to list
+	$(".message-window .back").on("click", function() {
+		// fade in UI to show the message list
+		$(".message-window").addClass("out")
+		$(".message-list").removeClass("out")
+	})
+
+		
+
+</script>

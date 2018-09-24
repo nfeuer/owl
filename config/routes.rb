@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'priorities/index'
 
   get 'main/index'
-  root 'main#home'
+  root 'main#landing'
 
   # dynamic resources
   resources :messages
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # custom html pages
   match '/home', to: 'main#home', via: 'get'
+  match '/landing', to: 'main#landing', via: 'get'
   match '/eye', to: 'main#eye', via: 'get'
   match '/test', to: 'main#test', via: 'get'
   match '/search', to: 'main#search', via: 'get'

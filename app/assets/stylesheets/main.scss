@@ -275,6 +275,19 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 }
 
 
+#landing {
+
+	.banner {
+		padding: 8em 0;
+	}
+
+	.section {
+		padding: 6em 0;
+		border-bottom: 2px solid #ddd;
+	}
+}
+
+
 #civilian {
 	background: $bg;
 	min-height: 100vh;
