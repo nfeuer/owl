@@ -276,14 +276,157 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 
 #landing {
+	background: $bg;
+
+	h1 {
+		font-size: 7em;
+		line-height: 1.15em;
+		margin: 0 0 1.5rem;
+	}
+
+	h2 {
+		font-size: 3em;
+		line-height: 1.25em;
+		margin: 0 0 1.5rem;
+	}
+
+	h3 {
+		font-size: 1.75em;
+		line-height: 1.5em;
+		margin: 0 0 1.5rem;
+		font-weight: 300;
+	}
+
+	h4 {
+		text-align: center;
+		display: block;
+		margin: 2rem 0 2rem;
+		padding: .75em 0;
+		border-top: 1px solid rgba(255,255,255,.2);
+		border-bottom: 1px solid rgba(255,255,255,.2);
+	}
+
+	p {
+		font-size: 1.25em;
+		line-height: 1.5em;
+		font-weight: 300;
+		margin: 0 0 1.5rem;
+	}
 
 	.banner {
-		padding: 8em 0;
+		padding: 14em 0 40vh;
+		color: #fff;
+		position: relative;
+		border-bottom: 3px solid #0a1723;
+		background: #000;
+		box-shadow: 0 0 25px rgba(0,0,0,.5);
+		/*background: url('/assets/index_banner.jpg');
+		background-size: cover;
+		background-position: center top;
+		background-repeat: no-repeat;*/
+
+		h1 {
+			position: relative;
+			z-index: 5;
+		}
+
+		h2 {
+			position: relative;
+			z-index: 5;
+		}
+
+		h3 {
+			position: relative;
+			z-index: 5;
+		}
+
+		p {
+			position: relative;
+			z-index: 5;
+		}
+
+		iframe {
+			position: relative;
+			z-index: 5;
+			border: 6px solid rgba(0,0,0,.75);
+		}
+
+		img.bg {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			display: block;
+			z-index: 1;
+		}
 	}
 
 	.section {
 		padding: 6em 0;
-		border-bottom: 2px solid #ddd;
+		border-bottom: 3px solid rgba(255,255,255,.05);
+		color: #fff;
+
+		img {
+			display: block;
+			width: 100%;
+			border: 3px solid rgba(255,255,255,.15);
+		}
+
+		h2 {
+			 font-weight: 400;
+			 opacity: .6;
+		}
+
+		a {
+			opacity: .75;
+			font-size: 1.25em;
+			line-height: 1.5em;
+			font-weight: 600;
+			display: inline-block;
+			padding: .5em 1em;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,.5);
+			margin: 0 0 1.5rem;
+			color: #fff;
+			text-decoration: none;
+			transition: all .15s;
+			-ms-transition: all .15s;
+			-moz-transition: all .15s;
+			-webkit-transition: all .15s;
+
+			i,svg {
+				color: #fff;
+				display: inline-block;
+				margin-left: .25em;
+				vertical-align: middle;
+				transition: all .15s;
+				-ms-transition: all .15s;
+				-moz-transition: all .15s;
+				-webkit-transition: all .15s;
+			}
+		}
+
+		a:hover {
+			opacity: 1;
+			background: #fff;
+			color: $bg;
+
+			i,svg {
+				color: $bg;
+				margin-left: .75em;
+			}
+		}
+	}
+
+	.section.problem {
+		text-align: center;
+
+		h2 {
+			 text-transform: uppercase;
+			 font-weight: 400;
+			 letter-spacing: 4px;
+			 opacity: .6;
+		}
 	}
 }
 
