@@ -1,0 +1,7 @@
+---
+applications:
+- name: project-owl-ruby-10
+  memory: 512M
+  instances: 1
+  random-route: true
+  command: bundle exec rake db:create && bundle exec rake db:migrate
