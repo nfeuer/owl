@@ -44,3 +44,4 @@ gem 'twilio-ruby'
 gem "fog"
 gem 'httparty'
 gem 'cf'
+gem 'net-telnet'
