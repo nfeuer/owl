@@ -362,17 +362,23 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.section {
-		padding: 6em 0;
-		border-bottom: 3px solid rgba(255,255,255,.05);
+		padding: 8em 0;
 		color: #fff;
+		position: relative;
 
 		img {
+
+		}
+
+		img.block {
+			position: relative;
 			display: block;
 			width: 100%;
-			border: 3px solid rgba(255,255,255,.15);
+			border: 1px solid rgba(255,255,255,.15);
 		}
 
 		h2 {
+			font-size: 2.25em;
 			 font-weight: 400;
 			 opacity: .6;
 		}
@@ -427,6 +433,29 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			 letter-spacing: 4px;
 			 opacity: .6;
 		}
+
+		.challenge {
+			padding-bottom: 2em;
+			margin-bottom: 3em;
+			border-bottom: 1px solid rgba(255,255,255,.2);
+		}
+	}
+
+	.section.background {
+		background: rgba(255,255,255,.025);
+
+		.content {
+			padding-top: 1em;
+			padding-bottom: 1em;
+		}
+	}
+
+	.section.hardware {
+
+	}
+
+	.section.open {
+		background: rgba(255,255,255,.025);
 	}
 }
 

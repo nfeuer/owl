@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   match '/clusterdata', to: 'main#clusterdata', via: 'get'
   match '/captive', to: 'main#captive', via: 'get'
   match '/civilian', to: 'main#civilian', via: 'get'
+  match '/owldetails', to: 'main#owldetails', via: 'get'
 
   
   ########## API ROUTES
