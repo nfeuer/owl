@@ -302,8 +302,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		display: block;
 		margin: 2rem 0 2rem;
 		padding: .75em 0;
-		border-top: 1px solid rgba(255,255,255,.2);
-		border-bottom: 1px solid rgba(255,255,255,.2);
+		border-top: 1px solid rgba(255,255,255,.25);
+		border-bottom: 1px solid rgba(255,255,255,.25);
 	}
 
 	p {
@@ -314,10 +314,11 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.banner {
-		padding: 14em 0 40vh;
+		padding: 10vh 0 40vh;
 		color: #fff;
 		position: relative;
 		border-bottom: 3px solid #0a1723;
+		top: 0;
 		background: #000;
 		box-shadow: 0 0 25px rgba(0,0,0,.5);
 		/*background: url('/assets/index_banner.jpg');
@@ -328,6 +329,14 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		h1 {
 			position: relative;
 			z-index: 5;
+			font-weight: 700;
+
+			img.icon {
+				display: inline-block;
+				vertical-align: bottom;
+				height: 1em;
+				margin-right: .2em;
+			}
 		}
 
 		h2 {
@@ -340,9 +349,50 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			z-index: 5;
 		}
 
+		h4 {
+			opacity: .75;
+		}
+
+		a.link {
+			display: inline-block;
+			vertical-align: top;
+			cursor: pointer;
+			padding: .35em 1.5em;
+			font-size: 1.25em;
+			line-height: 1.5em;
+			text-decoration: none;
+			border: 2px solid #fff;
+			min-width: 10em;
+			text-align: center;
+			margin: 0 .5em 2.5rem;
+			color: #fff;
+			font-weight: 400;
+			transition: all .1s;
+			-ms-transition: all .1s;
+			-moz-transition: all .1s;
+			-webkit-transition: all .1s;
+		}
+
+		a.link:hover {
+			background: #fff;
+			color: #111;
+		}
+
 		p {
 			position: relative;
 			z-index: 5;
+		}
+
+		.intro {
+			text-align: center;
+		}
+
+		.content {
+			position: relative;
+			top: 0;
+			opacity: 1;
+			z-index: 100;
+			min-height: 25em;
 		}
 
 		iframe {
@@ -380,7 +430,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		h2 {
 			font-size: 2.25em;
 			 font-weight: 400;
-			 opacity: .6;
+			 opacity: .75;
 		}
 
 		a {
@@ -431,13 +481,30 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			 text-transform: uppercase;
 			 font-weight: 400;
 			 letter-spacing: 4px;
-			 opacity: .6;
+			 margin-bottom: 2.5rem;
 		}
 
 		.challenge {
-			padding-bottom: 2em;
-			margin-bottom: 3em;
+			padding-bottom: 3em;
+			margin-bottom: 4em;
 			border-bottom: 1px solid rgba(255,255,255,.2);
+		}
+
+		.solution {
+
+			span {
+				font-size: 3em;
+				font-weight: 700;
+				margin-bottom: 2.5rem;
+				display: block;
+			}
+
+			img.icon {
+				display: inline-block;
+				vertical-align: middle;
+				height: 1.25em;
+				margin-right: .2em;
+			}
 		}
 	}
 
@@ -447,11 +514,34 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		.content {
 			padding-top: 1em;
 			padding-bottom: 1em;
+
+			h2 {
+				opacity: 1;
+			}
+
+			img.icon {
+				display: inline-block;
+				vertical-align: middle;
+				height: 1.15em;
+				margin-right: .2em;
+			}
+
+			p {
+				opacity: .75;
+			}
 		}
 	}
 
 	.section.hardware {
 
+		img {
+			display: block;
+			width: 100%;
+		}
+
+		.content {
+			padding-top: 3em;
+		}
 	}
 
 	.section.open {

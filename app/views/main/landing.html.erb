@@ -1,20 +1,24 @@
 <div id="landing">
 	<div class="banner">
-		<div class="container">
+		<div class="container content" data-0="top:0px; opacity: 1;" data-700="top: 200px; opacity: 0;">
 			<div class="row">
-				<div class="col-sm-6">
-					<h1>OWL</h1>
-					<h3><b>O</b>rganization, <b>W</b>hereabouts, and <b>L</b>ogistics for Disaster Preparation and Recovery</h3>
+				<div class="col-sm-10 col-sm-offset-1 intro">
+					<h1><img class="icon" src="/assets/owl_icon_light.png" />OWL</h1>
+					<h3>Organization, Whereabouts, and Logistics for Disasters</h3>
+					<a class="link problem">Learn More</a>
+					<a href="#" class="link">Create Account</a>
 				</div>
-				<div class="col-sm-5 col-sm-offset-1">
-					<h4>OWL Overview Video (7 minutes)</h4>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<h4>OWL Software Demo (7 minutes)</h4>
 					<iframe width="100%" height="250" src="https://www.youtube.com/embed/HPtwrfv-gxs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</div>
 			</div>
 		</div>
 		<img class="bg" src="/assets/index_banner.jpg" />
 	</div>
-	<div class="section problem">
+	<div class="section problem" id="problem">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
@@ -23,8 +27,10 @@
 						<h3>Disaster preparation, management, and recovery is a complicated, high-pressure, and time-constrained endeavor.</h3>
 					</div>
 					<h2>Our Solution</h2>
-					<div class="soluation">Clusterduck + OWL</div>
-					<h3>A hardware and software disaster management solution that brings analytics, cummincative, and organizational capabilities to afflicted populations.</h3>
+					<div class="solution">
+						<span>Clusterduck + <img class="icon" src="/assets/owl_icon_light.png" />OWL</span>
+						<h3>A hardware and software disaster management solution that brings analytics, communications, and organizational capabilities to afflicted populations to streamline disaster preparation, management, and recovery efforts.</h3>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,7 +42,7 @@
 					<img class="block" src="/assets/landing_menu.jpg" />
 				</div>
 				<div class="col-sm-5 col-sm-offset-1 content">
-					<h2>OWL Incident Command</h2>
+					<h2><img class="icon" src="/assets/owl_icon_light.png" /><b>OWL</b> Incident Command</h2>
 					<p>Manage incidents seamlessly regardless of their size, cause, or location.<br><Br>OWL provides capabilities to accumulate and analyze data, understand and predict weather patterns, and manage resources before, during, and after a disaster --- just by talking to it.</p>
 					<a href="/owldetails">More About OWL <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -59,13 +65,13 @@
 	<div class="section hardware">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-5 content">
 					<h2>Clusterduck Mobile Network</h2>
-					<p>In the worst disasters, cellular and electrical networks are kicked offline. Through the Clusterduck mobile network, OWL incident management can be deployed to the worst disasters.</p>
+					<p>In the worst disasters, cellular and electrical networks might be offline.<br><br>The Clusterduck mobile network is made of small, mobile IoT devices that collectively provide an ad-hoc internet network. Through the Clusterduck network, OWL incident management can be deployed to the worst disasters.</p>
 					<a href="/clusterduck">More About Clusterduck <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
-				<div class="col-sm-6">
-					<img class="block" src="/assets/clusterduck_design.png" />
+				<div class="col-sm-6 col-sm-offset-1">
+					<img src="/assets/clusterduck_overview.png" />
 				</div>
 			</div>
 		</div>
@@ -78,10 +84,45 @@
 				</div>
 				<div class="col-sm-6">
 					<h2>Open Source Technology</h2>
-					<p>Want to contribute to the OWL project or the Clusterduck network?  Create experiences for the OWL incident management system or build on top of the Clusterduck base hardware.</p>
-					<a href="/opensource">Learn More <i class="fas fa-arrow-circle-right"></i></a>
+					<p>Want to contribute to the OWL software or the Clusterduck mobile network?  Create new experiences for the OWL incident management system or build on top of the Clusterduck base hardware.</p>
+					<a href="/opensource">Learn How To Contribute <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="content">
+						<a href="">About Owl</a>
+						<a href="">Clusterduck</a>
+						<a href="">About Owl</a>
+						<a href="">Clusterduck</a>
+						<a href="">About Owl</a>
+						<a href="">Clusterduck</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 </div>
+
+
+
+
+<script type="text/javascript">
+	var s = skrollr.init();
+
+
+
+    // Smooth scrolling
+
+    $(".link.problem").on("click", function() {
+    	$([document.documentElement, document.body]).animate({
+	        scrollTop: $("#problem").offset().top
+	    }, 780);
+    })
+</script>
+
+
