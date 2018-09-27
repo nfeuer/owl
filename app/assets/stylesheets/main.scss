@@ -1233,6 +1233,16 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 }
 
 
+#civdata {
+
+	#map {
+		height: 100vh;
+		width: 100vw;
+	}
+}
+
+
+
 #eye {
 	position: relative;
 	z-index: 50;

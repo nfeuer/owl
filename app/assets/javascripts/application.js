@@ -357,6 +357,40 @@ function getpriority() {
 
 
 
+//////// geocode an address
+
+function getLocation(g) {
+
+    $.get("/getlocation?location=" + g, function(data){
+
+        console.log(data)
+
+        // append to raw response
+        var raw = $(".data-response")
+        raw.append(data)
+
+        // grab the raw response and turn into json
+        var jResponse = JSON.parse(raw.html())
+        console.log(jResponse)
+
+        // coordinates
+        var lat = jResponse.location.latitude[0]
+        var lon = jResponse.location.longitude[0]
+        console.log(lat)
+        console.log(lon)
+
+        //// unpack the json
+        
+
+        // append to visible response section
+        // p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
+    })
+}
+
+
+
+
+
 
 ///// create an incident
 function newincident(name, location) {
@@ -727,6 +761,13 @@ function mapsRequest(destination, dName, dLat, dLng, origin, oName, oLat, oLng, 
         position: {lat: oLat, lng: oLng},
         map: map,
             label: {text: oName, color: "white", fontSize: "28px", fontWeight: "300"},
+        icon: cyanDotTop
+    });
+
+    new google.maps.Marker({
+        position: {lat: 40.67, lng: -73.99},
+        map: map,
+            label: {text: "AYO", color: "white", fontSize: "28px", fontWeight: "300"},
         icon: cyanDotTop
     });
 

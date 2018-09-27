@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   match '/civilian', to: 'main#civilian', via: 'get'
   match '/owldetails', to: 'main#owldetails', via: 'get'
   match '/opensource', to: 'main#opensource', via: 'get'
+  match '/civdata', to: 'main#civdata', via: 'get'
 
   
   ########## API ROUTES
