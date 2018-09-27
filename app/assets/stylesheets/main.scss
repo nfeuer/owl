@@ -1239,6 +1239,49 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		height: 100vh;
 		width: 100vw;
 	}
+
+	.console {
+		z-index: 150;
+		opacity: 0;
+		padding: 1em;
+		position: fixed;
+		top: 1.5em;
+		left: 1.5em;
+		width: 25em;
+		border: 1px solid rgba(255,255,255,.85);
+		background: rgba(0,0,0,.85);
+		-ms-transition: all .2s;
+		-moz-transition: all .2s;
+		-webkit-transition: all .2s;
+		transition: all .2s;
+
+		h3 {
+			color: #fff;
+			font-size: 3em;
+			font-weight: 700;
+			margin: 0 0 .75em;
+			line-height: 1.25em;
+		}
+
+		p {
+			font-size: 1.25em;
+			font-weight: 300;
+			color: #fff;
+			margin: 0 0 .75em;
+			line-height: 1.5em;
+			padding-bottom: .75em;
+			border-bottom: 1px solid rgba(255,255,255,.25);
+		}
+
+		p:last-child {
+			border: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	.console.in {
+		opacity: 1;
+	}
 }
 
 

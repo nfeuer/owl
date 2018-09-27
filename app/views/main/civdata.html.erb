@@ -1,6 +1,9 @@
 <div id="civdata">
 	<div id="maps">
 		<div id="map"></div>
+		<div class="console">
+			<h3>Fuel/Gas</h3>
+		</div>
 	</div>
 </div>
 
@@ -29,6 +32,12 @@
     //     $("#mapOverlay").fadeOut("fast")
     //     $("#readout").val(" ")
     // }, 600)
+
+    function addConsole() {
+
+    }
+
+
     $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initCivMap', function() { });
 
     var styles = [
@@ -131,7 +140,7 @@
 	    "elementType": "labels.text.stroke",
 	    "stylers": [
 	      {
-	        "color": "#ffffff"
+	        "color": "#333333"
 	      }
 	    ]
 	  },
@@ -224,6 +233,7 @@
 		var map = new google.maps.Map(
 		  document.getElementById('map'), {
 		  	zoom: 12,
+    		disableDefaultUI: true,
 		  	center: {lat: 35.613, lng: -77.366},
 		  	styles: styles
 		  });
@@ -286,8 +296,23 @@
 			});
 
 			marker.addListener('click', function() {
-	          console.log("Civilian!!")
+				var e = $(this)
+				$(".console h3").fadeOut("fast")
+				$(".console p").fadeOut("fast")
+				setTimeout(function() {
+					$(".console h3").remove()
+					$(".console p").remove()
+		        	console.log(e[0])
+					var l = e[0].label.text
+					var lat = e[0].position.lat()
+					var lng = e[0].position.lng()
+		        	$(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p>").addClass("in")
+				}, 160)
 	        });
+
+	        marker.addListener('mouseover', function() {
+			    marker.setIcon(redDot)
+			});
 		}
 
 		/// make a few ems
@@ -307,7 +332,16 @@
 			});
 
 			marker.addListener('click', function() {
-	          console.log("EMS!!")
+				var e = $(this)
+				$(".console h3").fadeOut("fast")
+				setTimeout(function() {
+					$(".console h3").remove()
+		        	console.log(e[0])
+					var l = e[0].label.text
+					var lat = e[0].position.lat()
+					var lng = e[0].position.lng()
+		        	$(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p>").addClass("in")
+				}, 160)
 	        });
 		}
 
@@ -328,7 +362,16 @@
 			});
 
 			marker.addListener('click', function() {
-	          console.log("FOOD!!")
+				var e = $(this)
+				$(".console h3").fadeOut("fast")
+				setTimeout(function() {
+					$(".console h3").remove()
+		        	console.log(e[0])
+					var l = e[0].label.text
+					var lat = e[0].position.lat()
+					var lng = e[0].position.lng()
+		        	$(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p>").addClass("in")
+				}, 160)
 	        });
 		}
 
@@ -349,7 +392,16 @@
 			});
 
 			marker.addListener('click', function() {
-	          console.log("Fuel/Gas!!")
+				var e = $(this)
+				$(".console h3").fadeOut("fast")
+				setTimeout(function() {
+					$(".console h3").remove()
+		        	console.log(e[0])
+					var l = e[0].label.text
+					var lat = e[0].position.lat()
+					var lng = e[0].position.lng()
+		        	$(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p>").addClass("in")
+				}, 160)
 	        });
 		}
 
