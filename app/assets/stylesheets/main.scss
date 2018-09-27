@@ -629,6 +629,15 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			margin-top: 4em;
 		}
 	}
+
+	.section.analytics {
+		background: url('/assets/owl_civiliandata.jpg');
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: left top;
+		border-top: 4px solid rgba(0,0,0,.5);
+		border-bottom: 4px solid rgba(0,0,0,.5);
+	}
 }
 
 #landing.opensource {
