@@ -170,6 +170,19 @@ header#header {
 }
 
 
+header#header.landingheader {
+	background: rgba(0,0,0,.75);
+
+	a {
+		cursor: pointer;
+	}
+
+	a:hover  {
+		background: rgba(255,255,255,.1);
+	}
+}
+
+
 .data-response {
 	display: none;
 }

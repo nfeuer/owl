@@ -7,20 +7,21 @@
 				</div>
 			</div>
 		</div>
+		<canvas class="background"></canvas>
 	</div>
 	<div class="section duckintro">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1 content">
+				<div class="col-sm-12 col-sm-offset-0 content">
 					<h2>The Ducklink</h2>
-					<p>A Ducklink, or simply a "Duck", is a small WiFi-enabled IoT device in a 3D printend enclosure.  This Ducklink can connect to consumer electronics such as a phone or a laptop. The Ducklink connects to Mamaduck (the central server) to create a Clusterduck network.</p>
+					<p>A Ducklink, or simply a "Duck", is a small WiFi-enabled IoT device in a 3D printend enclosure.  A Ducklink can connect through WiFi to consumer electronics such as a phone or a laptop. Ducklinks connect to Mamaduck (the central server IoT device) to create a Clusterduck network.</p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5 col-sm-offset-1">
+				<div class="col-sm-6 col-sm-offset-0">
 					<img class="block" src="/assets/clusterduck_photo01.jpg" />
 				</div>
-				<div class="col-sm-5">
+				<div class="col-sm-6">
 					<img class="block" src="/assets/clusterduck_photo03.jpg" />
 				</div>
 			</div>
@@ -98,4 +99,19 @@
 		}
 	})
 
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+<script type="text/javascript">
+	
+	$(window).load(function() {
+		var particles = Particles.init({
+			selector: '.background',
+		  	color: '#292929',
+		  	connectParticles: true,
+		  	sizeVariations: 5,
+		  	maxParticles: 150,
+		  	speed: .3
+		});
+	});
 </script>

@@ -3,17 +3,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1>OWL Details</h1>
+					<h1><img class="icon" src="/assets/owl_icon_light.png" />OWL <span>Incident Management</span></h1>
 				</div>
 			</div>
 		</div>
+		<canvas class="background"></canvas>
 	</div>
 	<div class="section">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-5 content">
 					<h2>Fast, Simple Incident Management</h2>
-					<p>OWL is built to provide first responders a simple process for managing a disaster.<br><br>Start by creating an incident (example: Hurricane Florence) and then manage the incident by establishing a leadership structure, communicating with relevant individuals, updating resource allocations and distributing status notifications to the public.</p>
+					<p>OWL is built to provide first responders a simple experience for managing a disaster.<br><br>Start by creating an incident (Hurricane Florence) available to all on the OWL platform.  Then manage the incident by establishing a leadership structure, communicating with relevant individuals, updating resource allocations and distributing status notifications to the public.</p>
 				</div>
 				<div class="col-sm-6 col-sm-offset-1">
 					<img class="block" src="/assets/owl_screenshot01.jpg" />
@@ -27,7 +28,7 @@
 				<div class="col-sm-7"></div>
 				<div class="col-sm-4 col-sm-offset-1 content">
 					<h2>Data Analytics</h2>
-					<p>Accumulate data in OWL to paint a clear operating picture of an incident.<br><br>Data may come from civilians on the Clusterduck network, or from first responders operating on the management platform, or from over a dozen APIs or open data sets from the Weather Company, the Red Cross, FEMA, and others.</p>
+					<p>OWL accumulates data to paint a clear operating picture of an incident.<br><br>Data may come from civilians on the Clusterduck network, first responders operating on the management platform, or over a dozen APIs and open data sets from the Weather Company, the Red Cross, FEMA, and others.</p>
 				</div>
 			</div>
 		</div>
@@ -35,18 +36,18 @@
 	<div class="section conversational">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3 col-sm-offset-0">
-					<img class="block" src="/assets/owl_dialogue_example01.jpg" />
-				</div>
-				<div class="col-sm-3 col-sm-offset-1">
-					<img class="block" src="/assets/owl_dialogue_example02.jpg" />
-				</div>
 				<div class="col-sm-4 col-sm-offset-1 content">
 					<h2>Just Talk to OWL</h2>
-					<p>Leverage all of OWL's incident management capabilities just by talking to it.  The conversational interface provides an intuitive experience critical for environments where it is hard to think straight; for the tired and stressed first responders.</p>
+					<p>Leverage all of OWL's incident management capabilities just by talking to it.<br><br>The conversational interface provides an intuitive experience critical for environments where it is hard to think straight; for the tired and stressed first responders.</p>
 					<br><br>
 					<h2>Voice + Visuals</h2>
-					<p>Within OWL are traditional visual user interfaces to provide the most intuitive possible experience for individuals who want to spend time recovering from disasters, not playing around on a laptop.</p>
+					<p>OWL combines a conversational experience with traditional visual user interfaces to provide a complete, effortless solution.</p>
+				</div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<img class="block" src="/assets/owl_dialogue_example01.jpg" />
+				</div>
+				<div class="col-sm-3 col-sm-offset-0">
+					<img class="block" src="/assets/owl_dialogue_example02.jpg" />
 				</div>
 			</div>
 		</div>
@@ -59,11 +60,11 @@
 				</div>
 				<div class="col-lg-5 col-lg-offset-1  col-md-7 col-md-offset-1 content">
 					<h2>OWL is for Civilians, Too</h2>
-					<p>As a civilian afflicted by a disaster, you are able to log in to OWL and upload basic data about your situation, location, and needs.  Additionally take photographs of your posessions and upload to document damage if needed later for insurance claims.</p>
+					<p>Civilians affected by disasters may log in to OWL and add information about their health, location, and needs.</p>
 					<br><br>
-					<p><em>Mapping</em><br>Use mapping to get an overview of your geographic area and nearby supplies.</p><br>
-					<p><em>Claims and Photos</em><br>Upload photos from your phone of damage to your home, property, or anything else.  Use OWL to store this data and save for insurance claims.</p><br>
-					<p><em>Emergency</em><br>Connect to emergency services in the area if you are in urgent need.</p>
+					<p><em>Mapping</em><br>Use mapping to get an overview of the nearby geographic area and supplies.</p><br>
+					<p><em>Claims and Photos</em><br>Upload photos of damage to a home, property, or anything else.  Use OWL to store this data and save for insurance claims.</p><br>
+					<p><em>Emergency</em><br>Connect to emergency services in the area if in urgent need.</p>
 				</div>
 			</div>
 		</div>
@@ -72,8 +73,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-5 content">
-					<h2>Access Anywhere</h2>
-					<p>Access OWL through a web browser on a laptop or smartphone.  Alternatively, OWL can be accessed by phone call or SMS text message.  Coming to other messaging channels soon.</p>
+					<h2>Talk to OWL Anywhere</h2>
+					<p>Access the OWL cloud software through a web browser on a laptop or smartphone.<br><br>Alternatively, as a conversational agent OWL can be accessed by phone call or SMS text message.  Coming to other messaging channels soon.</p>
 				</div>
 				<div class="col-sm-6 col-sm-offset-1">
 					<img class="block" src="/assets/landing_menu.jpg" />
@@ -83,3 +84,18 @@
 	</div>
 	<%= render 'layouts/footer' %>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+<script type="text/javascript">
+	
+	$(window).load(function() {
+		var particles = Particles.init({
+			selector: '.background',
+		  	color: '#292929',
+		  	connectParticles: true,
+		  	sizeVariations: 5,
+		  	maxParticles: 150,
+		  	speed: .3
+		});
+	});
+</script>
