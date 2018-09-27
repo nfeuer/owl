@@ -36,14 +36,14 @@
 			<%= f.submit "Submit", class: "button submit" %>
 		<% end %>
 		<div class="all-claims">
-			<% Claim.all.each do |f| %>
-				<div class="row">
+			<div class="row">
+				<% Claim.all.each do |f| %>
 					<div class="col-xs-4 claim-item">
 						<img src="<%= f.file.to_s %>" />
 						<p><%= f.created_at.strftime("%b %d, %Y") %></p>
 					</div>
-				</div>
-			<% end %>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>
