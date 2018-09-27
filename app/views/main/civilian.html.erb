@@ -36,14 +36,18 @@
 			<%= f.submit "Submit", class: "button submit" %>
 		<% end %>
 		<div class="all-claims">
-			<div class="row">
-				<% Claim.all.each do |f| %>
-					<div class="col-xs-4 claim-item">
-						<img src="<%= f.file.to_s %>" />
-						<p><%= f.created_at.strftime("%b %d, %Y") %></p>
+			<% Claim.all.each_with_index do |f,index| %>
+				<% if index == 0 || index == 3 || index == 6 %>
+					<div class="row">
+				<% end %>
+				<div class="col-xs-4 claim-item">
+					<img src="<%= f.file.to_s %>" />
+					<p><%= f.created_at.strftime("%b %d, %Y") %></p>
+				</div>
+				<% if index == 2 || index == 5 %>
 					</div>
 				<% end %>
-			</div>
+			<% end %>
 		</div>
 	</div>
 </div>
