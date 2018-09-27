@@ -427,6 +427,13 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			border: 1px solid rgba(255,255,255,.15);
 		}
 
+		img.chart {
+			position: relative;
+			display: block;
+			width: 100%;
+			margin: 0 0 6em;
+		}
+
 		h2 {
 			font-size: 2.25em;
 			 font-weight: 400;
@@ -587,6 +594,41 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		background: rgba(255,255,255,.025);
 
 	}
+
+	.section.civilians {
+
+		img.block {
+			border: 0;
+		}
+
+		.content {
+			padding-top: 2em;
+		}
+	}
+
+	.section.duckintro {
+
+		.content {
+			padding-top: 3em;
+			padding-bottom: 2em;
+		}
+	}
+
+	.section.charts {
+
+		h4 {
+			margin-top: 2em;
+			border-top: 0;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			opacity: .7;
+			font-size: 1em;
+		}
+
+		img.chart.mamarange {
+			margin-top: 4em;
+		}
+	}
 }
 
 #landing.opensource {
@@ -603,11 +645,18 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 }
 
+#landing.clusterduck {
+
+	.banner {
+		padding: 15vh 0 20vh;
+	}
+}
+
 
 #civilian {
 	background: $bg;
 	min-height: 100vh;
-	padding-top: 12vh;
+	padding-top: 5vh;
 	position: relative;
 
 	h1 {
@@ -741,17 +790,18 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.menu {
 		position: relative;
 		z-index: 150;
+		padding: 0 1em;
 
 		.menu-item {
 			position: relative;
 			top: 0;
 			text-align: center;
-			padding: 1em .5em;
+			padding: 1.5em .5em;
 			cursor: pointer;
 			opacity: .7;
-			margin: 0 0 1em;
+			margin: 0 0 2.5em;
 			background: transparent;
-			border: 2px solid rgba(255,255,255,.1);
+			border: 2px solid rgba(255,255,255,.3);
 			transition: all .15s;
 			-ms-transition: all .15s;
 			-moz-transition: all .15s;
@@ -764,7 +814,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			}
 
 			h4 {
-				font-size: .8em;
+				font-size: 1em;
 				line-height: 1.25em;
 				margin: 0;
 				color: #fff;
