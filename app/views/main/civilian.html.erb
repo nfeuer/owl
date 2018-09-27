@@ -28,13 +28,23 @@
 		</div>
 	</div>
 	<%= render 'main/modularVoice' %>
-	<div class="claims-form">
+	<div class="claims-data">
 		<div class="exit">X</div>
 		<%= form_for @newclaim do |f| %>
 			<p class="message">Upload a New Photo</p>
 			<%= f.file_field :file, :onchange =>"validateFiles(this);", class: "file-input form-control" %>
 			<%= f.submit "Submit", class: "button submit" %>
 		<% end %>
+		<div class="all-claims">
+			<% Claim.all.each do |f| %>
+				<div class="row">
+					<div class="col-xs-4 claim-item">
+						<img src="<%= f.file.to_s %>" />
+						<p><%= f.created_at.strftime("%b %d, %Y") %></p>
+					</div>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
 
@@ -60,13 +70,13 @@
 	$(".menu-item.claims").on("click",function() {
 		removeMenu()
 		setTimeout(function() {
-			$(".claims-form").detach().appendTo(".dialogue")
-			$(".claims-form").fadeIn("fast")
+			$(".claims-data").detach().appendTo(".dialogue")
+			$(".claims-data").fadeIn("fast")
 		}, 500)
 	})
 
-	$(".claims-form .exit").on("click", function() {
-		$(this).parents(".claims-form").fadeOut("fast")
+	$(".claims-data .exit").on("click", function() {
+		$(this).parents(".claims-data").fadeOut("fast")
 		showMenu()
 	})
 

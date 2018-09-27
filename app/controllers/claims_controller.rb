@@ -20,7 +20,7 @@ class ClaimsController < ApplicationController
 
     respond_to do |format|
       if @claim.save
-        format.html { redirect_to "/claims", notice: 'claim created.' }
+        format.html { redirect_to "/civilian", notice: 'claim created.' }
         format.json { render action: 'show', status: :created, location: @claim }
       else
         format.html { render action: 'new' }

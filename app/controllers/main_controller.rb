@@ -23,6 +23,10 @@ class MainController < ApplicationController
     render layout: "landing"
   end
 
+  def civdata
+    render layout: "landing"
+  end
+
   def home
     if signed_in?
       @message = Message.new

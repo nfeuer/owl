@@ -721,9 +721,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		height: 75vh;
 	}
 
-	.claims-form {
+	.claims-data {
 		display: none;
-		margin-top: 4em;
+		margin-top: 0em;
 		text-align: left;
 
 		.form-control {
@@ -743,6 +743,27 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 		.exit:hover {
 			opacity: 1;
+		}
+
+		form {
+			margin-bottom: 2.5em;
+		}
+	}
+
+	.all-claims {
+
+		.claim-item {
+			margin-bottom: 1.5em;
+
+			img {
+				display: block;
+				width: 100%;
+			}
+
+			p {
+				color: #fff;
+				margin: 0 0 .75em;
+			}
 		}
 	}
 
@@ -781,10 +802,15 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		#startBtn {
 			display: none;
 		}
+
+		.dialogue {
+			padding-top: 1em;
+		}
 	}
 
 	.conversation:after {
 		z-index: 10;
+		background: transparent;
 	}
 
 	.menu {
