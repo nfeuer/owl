@@ -812,6 +812,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.conversation:after {
 		z-index: 10;
 		background: transparent;
+		height: 0;
+		width: 0;
+		position: relative;
 	}
 
 	.menu {
