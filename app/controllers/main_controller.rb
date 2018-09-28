@@ -27,6 +27,10 @@ class MainController < ApplicationController
     render layout: "landing"
   end
 
+  def duckportal
+    render layout: "portal"
+  end
+
   def home
     if signed_in?
       @message = Message.new

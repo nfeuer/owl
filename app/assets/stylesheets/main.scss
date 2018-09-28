@@ -666,7 +666,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 #landing.landing {
 
 	.banner {
-		padding: 20vh 0 30vh;
+		padding: 25vh 0 35vh;
 	}
 }
 
@@ -976,7 +976,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.action-container {
+		position: relative;
 		padding-top: 6rem;
+		padding-right: 3em;
 
 		.content-image {
 			display: block;
@@ -1035,7 +1037,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.notifications-container {
 		position: fixed;
 		top: 0;
-		right: -15em;
+		right: -17em;
+		opacity: .5;
 		height: 100%;
 		width: 20em;
 		border-left: 2px solid rgba(255,255,255,.15);
@@ -1242,6 +1245,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 	.notifications-container:hover, .notifications-container.open {
 		right: 0;
+		opacity: 1;
 	}
 
 	.menu {
@@ -1421,20 +1425,24 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 
 #eye {
-	position: relative;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
 	z-index: 50;
 
 	a.loadmap {
 		display: inline-block;
 		border: 2px solid #ccc;
-		background: #f1f1f1;
+		background: transparent;
 		font-size: 1.25em;
 		padding: .5em 1.5em;
 		margin: 1em;
 	}
 
 	#mapOverlay {
-		background: #111;
+		background: transparent;
 		z-index: 15;
 		text-align: center;
 		padding-top: 40vh;
@@ -1468,24 +1476,27 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	#maps {
-		position: fixed;
-		top: 10rem;
+		position: absolute;
+		top: 0;
 		left: 0;
 		width: 100%;
-		height: 85vh;
+		height: 100vh;
 	}
 
 	#map, #mapOverlay {
-		position: fixed;
-		width: 100vw;
-		height: 85vh;
+		position: absolute;
+		width: 100%;
+		height: 100%;
 	}
 
 	#map {
-		border-bottom: 3px solid lightgreen;
 
 		.labels {
 			background: red;
+		}
+
+		.gm-style-cc + .gmnoprint {
+			top: 6rem !important;
 		}
 	}
 

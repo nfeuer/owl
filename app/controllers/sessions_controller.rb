@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
 	    else
 	    	
 	    end
+
+	    render layout: "landing"
     end
  
 	def create

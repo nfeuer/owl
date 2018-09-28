@@ -86,11 +86,13 @@ function removeMenu() {
     }, 450)
 }
 
+
+////// remove action elements
 function removeActionElement() {
-    $(".action-element").fadeOut("fast")
+    $(".action-element").first().fadeOut("fast")
     setTimeout(function() {
-        $(".action-element").remove()
-    }, 175)
+        $(".action-element").first().remove()
+    }, 160)
 }
 
 
@@ -118,19 +120,27 @@ function showMapping() {
     removeMenu()
     removeActionElement()
 
-    $(".action-container .content-image").fadeOut("fast")
-    setTimeout(function(){
-        $(".content-image").remove()
-        $(".action-container").append("<img class='content-image' src='/assets/content_mapping.jpg' />")
-    }, 150)
+    // $(".action-container .content-image").fadeOut("fast")
+    // setTimeout(function(){
+    //     $(".content-image").remove()
+    //     $(".action-container").append("<img class='content-image' src='/assets/content_mapping.jpg' />")
+    // }, 150)
+
+    // setTimeout(function(){
+    //     $(".action-container .content-image").css("opacity", "1")
+    //     machineResponse = "I've shown location information for the current incident."
+    //     writeDialogue(machineResponse, "machine")
+    //     responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+    // }, 750)
+
+    // if ($("#map").length < 1) {
 
     setTimeout(function(){
-        $(".action-container .content-image").css("opacity", "1")
-        machineResponse = "I've shown location information for the current incident."
-        writeDialogue(machineResponse, "machine")
-        responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
-    }, 750)
-
+        $(".action-container").append('<div id="eye" class="action-element"></div>')
+        var mapsHtml = '<div id="maps"><div id="navigation"><div class="navlist"><div id="directionsPanel" style="height 100%;"></div></div></div><div id="mapOverlay"><h3>Loading maps...<span></span></h3></div><div id="map"></div></div>'
+        $("#eye").append(mapsHtml)
+        $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initDrawingMap', function() { });
+    }, 200)
 }
 
 
@@ -451,6 +461,249 @@ var routeTimeEst;
 var routeDistEst;
 
 
+function initDrawingMap() {
+
+    console.log("going")
+
+    var styles = [
+          {
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#212121"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#212121"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.country",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.locality",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#bdbdbd"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#181818"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#333333"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#555555"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#373737"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#3c3c3c"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway.controlled_access",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#4e4e4e"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#616161"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#000000"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#3d3d3d"
+              }
+            ]
+          }
+    ]
+
+    setTimeout(function(){
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 40.6543, lng: -122.5336},
+            zoom: 12,
+            styles: styles,
+            zoomControl: false,
+            scaleControl: true,
+            mapTypeControl: false,
+            fullscreenControl: false,
+            streetViewControl: false,
+        });
+
+        var drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.MARKER,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+          },
+          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+          circleOptions: {
+            fillColor: '#ffff00',
+            fillOpacity: 1,
+            strokeWeight: 5,
+            clickable: false,
+            editable: true,
+            zIndex: 1
+          },
+          polygonOptions: {
+            fillColor: '#ff0000',
+            fillOpacity: .25,
+            strokeColor: '#ff0000',
+            strokeWeight: 3,
+            clickable: true,
+            editable: true,
+            zIndex: 1
+          }
+        });
+        drawingManager.setMap(map);
+    }, 1000)
+
+    setTimeout(function() {
+        $("#maps").css("opacity", "1")
+        $("#mapOverlay h3 span").css("width", "100%").css("opacity", "1")
+    }, 150)
+    setTimeout(function() {
+        $("#mapOverlay").fadeOut("fast")
+        $("#readout").val(" ")
+    }, 600)
+}
+
 function loadCivilianMap() {
 
     /// check if our map exists, if not then load it in
@@ -493,7 +746,7 @@ function loadMap() {
       var mapsHtml = '<div id="maps"><div id="navigation"><div class="navlist"><div id="directionsPanel" style="height 100%;"></div></div></div><div id="mapOverlay"><h3>Loading maps...<span></span></h3></div><div id="map"></div></div>'
       $("#eye").append(mapsHtml)
 
-      $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initMap', function() { });
+      $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initDrawingMap', function() { });
     }
 
     ///// Maps functionality

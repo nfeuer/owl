@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   match '/owldetails', to: 'main#owldetails', via: 'get'
   match '/opensource', to: 'main#opensource', via: 'get'
   match '/civdata', to: 'main#civdata', via: 'get'
+  match '/duckportal', to: 'main#duckportal', via: 'get'
 
   
   ########## API ROUTES

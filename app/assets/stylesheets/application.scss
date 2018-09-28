@@ -127,8 +127,16 @@ header#header {
 		-moz-transition: all .15s;
 	}
 
+	a.home {
+		padding-left: 0;
+	}
+
 	a:hover {
 		background: #ddd;	
+	}
+
+	a.home:hover {
+		background: transparent;
 	}
 
 	.links {
@@ -179,6 +187,14 @@ header#header.landingheader {
 
 	a:hover  {
 		background: rgba(255,255,255,.1);
+	}
+
+	a.home:hover {
+		background: transparent;
+	}
+
+	.links {
+		float: right;
 	}
 }
 
