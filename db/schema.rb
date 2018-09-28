@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180919145611) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "claims", force: :cascade do |t|
     t.string "file"
     t.text "description"
@@ -69,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180919145611) do
     t.string "name"
     t.string "quantity"
     t.string "location"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

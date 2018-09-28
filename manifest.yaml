@@ -4,4 +4,4 @@ applications:
   memory: 512M
   instances: 1
   random-route: true
-  command: bundle exec rake cf:on_first_instance db:migrate && bundle exec rails s -p $PORT -e $RAILS_ENV
+  command: rake db:create && bin/rails server -p $PORT -e $RAILS_ENV
