@@ -144,6 +144,21 @@ function showMapping() {
 }
 
 
+
+function showCivilianData() {
+    
+    removeMenu()
+    removeActionElement()
+
+    setTimeout(function(){
+        $(".action-container").append('<div id="civdata" class="action-element"><div id="maps"><div id="map"></div><div class="console"><h3>Fuel/Gas</h3></div></div></div>')
+        var mapsHtml = '<div id="maps"><div id="navigation"><div class="navlist"><div id="directionsPanel" style="height 100%;"></div></div></div><div id="mapOverlay"><h3>Loading maps...<span></span></h3></div><div id="map"></div></div>'
+        $("#eye").append(mapsHtml)
+        $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initCivMap', function() { });
+    }, 200)
+}
+
+
 function showResources() {
 
     removeMenu()
@@ -704,6 +719,375 @@ function initDrawingMap() {
     }, 600)
 }
 
+
+
+function initCivMap() {
+
+    var styles = [
+      {
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#212121"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#212121"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.country",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#9e9e9e"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#bdbdbd"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#181818"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#333333"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#555555"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#373737"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#3c3c3c"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#4e4e4e"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#616161"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#000000"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#3d3d3d"
+          }
+        ]
+      }
+    ]
+
+    // The location of Uluru
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+      document.getElementById('map'), {
+        zoom: 12,
+        disableDefaultUI: true,
+        center: {lat: 35.613, lng: -77.366},
+        styles: styles
+      });
+    // The marker, positioned at Uluru
+
+    var cyanDotBot = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: '#05bfc0',
+        fillOpacity: 1,
+        scale: 8,
+        strokeColor: '#05bfc0',
+        strokeWeight: 3,
+        labelOrigin: new google.maps.Point(3, -2.5),
+    };
+
+    var redDot = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: 'red',
+        fillOpacity: 1,
+        scale: 8,
+        strokeColor: 'red',
+        strokeWeight: 3,
+        labelOrigin: new google.maps.Point(2.5, -2.5),
+    };
+
+    var greenDot = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: 'green',
+        fillOpacity: 1,
+        scale: 8,
+        strokeColor: 'green',
+        strokeWeight: 3,
+        labelOrigin: new google.maps.Point(2.5, -2.5),
+    };
+
+    var orangeDot = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: 'orange',
+        fillOpacity: 1,
+        scale: 8,
+        strokeColor: 'orange',
+        strokeWeight: 3,
+        labelOrigin: new google.maps.Point(2.5, -2.5),
+    };
+
+    // make civilians points
+    for (var i = 25 - 1; i >= 0; i--) {
+        var rand = Math.floor((Math.random() * 800) + 1)/3000;
+        var la = 35.5030 + rand
+
+        var randl = Math.floor((Math.random() * 1000) + 1)/2000;
+        var ln = -77.2000 - randl
+
+        var marker = new google.maps.Marker({
+            position: {lat: la, lng: ln},
+            map: map,
+            title: "Civilian",
+            label: {text: "Civilian", color: "white", fontSize: "14px", fontWeight: "300"},
+            icon: cyanDotBot
+        });
+
+        marker.addListener('click', function() {
+            var e = $(this)
+            $(".console h3").fadeOut("fast")
+            $(".console p").fadeOut("fast")
+            setTimeout(function() {
+                $(".console h3").remove()
+                $(".console p").remove()
+                console.log(e[0])
+                var l = e[0].label.text
+                var lat = e[0].position.lat()
+                var lng = e[0].position.lng()
+                $(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p><p>Added: 11:17 AM, Sept 27, 2018</p><p>Note:  Civilian has submitted they are present at this location.</p>").addClass("in")
+            }, 160)
+        });
+
+        marker.addListener('mouseover', function() {
+            marker.setIcon(redDot)
+        });
+    }
+
+    /// make a few ems
+    for (var i = 7 - 1; i >= 0; i--) {
+        var rand = Math.floor((Math.random() * 800) + 1)/4000;
+        var la = 35.5230 + rand
+
+        var randl = Math.floor((Math.random() * 1000) + 1)/3000;
+        var ln = -77.2000 - randl
+
+        var marker = new google.maps.Marker({
+            position: {lat: la, lng: ln},
+            map: map,
+            title: "EMS",
+            label: {text: "EMS", color: "white", fontSize: "14px", fontWeight: "300"},
+            icon: redDot
+        });
+
+        marker.addListener('click', function() {
+            var e = $(this)
+            $(".console h3").fadeOut("fast")
+            setTimeout(function() {
+                $(".console h3").remove()
+                console.log(e[0])
+                var l = e[0].label.text
+                var lat = e[0].position.lat()
+                var lng = e[0].position.lng()
+                $(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p><p>Added: 7:10 PM, Sept 27, 2018</p><p>Note:  Emergency medical services are present here for anyone in urgent need of care or medical supplies.</p>").addClass("in")
+            }, 160)
+        });
+    }
+
+    /// make a few food markers
+    for (var i = 10 - 1; i >= 0; i--) {
+        var rand = Math.floor((Math.random() * 800) + 1)/4000;
+        var la = 35.5230 + rand
+
+        var randl = Math.floor((Math.random() * 1000) + 1)/3000;
+        var ln = -77.2000 - randl
+
+        var marker = new google.maps.Marker({
+            position: {lat: la, lng: ln},
+            map: map,
+            title: "Food",
+            label: {text: "FOOD", color: "white", fontSize: "14px", fontWeight: "300"},
+            icon: greenDot
+        });
+
+        marker.addListener('click', function() {
+            var e = $(this)
+            $(".console h3").fadeOut("fast")
+            setTimeout(function() {
+                $(".console h3").remove()
+                console.log(e[0])
+                var l = e[0].label.text
+                var lat = e[0].position.lat()
+                var lng = e[0].position.lng()
+                $(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p><p>Added: 2:36 PM, Sept 27, 2018</p><p>Note:  We have food and water present if you need.  Please come by and we will help.</p>").addClass("in")
+            }, 160)
+        });
+    }
+
+    /// make a few gas markers
+    for (var i = 5 - 1; i >= 0; i--) {
+        var rand = Math.floor((Math.random() * 800) + 1)/4000;
+        var la = 35.5230 + rand
+
+        var randl = Math.floor((Math.random() * 1000) + 1)/3000;
+        var ln = -77.2000 - randl
+
+        var marker = new google.maps.Marker({
+            position: {lat: la, lng: ln},
+            map: map,
+            title: "Fuel, Oil, and Gas is Available Here",
+            label: {text: "Fuel/Gas", color: "white", fontSize: "14px", fontWeight: "300"},
+            icon: orangeDot
+        });
+
+        marker.addListener('click', function() {
+            var e = $(this)
+            $(".console h3").fadeOut("fast")
+            setTimeout(function() {
+                $(".console h3").remove()
+                console.log(e[0])
+                var l = e[0].label.text
+                var lat = e[0].position.lat()
+                var lng = e[0].position.lng()
+                $(".console").html("<h3>" + l + "</h3><p>Latitude: " + lat + "</p><p>Longitude: " + lng + "</p><p>Added: 3:42 PM, Sept 27, 2018</p><p>Note:  We have a limited supply of gasoline and heating oil, please come and speak with us if you are in need of either.</p>").addClass("in")
+            }, 160)
+        });
+    }
+}
+    
 function loadCivilianMap() {
 
     /// check if our map exists, if not then load it in
@@ -1413,6 +1797,9 @@ function dialogue(text) {
     if (preparedText.includes("incident")) {
         entities.push("incident")
     }
+    if (preparedText.includes("civilian")) {
+        entities.push("civilian")
+    }
 
     ///////////////////////// Determine if there is a quantity mentioned, here we calculate quantities
 
@@ -1523,6 +1910,12 @@ function dialogue(text) {
 
         // show the menu!
         showMapping()
+
+        setTimeout(function(){
+            machineResponse = "Showing maps for geographical data"
+            writeDialogue(machineResponse, "machine")
+            // responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+        }, 300)
     }
 
     ////////// show resources
@@ -1530,6 +1923,20 @@ function dialogue(text) {
 
         // show the menu!
         showResources()
+    }
+
+
+    ////////// show resources
+    if (intents.indexOf("find") > -1 && (entities.indexOf("civilian") > -1 )) {
+
+        // show the menu!
+        showCivilianData()
+
+        setTimeout(function(){
+            machineResponse = "Showing Civilian geographical data"
+            writeDialogue(machineResponse, "machine")
+            // responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1});
+        }, 300)
     }
 
 

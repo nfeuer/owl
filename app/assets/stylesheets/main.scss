@@ -1372,6 +1372,11 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 
 #civdata {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100vh;
 
 	#map {
 		height: 100vh;
