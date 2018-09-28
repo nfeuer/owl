@@ -1,7 +1,7 @@
 ---
 applications:
-- name: project-owl-ruby-10
+- name: project-owl-ruby-17
   memory: 512M
   instances: 1
   random-route: true
-  command: rake db:create && bin/rails server -p $PORT -e $RAILS_ENV
+  command: rake db:migrate && bin/rails server -p $PORT -e $RAILS_ENV
