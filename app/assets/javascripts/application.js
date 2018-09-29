@@ -2293,6 +2293,8 @@ function dialogue(text) {
             n = n.split("and the location is ")[0]
         }
 
+        removeMenu()
+        
         // create incident
         newincident(n,l)
 
