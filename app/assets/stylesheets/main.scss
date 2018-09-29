@@ -8,7 +8,7 @@ $bg: #0f253a;
 $highlight: #fcc802;
 
 h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 }
 
 
@@ -289,6 +289,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		font-size: 3em;
 		line-height: 1.25em;
 		margin: 0 0 1.5rem;
+		font-family: 'Prata',serif;
 	}
 
 	h3 {
@@ -308,7 +309,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	p {
-		font-size: 1.25em;
+		font-size: 1.5em;
 		line-height: 1.5em;
 		font-weight: 300;
 		margin: 0 0 1.5rem;
@@ -331,6 +332,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			position: relative;
 			z-index: 5;
 			font-weight: 700;
+			letter-spacing: 1px;
+			font-family: 'Prata', serif;
 
 			span {
 				font-weight: 300;
@@ -340,9 +343,9 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			img.icon {
 				display: inline-block;
-				vertical-align: sub;
-				height: 1em;
-				margin-right: .2em;
+				vertical-align: unset;
+				height: .85em;
+				margin-left: .4em;
 			}
 		}
 
@@ -354,6 +357,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		h3 {
 			position: relative;
 			z-index: 5;
+			margin: 0 0 4rem;
 		}
 
 		h4 {
@@ -435,7 +439,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.section {
-		padding: 8em 0;
+		padding: 6em 0 4em;
 		color: #fff;
 		position: relative;
 
@@ -454,17 +458,22 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			position: relative;
 			display: block;
 			width: 100%;
-			margin: 0 0 6em;
+			margin: 0 0 1.5rem;
 		}
 
 		h2 {
 			font-size: 2.25em;
-			 font-weight: 400;
+			font-weight: 400;
+			font-family: 'Prata',serif;
+
+			b {
+				font-family: 'Prata', serif;
+			}
 		}
 
 		a {
 			opacity: .75;
-			font-size: 1.25em;
+			font-size: 1.5em;
 			line-height: 1.5em;
 			font-weight: 600;
 			display: inline-block;
@@ -501,13 +510,17 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				margin-left: .75em;
 			}
 		}
+
+		img.gif {
+			display: block;
+			width: 100%;
+		}
 	}
 
 	.section.problem {
 		text-align: center;
 
 		h2 {
-			 text-transform: uppercase;
 			 font-weight: 400;
 			 letter-spacing: 4px;
 			 margin-bottom: 3rem;
@@ -544,10 +557,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.section.background {
-		background: rgba(255,255,255,.025);
+		background: rgba(255,255,255,.075);
 
 		.content {
-			padding-top: 5em;
+			padding-top: 2em;
 			padding-bottom: 1em;
 
 			h2 {
@@ -556,14 +569,21 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 			img.icon {
 				display: inline-block;
-				vertical-align: middle;
-				height: 1.15em;
-				margin-right: .2em;
+				vertical-align: unset;
+				height: 1em;
+				margin-left: .25em;
 			}
 
 			p {
-				opacity: .75;
+				opacity: 1;
 			}
+		}
+	}
+
+	.section.management {
+
+		.content {
+			padding-top: 3em;
 		}
 	}
 
@@ -575,12 +595,12 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 
 		.content {
-			padding-top: 3em;
+			padding-top: 0em;
 		}
 	}
 
 	.section.open {
-		background: rgba(255,255,255,.025);
+		background: rgba(255,255,255,.075);
 
 		img.block {
 			border: 0;
@@ -590,7 +610,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 
 		.content {
-			padding-top: 3em;
+			padding-top: 0em;
 		}
 	}
 
@@ -608,17 +628,22 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		}
 	}
 
+	.section.access {
+		padding-bottom: 0em;
+	}
+
 	.section.conversational {
-		background: rgba(255,255,255,.025);
+
 
 	}
 
 	.section.channels {
-		background: rgba(255,255,255,.025);
+
 
 	}
 
 	.section.civilians {
+		background: rgba(255,255,255,.075);
 
 		img.block {
 
@@ -634,6 +659,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		.content {
 			padding-top: 3em;
 			padding-bottom: 2em;
+		}
+
+		img.block {
+			margin-bottom: 1.5rem;
 		}
 	}
 
@@ -657,7 +686,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		background: url('/assets/owl_civiliandata.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-position: left top;
+		background-position: left center;
 		border-top: 4px solid rgba(0,0,0,.5);
 		border-bottom: 4px solid rgba(0,0,0,.5);
 	}
@@ -667,6 +696,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 	.banner {
 		padding: 25vh 0 35vh;
+	}
+
+	.section {
+		padding: 8em 0;
 	}
 }
 
@@ -1387,8 +1420,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 		z-index: 150;
 		opacity: 0;
 		padding: 1em;
-		position: fixed;
-		top: 1.5em;
+		position: absolute;
+		top: 6rem;
 		left: 1.5em;
 		width: 25em;
 		border: 1px solid rgba(255,255,255,.85);

@@ -41,14 +41,14 @@ header#header {
 	a.logo {
 		padding: 0;
 		display: inline-block;
-		padding: .5rem 0;
+		padding: 0rem 0;
 		font-size: 1em;
 		vertical-align: top;
 	}
 
 	img {
 		display: block;
-		max-height: 2rem;
+		max-height: 2.5rem;
 		margin-top: 0;
 	}
 
@@ -183,6 +183,24 @@ header#header.landingheader {
 
 	a {
 		cursor: pointer;
+	}
+
+	h1 {
+	}
+
+	a.home {
+		font-family: "Prata", serif;
+		letter-spacing: 1px;
+		cursor: pointer;
+		font-size: 2.25em;
+
+		img {
+			display: inline-block;
+			height: 2.85rem;
+			max-height: 2.85rem;
+			vertical-align: unset;
+			margin: 0 0 0 .25em;
+		}
 	}
 
 	a:hover  {

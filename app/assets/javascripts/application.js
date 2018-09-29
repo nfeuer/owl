@@ -271,7 +271,7 @@ function getNowcast(geocode) {
         /// append description
         $(".weather-content p.description").html(desc)
 
-        responsiveVoice.speak(desc, "UK English Female", {rate: 1.075});
+        // responsiveVoice.speak(desc, "UK English Female", {rate: 1.075});
 
     })    
 }
@@ -287,7 +287,7 @@ function getTropicalCurrentPosition() {
         console.log(jResponse)
 
         var advisoryinfo = jResponse.advisoryinfo
-        var laststorm = advisoryinfo[4]
+        var laststorm = advisoryinfo[0]
         var stormname = laststorm.storm_name
         var stormtype = laststorm.currentposition.storm_type
         var stormcategory = laststorm.currentposition.storm_sub_type
