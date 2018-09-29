@@ -1,5 +1,3 @@
-# IoT Hardware Portion of OWL - ClusterDuck
-
 # Clusterduck Details
 
 ## The Ducklink
