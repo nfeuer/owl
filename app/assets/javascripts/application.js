@@ -271,6 +271,8 @@ function getNowcast(geocode) {
         /// append description
         $(".weather-content p.description").html(desc)
 
+        machineResponse = "Here is the current weather"
+        writeDialogue(machineResponse, "machine")
         // responsiveVoice.speak(desc, "UK English Female", {rate: 1.075});
 
     })    
@@ -670,7 +672,7 @@ function initDrawingMap() {
     setTimeout(function(){
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 40.6543, lng: -122.5336},
+            center: {lat: 35.613, lng: -77.366},
             zoom: 12,
             styles: styles,
             zoomControl: false,
@@ -1087,7 +1089,245 @@ function initCivMap() {
         });
     }
 }
+
+
+
+function initNewIncidentMap() {
+
+    var styles = [
+      {
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#212121"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#212121"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.country",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#9e9e9e"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#bdbdbd"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#181818"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#333333"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#555555"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#373737"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#3c3c3c"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#4e4e4e"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#616161"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#000000"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#3d3d3d"
+          }
+        ]
+      }
+    ]
+
+    // The location of Uluru
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+    document.getElementById('map'), {
+      zoom: 12,
+      disableDefaultUI: true,
+      center: {lat: 35.613, lng: -77.366},
+      styles: styles
+    });
+}
     
+
+function loadNewIncidentMap() {
+
+    /// check if our map exists, if not then load it in
+
+    if ($("#map").length < 1) {
+      var mapsHtml = '<div id="maps"><div id="mapOverlay"></div><div id="map"></div></div>'
+      $(".map-container").append(mapsHtml)
+
+      $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initNewIncidentMap', function() { });
+    }
+
+    ///// Maps functionality
+
+    // Fade in maps after a second so we don't get background flicker!
+    setTimeout(function() {
+        $("#maps").css("opacity", "1")
+        $("#mapOverlay h3 span").css("width", "100%").css("opacity", "1")
+    }, 150)
+    setTimeout(function() {
+        $("#mapOverlay").fadeOut("fast")
+        $("#readout").val(" ")
+    }, 600)
+
+    setTimeout(function() {
+
+        // scenic route
+        // loadDestination(dest, true)
+
+        // // normal destination
+        loadCivilianDestination("grand central station")
+    }, 750)
+
+}
+
+
 function loadCivilianMap() {
 
     /// check if our map exists, if not then load it in
@@ -2057,14 +2297,16 @@ function dialogue(text) {
         newincident(n,l)
 
         setTimeout(function() {
-            machineResponse = "Incident created, would you like to add a priority?"
+            machineResponse = "Incident created."
             writeDialogue(machineResponse, "machine")
             responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1.075})
         }, 350)
 
         //// add visual UI stuffs
-        var inchtml = '<div class="incident action-element"><h3>New Incident</h3><h2>Hurricane Florence</h2><h4><b>Incident Manager:</b>  Bryan</h4><h4><b>Location:</b>  Greenville, North Carolina</h4></div>'
+        var inchtml = '<div class="action-element incident"><h3>New Incident</h3><div class=row><div class=col-sm-4><h2>Hurricane Florence</h2><h4><b>Incident Owner:</b> Bryan</h4><h4><b>Location:</b> Greenville, North Carolina</h4><div class=managers><h4><b>Managers:</b></h4><div class=manager>BK</div><div class=manager>MP</div><div class=manager>CE</div><div class=manager>TR</div></div><div class=issues><h4><b>Anticipated Issues:</b> Flooding, Wind Damage, Electrical Outages</h4></div></div><div class="col-sm-8 map-container"></div></div></div>'
         $(".action-container").append(inchtml)
+
+        loadNewIncidentMap()
 
         // update user incident in status bar if empty
         if ($(".status-bar .user-incident").text() == "") {
@@ -2174,7 +2416,7 @@ function writeDialogue(m,t,d) {
     if (t == "user") {
         var messageHtml = '<div class="out message"><user>' + currentUsername + '<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div>'
     } else if (t == "machine") {
-        var messageHtml = '<div class="out message"><div class="img-container"><img src="/assets/owl_logo_light.png" /></div><div class="content-container"><user>OWL<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
+        var messageHtml = '<div class="out message"><div class="img-container"><img src="/assets/owl_icon_light.png" /></div><div class="content-container"><user>Owl<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
     }
 
     // Append to conversation list

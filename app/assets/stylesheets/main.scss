@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.content-container {
 				display: inline-block;
 				vertical-align: top;
-
+				width: 85%;
 			}
 
 			span {
@@ -1052,12 +1052,119 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				font-size: 1.35em;
 				line-height: 1.5em;
 				font-weight: 300;
-				margin: 0 0 .75em;
-				padding-bottom: .5em;
-				border-bottom: 1px dotted rgba(255,255,255,.5);
+				margin: 0 0 1.5em;
+				padding-bottom: 1em;
+				border-bottom: 1px dotted rgba(255,255,255,.25);
 
 				b {
 					font-weight: 700;
+					display: block;
+					opacity: .65;
+				}
+			}
+
+			h4:last-child {
+				border: 0;
+			}
+
+			img {
+				display: block;
+				width: 100%;
+			}
+
+			.managers {
+				margin-bottom: 1.75em;
+				padding-bottom: .75em;
+				border-bottom: 1px dotted rgba(255,255,255,.25);
+
+				h4 {
+					margin-bottom: 0;
+					border: 0;
+				}
+
+				.manager {
+					display: inline-block;
+					vertical-align: top;
+					margin: 0 .5em .5em 0;
+					font-size: 1.25em;
+					line-height: 1.5em;
+					font-weight: 600;
+					background: rgba(255,255,255,.15);
+					width: 2.5em;
+					height: 2.5em;
+					border-radius: 1.25em;
+					text-align: center;
+					padding: .5em 0;
+				}
+			}
+
+			.map-container {
+
+				a.loadmap {
+					display: inline-block;
+					border: 2px solid #ccc;
+					background: transparent;
+					font-size: 1em;
+					padding: .5em 1.5em;
+					margin: 1em;
+				}
+
+				#map, #mapOverlay {
+					position: relative;
+					width: 100%;
+				}
+
+				#mapOverlay {
+					background: transparent;
+					z-index: 15;
+					text-align: center;
+					z-index: 500;
+					position: absolute;
+
+					h3 {
+						position: relative;
+						text-align: center;
+						display: inline-block;
+						margin: 0;
+						font-size: 4em;
+						opacity: .5;
+						font-weight: 100;
+						color: #fff;
+						font-family: 'Roboto', sans-serif;
+
+						span {
+							position: absolute;
+							left: 0;
+							bottom: -.5em;
+							height: .1em;
+							background: #fff;
+							width: 10%;
+							opacity: 0;
+							transition: all .75s;
+							-ms-transition: all .75s;
+							-moz-transition: all .75s;
+							-webkit-transition: all .75s;
+						}
+					}
+				}
+
+				#maps {
+					position: relative;
+					top: 0;
+					left: 0;
+					width: 100%;
+				}
+
+				#map {
+					min-height: 35em;
+
+					.labels {
+						background: red;
+					}
+
+					.gm-style-cc + .gmnoprint {
+						top: 6rem !important;
+					}
 				}
 			}
 		}
