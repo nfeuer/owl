@@ -1,4 +1,4 @@
-# ClusterDuck Details
+# ClusterDuck Overview
 
 ## The DuckLink
 
