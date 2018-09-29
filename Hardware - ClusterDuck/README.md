@@ -1,4 +1,4 @@
-##IoT Hardware Portion of OWL - ClusterDuck
+# IoT Hardware Portion of OWL - ClusterDuck
 
 # Clusterduck Details
 
