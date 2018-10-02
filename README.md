@@ -1,6 +1,8 @@
 # Project Owl
 
-Manage large and small disasters with the Owl incident management system.  Access the website here:  https://project-owl-ruby-17-zany-wolverine.mybluemix.net/
+Website:  https://project-owl-ruby-17-zany-wolverine.mybluemix.net/
+
+Manage large and small disasters with the Owl incident management system.
 
 This project is created as a Ruby on Rails web application hosted on IBM Cloud leveraging the IBM Watson Studio, IBM Watson Cloud APIs, Weather Company APIs, Google Maps API, and various public data sets.
 
