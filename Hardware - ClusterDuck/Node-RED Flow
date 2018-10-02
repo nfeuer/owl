@@ -1,0 +1,343 @@
+[
+    {
+        "id": "c5b01fbc.d9d51",
+        "type": "tab",
+        "label": "PAPA to OWL",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "38eaefc5.ccc44",
+        "type": "debug",
+        "z": "c5b01fbc.d9d51",
+        "name": "Iot Data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 300,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "cf8c407a.ded8",
+        "type": "ibmiot in",
+        "z": "c5b01fbc.d9d51",
+        "authentication": "apiKey",
+        "apiKey": "b94bab6f.a09478",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "PAPA_4",
+        "applicationId": "",
+        "deviceType": "PAPA",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "PAPA",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": "",
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 70,
+        "y": 640,
+        "wires": [
+            [
+                "38eaefc5.ccc44",
+                "94bcb49.76f68c8"
+            ]
+        ]
+    },
+    {
+        "id": "2e01b6f4.8e9a2a",
+        "type": "inject",
+        "z": "c5b01fbc.d9d51",
+        "name": "Civilian",
+        "topic": "",
+        "payload": "{\"civilian\":{\"info\":{\"name\":\"John Doe\",\"phone\":1312567794,\"location\":\"2725 E 14th St\",\"occupants\":7},\"status\":{\"danger\":0,\"vacant\":1},\"needs\":{\"first-aid\":0,\"water\":0,\"food\":1},\"message\":\"Please send help\"}}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 70,
+        "y": 580,
+        "wires": [
+            [
+                "94bcb49.76f68c8"
+            ]
+        ]
+    },
+    {
+        "id": "367bbb0b.c63b54",
+        "type": "cloudant out",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "cloudant": "",
+        "database": "payload",
+        "service": "ducklink-cloudantNoSQLDB",
+        "payonly": true,
+        "operation": "insert",
+        "x": 880,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "603eb963.fc9d8",
+        "type": "debug",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 890,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "528922d7.d2984c",
+        "type": "debug",
+        "z": "c5b01fbc.d9d51",
+        "name": "Print Coordinates",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.description",
+        "x": 910,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "cfdfe82e.575448",
+        "type": "google geocoding",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "geocodeBy": "address",
+        "address": "",
+        "lat": "",
+        "lon": "",
+        "googleAPI": "",
+        "bounds": "",
+        "language": "",
+        "region": "",
+        "components": "",
+        "x": 340,
+        "y": 740,
+        "wires": [
+            [
+                "367bbb0b.c63b54",
+                "f812f08e.bd95e"
+            ]
+        ]
+    },
+    {
+        "id": "c1235931.d1fde",
+        "type": "http in",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "url": "/data",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 420,
+        "wires": [
+            [
+                "9cd9d988.38a0b8"
+            ]
+        ]
+    },
+    {
+        "id": "9cd9d988.38a0b8",
+        "type": "cloudant in",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "cloudant": "",
+        "database": "payload",
+        "service": "ducklink-cloudantNoSQLDB",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "bff1b49b.3e96b8"
+            ]
+        ]
+    },
+    {
+        "id": "bff1b49b.3e96b8",
+        "type": "http response",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2c67c79d.27388",
+        "type": "http request",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://project-owl-ruby-17-zany-wolverine.mybluemix.net/clusterduck-data",
+        "tls": "",
+        "x": 890,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "94bcb49.76f68c8",
+        "type": "change",
+        "z": "c5b01fbc.d9d51",
+        "name": "Street + City, State",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "iot",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.civilian.info.location",
+                "pt": "msg",
+                "to": "payload.civilian.info.location & \", Greenville, NC\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "location.address",
+                "pt": "msg",
+                "to": "payload.civilian.info.location",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.civilian.time",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 580,
+        "wires": [
+            [
+                "603eb963.fc9d8",
+                "367bbb0b.c63b54",
+                "cfdfe82e.575448",
+                "2c67c79d.27388"
+            ]
+        ]
+    },
+    {
+        "id": "f812f08e.bd95e",
+        "type": "change",
+        "z": "c5b01fbc.d9d51",
+        "name": "Update Topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "geo",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 740,
+        "wires": [
+            [
+                "528922d7.d2984c"
+            ]
+        ]
+    },
+    {
+        "id": "d46963af.942558",
+        "type": "function",
+        "z": "c5b01fbc.d9d51",
+        "name": "test ",
+        "func": "context.data = context.data || {};\n\nvar testmsg1;\nvar testmsg2;\n\nvar flag = 0;\n\nif(msg.topic == \"geo\")\n{\n    context.data.geo = msg.payload.description;\n    flag = 1;\n    msg = null;\n}\n\nif(msg.topic ==\"iot\" && flag == 1)\n{\n    msg.payload.info.location = context.data.geo;\n}\n\nreturn msg;\n\n// if(msg.topic == \"iot\")\n// {\n//     msg.payload.info.geo = context.data.geo;\n//     testmsg2 = msg.payload.info.geo;\n// }\n\n// return {payload:testmsg};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 920,
+        "wires": [
+            [
+                "1cf8559c.6c3b9a"
+            ]
+        ]
+    },
+    {
+        "id": "1cf8559c.6c3b9a",
+        "type": "debug",
+        "z": "c5b01fbc.d9d51",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 930,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "fd5cf4ae.021e18",
+        "type": "comment",
+        "z": "c5b01fbc.d9d51",
+        "name": "Remove nodes below if don't work",
+        "info": "",
+        "x": 740,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "14574690.33c369",
+        "type": "comment",
+        "z": "c5b01fbc.d9d51",
+        "name": "Address to Geocode",
+        "info": "",
+        "x": 107,
+        "y": 742,
+        "wires": []
+    },
+    {
+        "id": "b94bab6f.a09478",
+        "type": "ibmiot",
+        "z": "",
+        "name": "Papa",
+        "keepalive": "60",
+        "serverName": "spzzrw.messaging.internetofthings.ibmcloud.com",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    }
+]
