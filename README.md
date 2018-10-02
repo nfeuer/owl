@@ -4,7 +4,7 @@ Website:  https://project-owl-ruby-17-zany-wolverine.mybluemix.net/
 
 Manage large and small disasters with the Owl incident management system.
 
-This project is created as a Ruby on Rails web application hosted on IBM Cloud leveraging the IBM Watson Studio, IBM Watson Cloud APIs, Weather Company APIs, Google Maps API, and various public data sets.
+Project Owl is a Ruby on Rails web application hosted on IBM Cloud leveraging the IBM Watson Studio, IBM Watson Cloud APIs, Weather Company APIs, Google Maps API, and public data sets.
 
 Owl is designed to offer a fast, simple incident management experience --- just by talking to it.  
 
