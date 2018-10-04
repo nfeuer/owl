@@ -21,3 +21,10 @@ Apps for Owl are created simply using HTML, CSS, and JS.  If you have built a we
 Deploy Owl incident management to geographies without active communications or infrastructure through the ClusterDuck Mobile Network.  This network is made of portable IoT WiFi devices - called "Ducks" - that provide an ad-hoc internet solution.
 
 Learn more and contribute to our open source hardware:  https://github.com/knouse1344/owl/tree/master/Hardware%20-%20ClusterDuck
+
+
+## Project Roadmap
+
+The Owl is currently a cloud software prototype and is being tested in simulated incidents.  The ClusterDuck hardware also has been manufactured as a prototype and is being tested to prepare for field experiments.
+
+[[https://project-owl-ruby-17-zany-wolverine.mybluemix.net/assets/projectowl_roadmap.jpg|alt=roadmap]]
