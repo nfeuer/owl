@@ -128,15 +128,35 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 <script type="text/javascript">
+
+	function initParticles(x) {
+	    if (x.matches) { // If media query matches
+			var particles = Particles.init({
+				selector: '.background',
+			  	color: '#292929',
+			  	connectParticles: true,
+			  	sizeVariations: 5,
+			  	maxParticles: 20,
+			  	speed: .3
+			});
+	    } else {
+			var particles = Particles.init({
+				selector: '.background',
+			  	color: '#292929',
+			  	connectParticles: true,
+			  	sizeVariations: 5,
+			  	maxParticles: 150,
+			  	speed: .3
+			});
+	    }
+	}
+
+	
 	
 	$(window).load(function() {
-		var particles = Particles.init({
-			selector: '.background',
-		  	color: '#292929',
-		  	connectParticles: true,
-		  	sizeVariations: 5,
-		  	maxParticles: 150,
-		  	speed: .3
-		});
+		var x = window.matchMedia("(max-width: 768px)")
+		initParticles(x) // Call listener function at run time
+		x.addListener(initParticles) // Attach listener function on state changes
 	});
+	
 </script>

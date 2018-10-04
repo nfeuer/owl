@@ -43,10 +43,10 @@
 					<h2>Voice and Visuals</h2>
 					<p>OWL combines a conversational experience with traditional visual user interfaces to provide a complete, effortless solution.</p>
 				</div>
-				<div class="col-sm-3 col-sm-offset-1">
+				<div class="col-sm-3 col-sm-offset-1 col-xs-6 col-xs-offset-0">
 					<img class="block" src="/assets/owl_dialogue_example01.jpg" />
 				</div>
-				<div class="col-sm-3 col-sm-offset-0">
+				<div class="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-0">
 					<img class="block" src="/assets/owl_dialogue_example02.jpg" />
 				</div>
 			</div>
@@ -87,15 +87,35 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 <script type="text/javascript">
+
+	function initParticles(x) {
+	    if (x.matches) { // If media query matches
+			var particles = Particles.init({
+				selector: '.background',
+			  	color: '#292929',
+			  	connectParticles: true,
+			  	sizeVariations: 5,
+			  	maxParticles: 20,
+			  	speed: .3
+			});
+	    } else {
+			var particles = Particles.init({
+				selector: '.background',
+			  	color: '#292929',
+			  	connectParticles: true,
+			  	sizeVariations: 5,
+			  	maxParticles: 150,
+			  	speed: .3
+			});
+	    }
+	}
+
+	
 	
 	$(window).load(function() {
-		var particles = Particles.init({
-			selector: '.background',
-		  	color: '#292929',
-		  	connectParticles: true,
-		  	sizeVariations: 5,
-		  	maxParticles: 150,
-		  	speed: .3
-		});
+		var x = window.matchMedia("(max-width: 768px)")
+		initParticles(x) // Call listener function at run time
+		x.addListener(initParticles) // Attach listener function on state changes
 	});
+
 </script>
