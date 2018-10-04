@@ -88,7 +88,22 @@
 
 
 <script type="text/javascript">
-	var s = skrollr.init();
+
+	function initScrollr(x) {
+	    if (x.matches) {
+
+	    } else {
+			var s = skrollr.init();
+	    }
+	}
+
+
+	$(window).load(function() {
+		var x = window.matchMedia("(max-width: 768px)")
+		initScrollr(x) // Call listener function at run time
+		x.addListener(initScrollr) // Attach listener function on state changes
+	});
+	
 
 
 
