@@ -18,6 +18,6 @@ Apps for Owl are created simply using HTML, CSS, and JS.  If you have built a we
 
 ## Open Source Hardware
 
-Deploy Owl incident management to geographies without active communications or infrastructure through the ClusterDuck Mobile Network.  This network is made of portable IoT WiFi devices - called "Ducks" - that provide an ad-hoc internet solution.  
+Deploy Owl incident management to geographies without active communications or infrastructure through the ClusterDuck Mobile Network.  This network is made of portable IoT WiFi devices - called "Ducks" - that provide an ad-hoc internet solution.
 
 Learn more and contribute to our open source hardware:  https://github.com/knouse1344/owl/tree/master/Hardware%20-%20ClusterDuck
