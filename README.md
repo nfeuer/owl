@@ -32,7 +32,7 @@ The `ClusterDuck` hardware solution would also allow passionate developers and O
 
 **QuackHackers** will be provided with boilerplate libraries in order for your `QuackPacks` to work with our `Ducks`.
 
-Learn more and contribute to our open source hardware @ [ClusterDuck + QuackPack](https://github.com/knouse1344/owl/tree/master/Hardware%20-%20ClusterDuck)
+Learn more and contribute to our open source hardware @ [ClusterDuck + QuackPack](https://github.com/knouse1344/owl/tree/master/Hardware%20-%20ClusterDuck#quackpack)
 
 
 ## Project Roadmap
