@@ -59,7 +59,7 @@ The `ClusterDuck` hardware solution would also allow passionate developers and O
 
 **QuackHackers** will be provided with boilerplate libraries in order for your `QuackPacks` to work with our `Ducks`.
 
-![quackpack](https://user-images.githubusercontent.com/13107225/46578456-b4e2ab80-c9ce-11e8-8f2f-8be2546bdc7e.png)
+![quackpack](https://user-images.githubusercontent.com/13107225/46578491-c7a9b000-c9cf-11e8-805a-22c2edfb8a9b.png)
 > Fig. 7 - Early Prototype with Humidity/Temperature + Water Pressure Sensor
 
 
