@@ -1,4 +1,10 @@
 # ClusterDuck Overview
+Hurricanes, earthquakes, tornadoes, wildfires, and other events will continue to test the strength of the infrastructure modern society relies on, such as communication equipment like cellular networks.
+
+Communications infrastructure needs to be restored within **72 hours** after which the survival chances of victims decrease drastically. 
+
+Our IoT hardware solution ClusterDuck addresses this issue. Ducks are miniaturized multi-terrain wifi-enabled devices that are dispersed in Clusters in areas where traditional infrastructure and communications is offline. Once dispersed, the Ducks create an ad-hoc wireless network, enabling civilians in need of aid to connect to the network, and send information about their situation, location, and needs.
+
 ![overview](https://user-images.githubusercontent.com/13107225/46240475-263eb080-c376-11e8-9d17-ffe05a4c6527.png)
 
 ## The DuckLink
