@@ -30,7 +30,7 @@ Apps for Owl are created simply using HTML, CSS, and JS.  If you have built a we
 #### ClusterDuck + QuackPack
 The `ClusterDuck` hardware solution would also allow passionate developers and OEMs to build on top of our hardware, via lego-like modules called **QuackPacks**. In addition to relaying civilian data, additional `Quacks` would allow `Ducks` to send additional useful and crucial data via sensors such as, **temperature**, **water-pressure**, **smoke**, **gas**, and a lot more!
 
-**QuackHackers** will be provided with boilerplate library in order for their `QuackPacks` to work with our `Ducks`.
+**QuackHackers** will be provided with boilerplate libraries in order for your `QuackPacks` to work with our `Ducks`.
 
 Learn more and contribute to our open source hardware @ [ClusterDuck + QuackPack](https://github.com/knouse1344/owl/tree/master/Hardware%20-%20ClusterDuck)
 
