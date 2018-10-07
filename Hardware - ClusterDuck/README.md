@@ -9,13 +9,16 @@ Our IoT hardware solution `ClusterDuck` addresses this issue. Ducks are miniatur
 
 ![overview](https://user-images.githubusercontent.com/13107225/46240475-263eb080-c376-11e8-9d17-ffe05a4c6527.png)
 #### Fig. 1 - Ducks to OWL
-Once dispersed, the Ducks create an ad-hoc wireless network, enabling civilians in need of aid to connect to the network, and send information about their situation, location, and needs.
+`Once dispersed, the Ducks create an ad-hoc wireless network, enabling civilians in need of aid to connect to the network, and send information about their situation, location, and needs.`
 
 ## The DuckLink
 
 A DuckLink, or simply a "Duck", is a small WiFi-enabled IoT device in a 3D printend enclosure. A DuckLink can connect through WiFi to consumer electronics such as a phone or a laptop. DuckLinks connect to MamaDuck (the central server IoT device) to create a ClusterDuck network.
 
 ![3d parts](https://user-images.githubusercontent.com/13107225/46240708-9995f180-c379-11e8-9084-c59a41e9177d.png)
+
+![duck-float](https://user-images.githubusercontent.com/13107225/46577783-62988f00-c9bc-11e8-8da5-41eab2b3fe56.gif)
+#### Fig. 2 - Weather Proof, Water Proof, Multi-terrain
 
 ### DuckLink Portal - Quick Native Experience without downloading App or Visiting Link
 The DuckLinks automatically provide an intuitive emergency captive portal for civilians upon connecting to the hotspot network. These portals run on a local server within the **Ducks**. This is highly strategic, as the civilians won't have the internet capability to either download an app or visit a website. This allows the civilians to send immediate requests to the responders.
