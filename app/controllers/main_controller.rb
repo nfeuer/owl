@@ -301,10 +301,28 @@ class MainController < ApplicationController
 
   	##### IBM Watson Tone Analyzer
 
-  	@text = params[:text]
-  	@endpoint = "https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?text=" + @text + "&version=2017-09-21&sentences=true"
-    @tone = HTTParty.get(@endpoint, headers: { Authorization: "Basic ZmMxYjY3YTYtZTJmMi00YWVhLTgzMTYtZjBjYzMwMDRlY2MyOkhNMHhWT2NDWmxsWg==", 'Content-type' => 'application/x-www-form-urlencoded' }, body: { })
-    @tone = @tone
+    @text = params[:text]
+
+    require 'net/http'
+    require 'uri'
+    require 'json'
+
+    uri = URI.parse("https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?text=" + @text + "&version=2017-09-21&sentences=true")
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
+    request.content_type = "application/json"
+    request.body = JSON.dump({
+
+    })
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+    
 
     respond_to do |format|
       # format.html { redirect_to "/", notice: 'Gene created.' }
@@ -322,15 +340,29 @@ class MainController < ApplicationController
 
     # @endpoint = "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?version=2016-05-17&classifier_ids=DefaultCustomModel_2101976&url=" + @imgurl
     @endpoint = "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?version=2016-05-17&url=" + @imgurl
-    
-    @auth = {:username => "apikey", :password => "KUEQEGANZJS0gU4rnD_q0N99Va8KI2QtEQ21lOH9ycsf"}
-    @visual = HTTParty.get(@endpoint, basic_auth: @auth, body: { })
-    @vjson = JSON.parse(@visual.to_json)
-    @images = @vjson['images']
-    @classifiers = @images.to_a[0]['classifiers']
-    @classes = @classifiers[0]['classes']
+
+    require 'net/http'
+    require 'uri'
+    require 'json'
+
+    uri = URI.parse("https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?version=2016-05-17&url=" + @imgurl)
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
+    request.content_type = "application/json"
+    request.body = JSON.dump({
+
+    })
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
 
     puts " "
+    puts @response
     puts "----- visualizer"
     puts @vjson
     puts " "
@@ -356,13 +388,26 @@ class MainController < ApplicationController
   	@text = params[:text]
   	@text = "how hot will it be outside today?"
 
-  	{
-  	  "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-  	  "username": "e8f3ecb4-979e-45c1-8939-bdd29b9d7474",
-  	  "password": "7h6goCtngjoN"
-  	}
+    require 'net/http'
+    require 'uri'
+    require 'json'
 
-  	@endpoint = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1/classify?text=" + @text
+    uri = URI.parse("https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1/classify?text=" + @text)
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
+    request.content_type = "application/json"
+    request.body = JSON.dump({
+
+    })
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
   end
 
   def nlu
@@ -375,12 +420,26 @@ class MainController < ApplicationController
   	# @features = "concepts,categories,emotion,entities,keywords,metadata,relations,semantic_roles,sentiment"
   	@features = "keywords,entities"
 
-  	@endpoint = "https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-16&features=" + @features + "&text=" + @text
-  	@nlu = HTTParty.get(@endpoint, headers: { Authorization: 'Basic NGJhODRmYWQtN2E0NC00ZTg3LTkwYTgtM2ZkZGEyYmI0OGJhOnRERDNEdTU4QVhIMw==', 'Content-type' => 'application/json' }, body: {})
+    require 'net/http'
+    require 'uri'
+    require 'json'
 
-  	puts " "
-  	puts "----- nlu"
-  	puts @nlu
+    uri = URI.parse("https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-03-16&features=" + @features + "&text=" + @text)
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
+    request.content_type = "application/json"
+    request.body = JSON.dump({
+
+    })
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    @response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
 
   end
 
@@ -396,7 +455,7 @@ class MainController < ApplicationController
 
     # uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01")
     # request = Net::HTTP::Post.new(uri)
-    # request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    # request.basic_auth("apikey", ENV['WATSON_APIKEY'])
     # request.content_type = "application/json"
     # request.body = JSON.dump({
     #   "text" => [
@@ -569,8 +628,7 @@ class MainController < ApplicationController
     require 'net/http'
 
     # includes below a geoid so you can localize
-    # url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&geoId=" + @geoid + "&format=json")
-    url = URI("https://api.weather.com/v2/stormreports?apiKey=320c9252a6e642f38c9252a6e682f3c6&format=json")
+    url = URI("https://api.weather.com/v2/stormreports?apiKey=" + ENV['WEATHER_APIKEY'] + "&format=json")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
