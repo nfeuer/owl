@@ -9,6 +9,11 @@ Bundler.require(*Rails.groups)
 module Owl
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+	env_file = File.join(Rails.root, 'config', 'local_env.yml')
+	YAML.load(File.open(env_file)).each do |key, value|
+		ENV[key.to_s] = value
+	end if File.exists?(env_file)
+
     config.load_defaults 5.1
 
     # Settings in config/environments/* take precedence over those specified here.

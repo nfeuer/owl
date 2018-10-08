@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-    skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   #################### Web Pages
 
@@ -261,35 +261,35 @@ class MainController < ApplicationController
 
   def sendtext
 
-	@account_sid = "AC6e6e9ff5e49ee5759341cee47f95e568"
-	@auth_token = "a15edbeb573ac2c6cc6bad635063bdc8"
-	@client = Twilio::REST::Client.new @account_sid, @auth_token
-	if params[:message].blank?
-		@message = 'Hi there, this is OWL.'
-	else
-		@message = params[:message]
-	end
+  	@account_sid = ENV['TWILIO_SID']
+  	@auth_token = ENV['TWILIO_AUTHTOKEN']
+  	@client = Twilio::REST::Client.new @account_sid, @auth_token
+  	if params[:message].blank?
+  		@message = 'Hi there, this is OWL.'
+  	else
+  		@message = params[:message]
+  	end
 
-	@client.messages.create(
-		:from => '+14847256467',
-		:to => '+14843472216',
-		:body => @message
-	)
+  	@client.messages.create(
+  		:from => '+14847256467',
+  		:to => '+14843472216',
+  		:body => @message
+  	)
 
   end
 
   def sendcall
 
-	@account_sid = "AC6e6e9ff5e49ee5759341cee47f95e568"
-	@auth_token = "a15edbeb573ac2c6cc6bad635063bdc8"
-	@client = Twilio::REST::Client.new @account_sid, @auth_token
+    @account_sid = ENV['TWILIO_SID']
+    @auth_token = ENV['TWILIO_AUTHTOKEN']
+  	@client = Twilio::REST::Client.new @account_sid, @auth_token
 
-	@client.calls.create(
-		:from => '+14847256467',
-		:to => '+16175847593',
-		method: "GET",
-	    url: "http://s3.amazonaws.com/responsivetech/assets/call.xml"
-	)
+  	@client.calls.create(
+  		:from => '+14847256467',
+  		:to => '+14843472216',
+  		method: "GET",
+  	    url: "http://s3.amazonaws.com/responsivetech/assets/call.xml"
+  	)
   end
 
 
@@ -456,7 +456,7 @@ class MainController < ApplicationController
 
     uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01")
     request = Net::HTTP::Post.new(uri)
-    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
     request.content_type = "application/json"
     request.body = JSON.dump({
       "text" => [
@@ -498,7 +498,7 @@ class MainController < ApplicationController
 
     uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/identify?version=2018-05-01")
     request = Net::HTTP::Post.new(uri)
-    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
     request.content_type = "text/plain"
     request.body = @text
 
@@ -528,7 +528,7 @@ class MainController < ApplicationController
 
     uri = URI.parse("https://gateway.watsonplatform.net/language-translator/api/v3/identifiable_languages?version=2018-05-01")
     request = Net::HTTP::Get.new(uri)
-    request.basic_auth("apikey", "bUXEp_-PgAvYlYBxLjjUFb1Z-suQfdSw3h2bpSsMNcG_")
+    request.basic_auth("apikey", ENV['WATSON_APIKEY'])
     request.content_type = "text/plain"
 
     req_options = {
@@ -606,7 +606,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v3/wx/forecast/daily/3day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e%0A&format=json&geocode=" + @geocode)
+    url = URI("https://api.weather.com/v3/wx/forecast/daily/3day?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&units=e%0A&format=json&geocode=" + @geocode)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -639,7 +639,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v1/geocode/" + @location + "/forecast/fifteenminute.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+    url = URI("https://api.weather.com/v1/geocode/" + @location + "/forecast/fifteenminute.json?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&units=e")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -669,7 +669,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v3/location/search?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&query=" + @location)
+    url = URI("https://api.weather.com/v3/location/search?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&format=json&query=" + @location)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -703,7 +703,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v1/geocode/" + @location + "/forecast/nowcast.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+    url = URI("https://api.weather.com/v1/geocode/" + @location + "/forecast/nowcast.json?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&units=e")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -735,7 +735,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v2/indices/powerDisruption/daypart/15day?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&geocode=" + @location)
+    url = URI("https://api.weather.com/v2/indices/powerDisruption/daypart/15day?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&format=json&geocode=" + @location)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -764,7 +764,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v2/tropical/projectedpath?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&format=json&units=e&nautical=true&source=all&basin=" + @basin)
+    url = URI("https://api.weather.com/v2/tropical/projectedpath?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&format=json&units=e&nautical=true&source=all&basin=" + @basin)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -793,7 +793,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v2/tropical/currentposition?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&language=en-US&format=json&nautical=true&source=all&basin=" + @basin)
+    url = URI("https://api.weather.com/v2/tropical/currentposition?apiKey=" + ENV['WEATHER_APIKEY'] + "&units=e&language=en-US&format=json&nautical=true&source=all&basin=" + @basin)
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -820,7 +820,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v3/wx/almanac/daily/5day?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&geocode=40.712399%2C-73.964152&startDay=22&startMonth=08&format=json")
+    url = URI("https://api.weather.com/v3/wx/almanac/daily/5day?apiKey=" + ENV['WEATHER_APIKEY'] + "&units=e&geocode=40.712399%2C-73.964152&startDay=22&startMonth=08&format=json")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -845,7 +845,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v3/wx/observations/current?apiKey=320c9252a6e642f38c9252a6e682f3c6&units=e&geocode=40.712399%2C-73.964152&language=en-US&format=json")
+    url = URI("https://api.weather.com/v3/wx/observations/current?apiKey=" + ENV['WEATHER_APIKEY'] + "&units=e&geocode=40.712399%2C-73.964152&language=en-US&format=json")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -870,7 +870,7 @@ class MainController < ApplicationController
     require 'uri'
     require 'net/http'
 
-    url = URI("https://api.weather.com/v1/geocode/40.712399/-73.964152/observations.json?apiKey=320c9252a6e642f38c9252a6e682f3c6&language=en-US&units=e")
+    url = URI("https://api.weather.com/v1/geocode/40.712399/-73.964152/observations.json?apiKey=" + ENV['WEATHER_APIKEY'] + "&language=en-US&units=e")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
