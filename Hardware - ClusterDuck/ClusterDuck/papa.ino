@@ -96,7 +96,7 @@ void loop()
 
   if (simulate != 1)
   {
-    //    receive(LoRa.parsePacket());
+    receive(LoRa.parsePacket());
     jsonify(data);
   }
   else
