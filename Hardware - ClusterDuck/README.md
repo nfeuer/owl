@@ -25,7 +25,7 @@ The **`Ducks`** are weatherproof and multi-terrain. They are floatable and can b
 ### DuckLink Portal - Quick Native Experience without downloading App or Visiting Link
 The **`DuckLinks`** automatically provide an intuitive emergency captive portal for civilians upon connecting to the hotspot network. This allows the civilians to send immediate requests to the responders.
 
-![portal](https://project-owl-ruby-17-zany-wolverine.mybluemix.net/assets/cluster_demo_vector.gif)
+![portal](https://github.com/knouse1344/owl/blob/master/app/assets/images/cluster_demo_vector.gif)
 #### Fig. 3 - Emergency Portal
 
 These portals run on a local server within the **`Ducks`**. This is highly strategic, as the civilians won't have the internet capability to neither download apps nor visit websites.
