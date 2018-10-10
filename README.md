@@ -39,4 +39,4 @@ Learn more and contribute to our open source hardware @ [ClusterDuck + QuackPack
 
 The Owl is currently a cloud software prototype and is being tested in simulated incidents.  The ClusterDuck hardware also has been manufactured as a prototype and is being tested to prepare for field experiments.
 
-![roadmap](https://project-owl-ruby-17-zany-wolverine.mybluemix.net/assets/projectowl_roadmap.jpg)
+![roadmap](https://github.com/knouse1344/owl/blob/master/app/assets/images/projectowl_roadmap.jpg?raw=true)
