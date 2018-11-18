@@ -45,7 +45,7 @@ class IncidentsController < ApplicationController
   end
 
   def destroy
-    @incident = incident.find(params[:id])
+    @incident = Incident.find(params[:id])
     @incident.destroy
     respond_to do |format|
       format.html { redirect_to "/incidents", notice: 'incident was successfully destroyed.' }

@@ -4,4 +4,3 @@ applications:
   memory: 512M
   instances: 1
   random-route: true
-  # command: rake db:migrate && bin/rails server -p $PORT -e $RAILS_ENV
