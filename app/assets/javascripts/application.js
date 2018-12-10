@@ -30,6 +30,22 @@ $(document).ready(function() {
           $("#readout").blur()
       }
     })
+
+
+
+
+
+    // drawing mapping click open
+    $(".menu-item.mapping").on("click", function() {
+
+        showMapping()
+    })
+
+    // civilian data mapping click open
+    $(".menu-item.civdata").on("click", function() {
+
+        showCivilianData()
+    })
     
 })
 
@@ -136,10 +152,14 @@ function showMapping() {
     // if ($("#map").length < 1) {
 
     setTimeout(function(){
+
         $(".action-container").append('<div id="eye" class="action-element"></div>')
         var mapsHtml = '<div id="maps"><div id="navigation"><div class="navlist"><div id="directionsPanel" style="height 100%;"></div></div></div><div id="mapOverlay"><h3>Loading maps...<span></span></h3></div><div id="map"></div></div>'
         $("#eye").append(mapsHtml)
+
         $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initDrawingMap', function() { });
+        
+
     }, 200)
 }
 
