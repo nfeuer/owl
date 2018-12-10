@@ -35,16 +35,19 @@ $(document).ready(function() {
 
 
 
-    // drawing mapping click open
+    // drawing mapping menu click open
     $(".menu-item.mapping").on("click", function() {
-
         showMapping()
     })
 
-    // civilian data mapping click open
+    // civilian data mapping menu click open
     $(".menu-item.civdata").on("click", function() {
-
         showCivilianData()
+    })
+
+    // weather menu click open
+    $(".menu-item.weather").on("click", function() {
+        showWeather()
     })
     
 })
