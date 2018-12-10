@@ -994,6 +994,58 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 }
 
+#incident-list {
+	display: none;
+
+	.incident-item {
+		background: rgba(255,255,255,.035);
+		border: 1px solid rgba(255,255,255,.05);
+		padding: 1em;
+		margin-bottom: 1em;
+		cursor: pointer;
+		transition: all .15s;
+		-ms-transition: all .15s;
+		-moz-transition: all .15s;
+		-webkit-transition: all .15s;
+
+		h3 {
+			margin: 0;
+			line-height: 2rem;
+			font-size: 1.25em;
+		}
+
+		p {
+			font-size: 1em;
+			line-height: 2rem;
+			font-weight: 300;
+			margin: 0;
+
+			b {
+				font-weight: 400;
+			}
+		}
+
+		a {
+			font-size: 1em;
+			line-height: 2rem;
+			font-weight: 300;
+			padding: .5em;
+			border: 1px solid rgba(255,255,255,.5);
+			background: rgba(255,255,255,0);
+			text-decoration: none;
+			color: #fff;
+		}
+
+		a:hover {
+			background: rgba(255,255,255,.15);
+			border: 1px solid rgba(255,255,255,1);
+		}
+	}
+
+	.incident-item:hover {
+		background: rgba(255,255,255,.1);
+	}
+}
 
 
 #index {

@@ -39,6 +39,7 @@ class MainController < ApplicationController
     end
 
     @notifications = Notification.all.order(created_at: :desc).limit(7)
+    @incidents = Incident.all.order(created_at: :desc)
   end
 
   def search
@@ -84,6 +85,20 @@ class MainController < ApplicationController
     @u.incident = @iid
     @u.save
     
+  end
+
+  def getincidents
+
+    @incidents = Incident.all.order(created_at: :desc).map do |u|
+      { :name => u.name, :date => u.created_at.strftime("%l:%M%P %b %d"), id: u.id }
+    end
+
+    @ijson = @incidents.to_json
+
+    respond_to do |format|
+      format.json {render json: @ijson }
+    end
+
   end
 
 

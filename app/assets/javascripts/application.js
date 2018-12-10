@@ -35,6 +35,12 @@ $(document).ready(function() {
 
 
 
+
+    // incidents menu click open
+    $(".menu-item.incidents").on("click", function() {
+        getIncidents()
+    })
+
     // drawing mapping menu click open
     $(".menu-item.mapping").on("click", function() {
         showMapping()
@@ -54,6 +60,40 @@ $(document).ready(function() {
 
 
 
+
+///////////////// get all incidents from db
+function getIncidents() {
+
+  $.get("/getincidents", function(data){
+
+    // console.log(data)
+
+    var ehtml = ''
+
+    $(data).each(function(index,el){
+      // console.log(el)
+      ehtml = ehtml + '<div class="incident-item"><div class="row"><div class="col-sm-4"><h3>' + el.name + '</h3></div><div class="col-sm-4"><p><b>Created:</b> ' + el.date + '</p></div><div class="col-sm-4"><a data-confirm="Are you sure you want to delete this incident?" class="delete-btn" rel="nofollow" data-method="delete" href="/incidents/' + el.id + '">Delete</a></div></div></div>'
+    })
+
+    // append to action container
+    $(".action-container").append('<div id="incident-list"><div class="row"><div class="col-sm-12">' + ehtml + '</div></div></div>')
+
+    // add delete onclick
+    $("#incident-list a.delete-btn").on("click", function() {
+      $(this).parents(".incident-item").fadeOut("slow")
+    })
+
+    // remove menus and such
+    removeMenu()
+    removeActionElement()
+
+    // fade in incidents
+    setTimeout(function() {
+      $(".action-container #incident-list").fadeIn("fast")
+    },500)
+
+  })
+}
 
 ////////////////////////////// dashboard fade in UI
 function showMenu() {
@@ -2309,11 +2349,13 @@ function dialogue(text) {
         // separate
         if (preparedText.includes("name is ")) {
             n = preparedText.split("name is ")[1]
+        } else if (preparedText.includes("name it ")) {
+            n = preparedText.split("name it ")[1]
         }
 
-        if (preparedText.includes("and the location is ")) {
-            l = n.split("and the location is ")[1]
-            n = n.split("and the location is ")[0]
+        if (preparedText.includes("location is ")) {
+            l = n.split("location is ")[1]
+            n = n.split("location is ")[0]
         }
 
         removeMenu()

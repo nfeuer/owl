@@ -47,10 +47,10 @@ class IncidentsController < ApplicationController
   def destroy
     @incident = Incident.find(params[:id])
     @incident.destroy
-    respond_to do |format|
-      format.html { redirect_to "/incidents", notice: 'incident was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { render "/incidents", notice: 'incident was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
