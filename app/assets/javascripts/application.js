@@ -151,10 +151,14 @@ function removeMenu() {
 
 ////// remove action elements
 function removeActionElement() {
-    $(".action-element").first().fadeOut("fast")
-    setTimeout(function() {
-        $(".action-element").first().remove()
-    }, 160)
+
+    if ($(".action-element").length) {
+      $(".action-element").first().fadeOut("fast")
+
+      setTimeout(function() {
+          $(".action-element").first().remove()
+      }, 160)
+    }
 }
 
 
@@ -488,12 +492,30 @@ function getLocation(g) {
 ///// create an incident
 function newincident(name, location) {
 
+    removeMenu()
+    removeActionElement()
+
     var n = name
     var l = location
 
-    $.get("/newincident?name=" + n + "&location=" + l, function(data) {
-        console.log(data)
-    })
+    setTimeout(function() {
+      $.get("/newincident?name=" + n + "&location=" + l, function(data) {
+
+          //// add visual UI stuffs
+          var inchtml = '<div class="action-element incident"><h3>New Incident</h3><div class=row><div class=col-sm-4><h2>' + n + '</h2><h4><b>Incident Owner:</b> Bryan</h4><h4><b>Location:</b> ' + l + '</h4><div class=managers><h4><b>Managers:</b></h4><div class=manager>BK</div><div class=manager>MP</div><div class=manager>CE</div><div class=manager>TR</div></div><div class=issues><h4><b>Anticipated Issues:</b> Flooding, Wind Damage, Electrical Outages</h4></div></div><div class="col-sm-8 map-container"></div></div></div>'
+          $(".action-container").append(inchtml)
+
+
+          // add script if there is no map
+          if (typeof google == "undefined") {
+            $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k', function() { 
+              loadNewIncidentMap(l)
+            });
+          } else {
+            loadNewIncidentMap(l)
+          }
+      })
+    }, 500)
 }
 
 
@@ -545,8 +567,6 @@ var routeDistEst;
 
 
 function initDrawingMap() {
-
-    console.log("going")
 
     var styles = [
           {
@@ -738,8 +758,8 @@ function initDrawingMap() {
     setTimeout(function(){
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 35.613, lng: -77.366},
-            zoom: 12,
+            center: {lat: 34.2350, lng: -118.7013},
+            zoom: 11,
             styles: styles,
             zoomControl: false,
             scaleControl: true,
@@ -1158,7 +1178,7 @@ function initCivMap() {
 
 
 
-function initNewIncidentMap() {
+function initNewIncidentMap(lat,lng) {
 
     var styles = [
       {
@@ -1353,24 +1373,36 @@ function initNewIncidentMap() {
     document.getElementById('map'), {
       zoom: 12,
       disableDefaultUI: true,
-      center: {lat: 35.613, lng: -77.366},
+      center: {lat: lat, lng: lng},
       styles: styles
     });
 }
     
 
-function loadNewIncidentMap() {
+function loadNewIncidentMap(newloc) {
 
-    /// check if our map exists, if not then load it in
+    var mapsHtml = '<div id="maps"><div id="mapOverlay"></div><div id="map"></div></div>'
+    $(".map-container").append(mapsHtml)
 
-    if ($("#map").length < 1) {
-      var mapsHtml = '<div id="maps"><div id="mapOverlay"></div><div id="map"></div></div>'
-      $(".map-container").append(mapsHtml)
+    var iLat = 0
+    var iLng = 0
 
-      $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k&libraries=drawing&callback=initNewIncidentMap', function() { });
-    }
+    // Geocode origin & dest
+    var geocoder; geocoder = new google.maps.Geocoder(); geocoder.geocode({ 'address': newloc }, function(results, status) { 
+      if (status == 'OK') {
+        iLat = results[0].geometry.location.lat();
+        iLng = results[0].geometry.location.lng();
 
-    ///// Maps functionality
+        // console.log("codes")
+        // console.log(iLat)
+        // console.log(iLng)
+
+        initNewIncidentMap(iLat,iLng)
+      } else {
+        console.log('GeoCode failed: ' + status); 
+      }
+    })
+      
 
     // Fade in maps after a second so we don't get background flicker!
     setTimeout(function() {
@@ -1381,15 +1413,6 @@ function loadNewIncidentMap() {
         $("#mapOverlay").fadeOut("fast")
         $("#readout").val(" ")
     }, 600)
-
-    setTimeout(function() {
-
-        // scenic route
-        // loadDestination(dest, true)
-
-        // // normal destination
-        loadCivilianDestination("grand central station")
-    }, 750)
 
 }
 
@@ -2371,12 +2394,6 @@ function dialogue(text) {
             writeDialogue(machineResponse, "machine")
             responsiveVoice.speak(machineResponse, "UK English Female", {rate: 1.075})
         }, 350)
-
-        //// add visual UI stuffs
-        var inchtml = '<div class="action-element incident"><h3>New Incident</h3><div class=row><div class=col-sm-4><h2>Hurricane Florence</h2><h4><b>Incident Owner:</b> Bryan</h4><h4><b>Location:</b> Greenville, North Carolina</h4><div class=managers><h4><b>Managers:</b></h4><div class=manager>BK</div><div class=manager>MP</div><div class=manager>CE</div><div class=manager>TR</div></div><div class=issues><h4><b>Anticipated Issues:</b> Flooding, Wind Damage, Electrical Outages</h4></div></div><div class="col-sm-8 map-container"></div></div></div>'
-        $(".action-container").append(inchtml)
-
-        loadNewIncidentMap()
 
         // update user incident in status bar if empty
         if ($(".status-bar .user-incident").text() == "") {
