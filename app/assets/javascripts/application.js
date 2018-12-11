@@ -64,35 +64,38 @@ $(document).ready(function() {
 ///////////////// get all incidents from db
 function getIncidents() {
 
-  $.get("/getincidents", function(data){
+  // remove menus and such
+  removeMenu()
+  removeActionElement()
 
-    // console.log(data)
+  setTimeout(function() {
 
-    var ehtml = ''
+    $.get("/getincidents", function(data){
 
-    $(data).each(function(index,el){
-      // console.log(el)
-      ehtml = ehtml + '<div class="incident-item"><div class="row"><div class="col-sm-4"><h3>' + el.name + '</h3></div><div class="col-sm-4"><p><b>Created:</b> ' + el.date + '</p></div><div class="col-sm-4"><a data-confirm="Are you sure you want to delete this incident?" class="delete-btn" rel="nofollow" data-method="delete" href="/incidents/' + el.id + '">Delete</a></div></div></div>'
+      // console.log(data)
+
+      var ehtml = ''
+
+      $(data).each(function(index,el){
+        // console.log(el)
+        ehtml = ehtml + '<div class="incident-item"><div class="row"><div class="col-sm-4"><h3>' + el.name + '</h3></div><div class="col-sm-4"><p><b>Created:</b> ' + el.date + '</p></div><div class="col-sm-4"><a data-confirm="Are you sure you want to delete this incident?" class="delete-btn" rel="nofollow" data-method="delete" href="/incidents/' + el.id + '">Delete</a></div></div></div>'
+      })
+
+      // append to action container
+      $(".action-container").append('<div id="incident-list" class="action-element"><h2>All Incidents</h2><div class="row"><div class="col-sm-12">' + ehtml + '</div></div></div>')
+
+      // add delete onclick
+      $("#incident-list a.delete-btn").on("click", function() {
+        $(this).parents(".incident-item").fadeOut("slow")
+      })
+      // fade in incidents
+      setTimeout(function() {
+        $(".action-container #incident-list").fadeIn("fast")
+      },500)
+
     })
 
-    // append to action container
-    $(".action-container").append('<div id="incident-list"><div class="row"><div class="col-sm-12">' + ehtml + '</div></div></div>')
-
-    // add delete onclick
-    $("#incident-list a.delete-btn").on("click", function() {
-      $(this).parents(".incident-item").fadeOut("slow")
-    })
-
-    // remove menus and such
-    removeMenu()
-    removeActionElement()
-
-    // fade in incidents
-    setTimeout(function() {
-      $(".action-container #incident-list").fadeIn("fast")
-    },500)
-
-  })
+  }, 200)
 }
 
 ////////////////////////////// dashboard fade in UI
@@ -2483,7 +2486,7 @@ function writeDialogue(m,t,d) {
     if (t == "user") {
         var messageHtml = '<div class="out message"><user>' + currentUsername + '<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div>'
     } else if (t == "machine") {
-        var messageHtml = '<div class="out message"><div class="img-container"><img src="/assets/owl_icon_light.png" /></div><div class="content-container"><user>Owl<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
+        var messageHtml = '<div class="out message"><div class="img-container"><img src="/assets/owl_logo_tight_light.png" /></div><div class="content-container"><user>Owl<t>' + new Date().toLocaleTimeString() + '</t></user><span>' + m + '</span></div></div></div>'
     }
 
     // Append to conversation list

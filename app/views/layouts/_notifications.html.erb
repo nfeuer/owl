@@ -5,20 +5,22 @@
 
 			<% @notifications.each do |f| %>
 				<% @diff = ((Time.now - f.created_at)/60).round %>
-				<div class="notification <% if @diff < 25 %>active <% end %>" id="<%= f.id %>">
-					<% @c = f.content.to_s %>
-					<% if @c.include?(" :twitter") %>
-						<% @c = @c.gsub(" :twitter") %>
-						<div class="twitter"><i class="fab fa-twitter"></i></div>
-					<% end %>
-					<div class="info">
-						<h4><%= f.title.to_s %></h4>
-						<p><%= truncate(f.content.to_s, length: 35) %></p>
+				<% unless @diff > 150 %>
+					<div class="notification <% if @diff < 5 %>active <% end %>" id="<%= f.id %>">
+						<% @c = f.content.to_s %>
+						<% if @c.include?(" :twitter") %>
+							<% @c = @c.gsub(" :twitter") %>
+							<div class="twitter"><i class="fab fa-twitter"></i></div>
+						<% end %>
+						<div class="info">
+							<h4><%= f.title.to_s %></h4>
+							<p><%= truncate(f.content.to_s, length: 45) %></p>
+						</div>
+						<div class="time">
+							<p><span><%= @diff+1 %></span>mins</p>
+						</div>
 					</div>
-					<div class="time">
-						<p><span><%= @diff+1 %></span>mins</p>
-					</div>
-				</div>
+				<% end %>
 			<% end %>
 
 			<!-- <div class="notification active">

@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			}
 
 			.img-container {
-				width: 1.5em;
+				width: 1em;
 				display: inline-block;
 				vertical-align: top;
 				margin-right: .75em;
@@ -1095,7 +1095,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.action-container {
 		position: relative;
 		padding-top: 6rem;
-		padding-right: 3em;
+		padding-right: 4em;
 
 		.content-image {
 			display: block;
@@ -1261,10 +1261,10 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	.notifications-container {
 		position: fixed;
 		top: 0;
-		right: -17em;
+		right: -22em;
 		opacity: .5;
 		height: 100%;
-		width: 20em;
+		width: 25em;
 		border-left: 2px solid rgba(255,255,255,.15);
 		min-height: 100vh;
 		z-index: 550;
@@ -1282,7 +1282,6 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				height: 4.5rem;
 				line-height: 4.5rem;
 				font-size: 1.25em;
-				font-style: italic;
 				font-weight: 300;
 				background: rgba(255,255,255,.1);
 				text-transform: uppercase;
@@ -1296,7 +1295,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.notification {
 				position: relative;
 				cursor: pointer;
-				padding: 0 0 0 2.5em;
+				padding: 0 0 0 1.25em;
 				border-bottom: 1px solid rgba(255,255,255,.1);
 				background: rgba(255,255,255,0);
 				height: 6rem;
@@ -1314,6 +1313,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 						font-weight: 400;
 						margin: 0;
 						line-height: 1.15em;
+						padding-right: 4em;
 						text-transform: capitalize;
 					}
 
@@ -1347,7 +1347,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 
 				.twitter {
 					position: absolute;
-					left: .45em;
+					left: .25em;
 					top: 45%;
 					width: 4px;
 
@@ -1378,8 +1378,8 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				content: '';
 				display: block;
 				position: absolute;
-				left: .65em;
-				top: 25%;
+				left: .45em;
+				top: 27%;
 				width: 6px;
 				height: 6px;
 				background: #fff;
@@ -1398,7 +1398,6 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				line-height: 4rem;
 				font-size: 1.25em;
 				background: rgba(255,255,255,.05);
-				font-style: italic;
 				font-weight: 300;
 				text-transform: uppercase;
 				letter-spacing: 2px;
@@ -1414,7 +1413,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 					cursor: pointer;
 					height: 7rem;
 					position: relative;
-					padding: 1em 15px 1em 2.5em;
+					padding: 1em 15px 1em 1.25em;
 					border-bottom: 1px solid rgba(255,255,255,.1);
 					background: rgba(255,255,255,0);
 					transition: height .35s, opacity .125s, padding .35s;
@@ -1473,12 +1472,14 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.menu {
+		width: 85%;
+		margin: 2em auto;
 
 		.menu-item {
 			position: relative;
 			top: 0;
 			text-align: center;
-			padding: 1em;
+			padding: 1.25em 1em 1.75em;
 			cursor: pointer;
 			opacity: .7;
 			margin: 0 0 1em;
@@ -1492,7 +1493,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			.icon {
 				width: auto;
 				display: block;
-				max-width: 40%;
+				max-width: 7em;
 				margin: 0 auto 1em;
 			}
 

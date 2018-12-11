@@ -35,7 +35,7 @@ header#header {
 	left: 0;
 	display: block;
 	width: 100%;
-	background: rgba(255,255,255,.1);
+	background: rgba(0,0,0,.2);
 	z-index: 500;
 
 	a.logo {
@@ -53,9 +53,8 @@ header#header {
 	}
 
 	.status-bar {
-		background: rgba(255,255,255,.001);
 		display: block;
-		padding: 1rem 0 .5rem;
+		padding: 1rem 0 1rem;
 
 		.user-incident {
 			display: inline-block;
@@ -80,6 +79,9 @@ header#header {
 			opacity: 0;
 			width: 0;
 			height: 0;
+			margin: 0;
+			padding: 0;
+			border: 0;
 		}
 
 		p {
