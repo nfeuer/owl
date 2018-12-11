@@ -170,13 +170,43 @@ function showWeather() {
     
     // fade out current content
     $(".action-container .content-image").fadeOut("fast")
-    
-    setTimeout(function() {
-        getForecast()
-        getNowcast()
-        getTropicalCurrentPosition()
 
-        $(".weather-content").detach().appendTo(".action-container").fadeIn("fast")
+    setTimeout(function() {
+
+        if (typeof google == "undefined") {
+          $.loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAwpA8PHX57_8RCU8iCCDdIEViCWrpy44k', function() { 
+              
+              // get incident location
+              $.get("/getincidentlocation", function(loc){
+
+                var oLat = 0
+                var oLng = 0
+
+                console.log(loc)
+
+                // Geocode origin & dest
+                var geocoder; geocoder = new google.maps.Geocoder(); geocoder.geocode({ 'address': "talahassee, florida" }, function(results, status) { 
+                  if (status == 'OK') {
+                    oLat = results[0].geometry.location.lat();
+                    oLng = results[0].geometry.location.lng();
+
+                    getForecast(oLat + "," + oLng)
+                    getNowcast(oLat + "," + oLng)
+                    getTropicalCurrentPosition(oLat + "," + oLng)
+
+                  } else {
+                    console.log('GeoCode failed: ' + status); 
+                  }
+                })
+
+                    
+              })
+        
+              $(".weather-content").detach().appendTo(".action-container").fadeIn("fast")
+
+          });
+        }
+              
     }, 550)
 }
 
@@ -303,12 +333,14 @@ function getForecast(geocode) {
             var s = narrative[index].toLowerCase()
             if (s.includes("thunderstorm")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_thunderstorms.png")
+            } else if (s.includes("sun") && s.includes("cloud")) {
+              $(this).find("img.icon").attr("src", "/assets/icon_partlysunny.png")
             } else if (s.includes("windy")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
             } else if (s.includes("cloudy")) {
                 $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
-            } else if (s.includes("sun")) {
-                $(this).find("img.icon").attr("src", "/assets/icon_cloudy.png")
+            } else if (s.includes("sun") || s.includes("clear")) {
+                $(this).find("img.icon").attr("src", "/assets/icon_sun.png")
             } else if (s.includes("shower") || (s.includes("rain"))) {
                 $(this).find("img.icon").attr("src", "/assets/icon_rainy.png")
             }            
@@ -367,8 +399,9 @@ function getTropicalCurrentPosition() {
         /// append nomenclature
         $(".weather-content .warning em b").html(stormtype + " " + stormname)
         $(".weather-content .warning .storm-desc").html(stormcategory)
-        
 
+        $(".weather-content .warning").fadeIn("fast")
+        
     })
 }
 
@@ -464,6 +497,7 @@ function getLocation(g) {
 
         // append to raw response
         var raw = $(".data-response")
+        raw.html("")
         raw.append(data)
 
         // grab the raw response and turn into json
@@ -477,7 +511,6 @@ function getLocation(g) {
         console.log(lon)
 
         //// unpack the json
-        
 
         // append to visible response section
         // p.find(".response").append("<p><b>Metadata:</b> " + JSON.stringify(jResponse) + "</p>")
@@ -2379,7 +2412,10 @@ function dialogue(text) {
             n = preparedText.split("name it ")[1]
         }
 
-        if (preparedText.includes("location is ")) {
+        if (preparedText.includes("and the location is ")) {
+            l = n.split("and the location is ")[1]
+            n = n.split("and the location is ")[0]
+        } else if (preparedText.includes("location is ")) {
             l = n.split("location is ")[1]
             n = n.split("location is ")[0]
         }

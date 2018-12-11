@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   # Incident overview api stuffs
   match '/newincident', to: 'main#newincident', via: 'get'
   match '/getincidents', to: 'main#getincidents', via: 'get'
+  match '/getincidentlocation', to: 'main#getincidentlocation', via: 'get'
 
   # Twilio API routes
   match '/sendtext', to: 'main#sendtext', via: 'get'

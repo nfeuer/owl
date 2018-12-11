@@ -1115,6 +1115,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 			h2 {
 				font-size: 2.25em;
 				margin: 0 0 1em;
+				text-transform: capitalize;
 			}
 
 			h3 {
@@ -1138,6 +1139,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 				font-weight: 300;
 				margin: 0 0 1.5em;
 				padding-bottom: 1em;
+				text-transform: capitalize;
 				border-bottom: 1px dotted rgba(255,255,255,.25);
 
 				b {
@@ -1542,7 +1544,7 @@ h1, h2, h3, h4, h5, h6, span, p, a, ul, li, div, em, b {
 	}
 
 	.warning {
-		display: block;
+		display: none;
 		padding: .5em .75em;
 		font-size: 1.15em;
 		line-height: 1.25em;

@@ -40,6 +40,7 @@ class MainController < ApplicationController
 
     @notifications = Notification.all.order(created_at: :desc).limit(7)
     @incidents = Incident.all.order(created_at: :desc)
+    @incident = Incident.find(current_user.incident.to_i)
   end
 
   def search
@@ -99,6 +100,15 @@ class MainController < ApplicationController
       format.json {render json: @ijson }
     end
 
+  end
+
+  def getincidentlocation
+    @i = Incident.find(current_user.incident.to_i)
+    @l = @i.location
+
+    respond_to do |format|
+      format.text {render plain: @l }
+    end
   end
 
 
