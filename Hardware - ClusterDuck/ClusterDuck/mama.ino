@@ -16,6 +16,8 @@ const byte DNS_PORT = 53;
    Local DNS (duck.local)
 */
 const char *AP   = " 🆘 EMERGENCY PORTAL";
+//const char *AP   = " 🎅DUCK YOU HUMAN";
+
 const char *DNS  = "duck";
 
 String portal = MAIN_page;
@@ -201,5 +203,3 @@ void sendMessage(byte byteCode, String outgoing)
 //}
 
 #endif
-
-

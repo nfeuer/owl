@@ -1,5 +1,3 @@
-//#include <ssl_client.h>
-
 #include <Arduino.h>
 #include <SPI.h>
 #include <LoRa.h>
@@ -90,3 +88,5 @@ void setupLoRa()
   //  LoRa.setSyncWord(0xF3);         // ranges from 0-0xFF, default 0x34
   LoRa.enableCrc();             // Activate crc
 }
+
+

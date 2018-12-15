@@ -4,15 +4,15 @@
 #include <ArduinoJson.h>
 #include <WiFiClientSecure.h>
 
-#define SSID        "" // Type your SSID
-#define PASSWORD    "" // Type your Password
+#define SSID        "Bill Wi Fi The Science Fi" // Type your SSID
+#define PASSWORD    "NowYouKnow!" // Type your Password
 
 //#define MQTT_MAX_PACKET_SIZE 1000;
 
-#define ORG         "spzzrw"              // "quickstart" or use your organisation
-#define DEVICE_ID   "PAPA_Starbucks"
-#define DEVICE_TYPE "PAPA"                // your device type or not used for "quickstart"
-#define TOKEN       "G69aY53oPMLyXk_bnT"  // your device token or not used for "quickstart"
+#define ORG         "in6b6j"              // "quickstart" or use your organisation
+#define DEVICE_ID   "Papa_PostCFC"
+#define DEVICE_TYPE "PapaDuck"                // your device type or not used for "quickstart"
+#define TOKEN       "_tR!Mf(eyQmR4DtHr)"  // your device token or not used for "quickstart"
 
 //-------- Customise the above values --------
 
@@ -39,7 +39,7 @@ void setup()
 
   setupDisplay();
   setupLoRa();
-  setupWiFi();
+  //setupWiFi();
 
   Serial.println("PAPA Online");
   u8x8.drawString(0, 1, "PAPA Online");
@@ -92,7 +92,7 @@ void setupMQTT()
 
 void loop()
 {
-  setupMQTT();
+  //setupMQTT();
 
   if (simulate != 1)
   {
@@ -163,7 +163,7 @@ void receive(int packetSize)
         data.msg = readMessages(mLength);
       }
     }
-    //    showReceivedData();
+        showReceivedData();
     //    jsonify(data);
   }
   else
@@ -248,16 +248,16 @@ void jsonify(Data data)
   String jsonData;
   root.printTo(jsonData);
 
-  if (client.publish(topic, jsonData.c_str()))
-  {
-    Serial.println("Publish ok");
-    root.prettyPrintTo(Serial);
-    Serial.println("");
-  }
-  else
-  {
-    Serial.println("Publish failed");
-  }
+//  if (client.publish(topic, jsonData.c_str()))
+//  {
+//    Serial.println("Publish ok");
+//    root.prettyPrintTo(Serial);
+//    Serial.println("");
+//  }
+//  else
+//  {
+//    Serial.println("Publish failed");
+//  }
 }
 
 // Simulating Sending JSON Data to IoT Platform
