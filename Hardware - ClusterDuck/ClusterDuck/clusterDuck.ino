@@ -44,7 +44,7 @@ typedef struct
   String water;
   String food;
   String msg;
-} Data;
+} Victim;
 
 byte fname_B      = 0xB1;
 byte street_B     = 0xB2;
